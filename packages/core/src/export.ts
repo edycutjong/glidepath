@@ -1,4 +1,4 @@
-import type { Plan } from "./plan.js";
+import type { Plan } from "./plan";
 
 const fmtUsd = (v: number | null | undefined) => (v == null ? "—" : `$${Math.round(v).toLocaleString("en-US")}`);
 const fmtTok = (v: number) => (v >= 1000 ? Math.round(v).toLocaleString("en-US") : v.toPrecision(6));

@@ -1,9 +1,9 @@
-import { sha256 } from "./client.js";
-import { canonicalize } from "./cache.js";
-import type { Facts, DayFlow } from "./facts.js";
-import { RISK_INDICATORS } from "./facts.js";
-import { constantProductCost, type RouteQuotes } from "./impact.js";
-import { DAY } from "./nansen.js";
+import { sha256 } from "./client";
+import { canonicalize } from "./cache";
+import type { Facts, DayFlow } from "./facts";
+import { RISK_INDICATORS } from "./facts";
+import { constantProductCost, type RouteQuotes } from "./impact";
+import { DAY } from "./nansen";
 
 export type PlanInput = { chain: string; token: string; amount: number };
 

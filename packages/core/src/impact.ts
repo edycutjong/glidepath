@@ -1,5 +1,5 @@
-import type { NansenClient } from "./client.js";
-import { quote, USDC, QUOTE_CHAINS } from "./nansen.js";
+import type { NansenClient } from "./client";
+import { quote, USDC, QUOTE_CHAINS } from "./nansen";
 
 /**
  * Constant-product impact model. `liquidityUsd` is the pool's total (both sides), so the token side is ≈ L/2.

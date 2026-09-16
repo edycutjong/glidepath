@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { riskDial, redDay, theta, sizeTranches, historyDays, computePlan, applyQuotes, planHash, K_MIN, K_MAX, MAX_DAYS, LIQUIDITY_CAP, RED_DAY_FACTOR } from "../src/plan.js";
-import { constantProductCost, toBaseUnits } from "../src/impact.js";
-import { pepeFacts, RESOLVED, NOW } from "./helpers.js";
+import { riskDial, redDay, theta, sizeTranches, historyDays, computePlan, applyQuotes, planHash, K_MIN, K_MAX, MAX_DAYS, LIQUIDITY_CAP, RED_DAY_FACTOR } from "../src/plan";
+import { constantProductCost, toBaseUnits } from "../src/impact";
+import { pepeFacts, RESOLVED, NOW } from "./helpers";
 
 const INPUT = { chain: "ethereum", token: "PEPE", amount: 12_000_000_000 };
 

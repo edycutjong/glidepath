@@ -1,8 +1,8 @@
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { MemoryCache, type CacheEntry } from "./cache.js";
-import type { PlanInput } from "./plan.js";
-import type { PlanResult } from "./glidepath.js";
+import { MemoryCache, type CacheEntry } from "./cache";
+import type { PlanInput } from "./plan";
+import type { PlanResult } from "./glidepath";
 
 /**
  * A recorded live run: every raw Nansen response the plan touched (keyed by cache key, byte-for-byte as sent), the plan

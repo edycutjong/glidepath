@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { glidepath } from "../src/glidepath.js";
-import { fakeCachedClient, fakeClient, pepeRoutes, PEPE, NOW } from "./helpers.js";
+import { glidepath } from "../src/glidepath";
+import { fakeCachedClient, fakeClient, pepeRoutes, PEPE, NOW } from "./helpers";
 
 describe("glidepath end to end (fake Nansen)", () => {
   it("PEPE on ethereum: 9 calls, 12 credits, plan ok, provenance lists every endpoint with fields", async () => {

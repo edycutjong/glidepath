@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { listFixtures, readFixture, fixtureStore } from "../src/fixtures.js";
-import { CachedNansenClient } from "../src/cache.js";
-import { glidepath } from "../src/glidepath.js";
+import { listFixtures, readFixture, fixtureStore } from "../src/fixtures";
+import { CachedNansenClient } from "../src/cache";
+import { glidepath } from "../src/glidepath";
 
 const files = listFixtures(new URL("../../../fixtures", import.meta.url).pathname);
 

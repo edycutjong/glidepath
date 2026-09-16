@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { NansenClient } from "../src/client.js";
-import { fakeClient, KEY } from "./helpers.js";
+import { NansenClient } from "../src/client";
+import { fakeClient, KEY } from "./helpers";
 
 describe("NansenClient", () => {
   it("rejects a missing or malformed key", () => {

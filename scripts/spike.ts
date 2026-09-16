@@ -5,7 +5,7 @@
  *
  *   set -a; source ~/.config/nansen/meridian.env; set +a; npm run spike
  */
-import { clientFromEnv, whoBoughtPaged, EXCLUDED_LABELS, quote, USDC, tokenInformation } from "../packages/core/src/index.js";
+import { clientFromEnv, whoBoughtPaged, EXCLUDED_LABELS, quote, USDC, tokenInformation } from "../packages/core/src/index";
 
 const TOKENS: Array<{ symbol: string; chain: string; address: string; note: string }> = [
   { symbol: "PEPE", chain: "ethereum", address: "0x6982508145454ce325ddbe47a25d4ec3d2311933", note: "hero, large cap" },

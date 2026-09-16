@@ -1,8 +1,8 @@
-import type { NansenClient } from "./client.js";
+import type { NansenClient } from "./client";
 import {
   EXCLUDED_LABELS, tokenInformation, whoBoughtPaged, flowIntelligence, flows, indicators,
   type FlowsRow, type Indicator,
-} from "./nansen.js";
+} from "./nansen";
 
 /** One day of cohort flow history from tgm/flows: net token amount × that day's median price. */
 export type DayFlow = { date: string; complete: boolean; priceUsd: number | null; smNetUsd: number | null; exNetUsd: number | null };

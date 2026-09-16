@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { looksLikeAddress, resolveToken } from "../src/resolve.js";
-import { fakeClient, pepeRoutes, PEPE } from "./helpers.js";
+import { looksLikeAddress, resolveToken } from "../src/resolve";
+import { fakeClient, pepeRoutes, PEPE } from "./helpers";
 
 describe("resolve", () => {
   it("recognises EVM, Solana, Sui/Starknet, TON and Tron address shapes", () => {

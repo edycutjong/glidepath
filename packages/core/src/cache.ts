@@ -1,6 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { NansenClient, sha256, CREDITS, type ClientOptions, type CallOptions, type RawResult } from "./client.js";
+import { NansenClient, sha256, CREDITS, type ClientOptions, type CallOptions, type RawResult } from "./client";
 
 export type CacheEntry = { storedAt: string; ttlMs: number; endpoint: string; body: Record<string, unknown>; text: string; creditsUsed?: number };
 

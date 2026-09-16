@@ -1,6 +1,6 @@
-import { NansenClient, type ClientOptions } from "../src/client.js";
-import { CachedNansenClient, MemoryCache, type CachedClientOptions } from "../src/cache.js";
-import type { Facts } from "../src/facts.js";
+import { NansenClient, type ClientOptions } from "../src/client";
+import { CachedNansenClient, MemoryCache, type CachedClientOptions } from "../src/cache";
+import type { Facts } from "../src/facts";
 
 export const KEY = "nsn_test_key_0000000000000000000000";
 export const PEPE = "0x6982508145454ce325ddbe47a25d4ec3d2311933";

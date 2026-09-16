@@ -2,7 +2,7 @@
  * Typed wrappers for the Nansen endpoints Glidepath uses. Request bodies follow docs/api openapi.json (2026-09-16)
  * and were verified live; response types list only the fields the engine reads.
  */
-import type { NansenClient, CallOptions } from "./client.js";
+import type { NansenClient, CallOptions } from "./client";
 
 /** Chains accepted by the TGM endpoints (OpenAPI `TGMChain` enum). */
 export const TGM_CHAINS = [

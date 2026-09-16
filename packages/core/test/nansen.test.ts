@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { whoBoughtPaged, EXCLUDED_LABELS, floorHour, iso, flows } from "../src/nansen.js";
-import { fakeClient, NOW } from "./helpers.js";
+import { whoBoughtPaged, EXCLUDED_LABELS, floorHour, iso, flows } from "../src/nansen";
+import { fakeClient, NOW } from "./helpers";
 
 describe("whoBoughtPaged", () => {
   const page = (n: number, last: boolean) => ({ data: Array.from({ length: 3 }, (_, i) => ({ address: `p${n}-${i}`, bought_volume_usd: 10 })), pagination: { page: n, per_page: 1000, is_last_page: last } });

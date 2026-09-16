@@ -4,7 +4,7 @@
  *
  *   npm run verify                # NANSEN_OFFLINE is forced; no API key needed
  */
-import { CachedNansenClient, glidepath, listFixtures, readFixture, fixtureStore, type Plan } from "../packages/core/src/index.js";
+import { CachedNansenClient, glidepath, listFixtures, readFixture, fixtureStore, type Plan } from "../packages/core/src/index";
 
 process.env.NANSEN_OFFLINE = "1";
 const files = listFixtures();

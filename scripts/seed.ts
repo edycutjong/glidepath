@@ -6,7 +6,7 @@
  *   set -a; source ~/.config/nansen/meridian.env; set +a; npm run seed          # all (~150 credits)
  *   npm run seed -- PEPE BONK                                                    # a subset by token
  */
-import { CachedNansenClient, MemoryCache, glidepath, writeFixture, type Fixture, type PlanInput } from "../packages/core/src/index.js";
+import { CachedNansenClient, MemoryCache, glidepath, writeFixture, type Fixture, type PlanInput } from "../packages/core/src/index";
 
 export const FIXTURE_SET: Array<{ input: PlanInput; edge: string; tag?: string }> = [
   { input: { chain: "ethereum", token: "0x6982508145454ce325ddbe47a25d4ec3d2311933", amount: 12_000_000_000 }, edge: "1 · hero — PEPE 12B (≈$40K donation); large, liquid; exchange-driven red days in history" },

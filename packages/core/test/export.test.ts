@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { toICS, toCSV } from "../src/export.js";
-import { computePlan } from "../src/plan.js";
-import { pepeFacts, RESOLVED, NOW } from "./helpers.js";
+import { toICS, toCSV } from "../src/export";
+import { computePlan } from "../src/plan";
+import { pepeFacts, RESOLVED, NOW } from "./helpers";
 
 const p = computePlan(pepeFacts({ exNet1dUsd: 877_893 }), { chain: "ethereum", token: "PEPE", amount: 12_000_000_000 }, RESOLVED, NOW);
 

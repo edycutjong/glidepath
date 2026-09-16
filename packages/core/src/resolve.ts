@@ -1,5 +1,5 @@
-import type { NansenClient } from "./client.js";
-import { searchTokens, type SearchToken } from "./nansen.js";
+import type { NansenClient } from "./client";
+import { searchTokens, type SearchToken } from "./nansen";
 
 /** Address-shaped input passes straight through; anything else is treated as a ticker to resolve via search/general. */
 export function looksLikeAddress(s: string): boolean {

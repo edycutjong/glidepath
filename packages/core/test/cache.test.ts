@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { cacheKey, canonicalize, MemoryCache, LayeredCache, CachedNansenClient } from "../src/cache.js";
-import { fakeCachedClient, fakeFetch, KEY } from "./helpers.js";
+import { cacheKey, canonicalize, MemoryCache, LayeredCache, CachedNansenClient } from "../src/cache";
+import { fakeCachedClient, fakeFetch, KEY } from "./helpers";
 
 describe("cache", () => {
   it("cacheKey is order-independent at every depth and distinguishes GET from POST", () => {
