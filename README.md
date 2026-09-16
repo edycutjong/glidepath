@@ -8,7 +8,7 @@
 
 ![PEPE plan](docs/screenshots/01-pepe-plan.png)
 
-**[Live preview](https://glidepath-2515ws14u-edy-cus-projects.vercel.app)** · [DEMO.md](DEMO.md) · [SCORING.md](docs/SCORING.md) · [DX-REPORT.md](docs/DX-REPORT.md) · [ARCHITECTURE.md](ARCHITECTURE.md)
+**[Live preview](https://glidepath-ghfk4flh9-edy-cus-projects.vercel.app)** · [DEMO.md](DEMO.md) · [SCORING.md](docs/SCORING.md) · [DX-REPORT.md](docs/DX-REPORT.md) · [ARCHITECTURE.md](ARCHITECTURE.md)
 
 </div>
 
@@ -40,7 +40,7 @@ npm run glidepath -- PEPE --chain ethereum --amount 12000000000      # 0:05  →
 npm run dev                                                          # 0:20  → http://localhost:3000, click "PEPE · 12B"
 ```
 
-Timed on a clean clone (macOS, Node 22): 1 min 30 s to the first live plan; 2 min 10 s to the web app. Without a key, `npm run verify` replays the 13 recorded plans offline in 3 s.
+Timed on a clean clone (macOS, Node 22, warm npm cache, 2026-09-16): clone + `npm install` 8 s, first live plan 2 s, `npm run verify` 1 s, web build 12 s — under a minute; budget 10 minutes on a cold npm cache and a slow link. Without a key, `npm run verify` replays the 13 recorded plans offline.
 
 CLI flags: `--json` (full plan + provenance) · `--explain` (every tranche and every call) · `--ics plan.ics` · `--csv plan.csv` · `--no-cache` · `--no-quotes`.
 
