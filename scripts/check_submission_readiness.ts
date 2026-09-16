@@ -38,7 +38,7 @@ add("fixtures recorded (≥ 10)", fixtures.length >= 10, `${fixtures.length} fil
 const verify = sh("NANSEN_OFFLINE=1 npx tsx scripts/verify.ts");
 const m = verify.match(/(\d+)\/(\d+) plans reproduced offline/);
 add("npm run verify reproduces every plan offline", !!m && m[1] === m[2] && !verify.includes("__FAILED__"), m ? `${m[1]}/${m[2]}` : verify.slice(-200));
-const tests = sh("npx vitest run --reporter=dot 2>&1");
+const tests = sh("npx vitest run --reporter=dot 2>&1").replace(/\x1b\[[0-9;]*m/g, "");
 const t = tests.match(/Tests\s+(\d+) passed/);
 add("vitest green", !!t && !/failed/.test(tests), t ? `${t[1]} passed` : tests.slice(-300));
 if (t) add("README states the test count", readme.includes(`${t[1]} tests`) || readme.includes(`${t[1]} vitest`), `looking for "${t[1]} tests"`);
