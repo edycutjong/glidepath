@@ -36,7 +36,9 @@ if (process.argv.includes("--rederive")) {
     const plan = await glidepath(client, f.input, { now: f.now });
     if (plan.hash !== f.plan.hash) { console.error(`✖ ${path}: hash changed ${f.plan.hash.slice(0, 12)} → ${plan.hash.slice(0, 12)} — the decision moved, re-seed live instead`); process.exit(1); }
     const tag = path.match(/--[A-Z]+--([A-Z]+)\.json$/)?.[1];
-    writeFixture({ ...f, plan: { ...plan, credits: f.plan.credits, calls: f.plan.calls, cachedCalls: f.plan.cachedCalls, ms: f.plan.ms, asOf: f.plan.asOf, provenance: f.plan.provenance } }, undefined, tag);
+    // live-run metadata is kept as recorded: provenance, credits, timing, and `errors` (a call that failed live is not in the
+    // fixture, so a replay would otherwise overwrite Nansen's real reason with an offline-cache miss)
+    writeFixture({ ...f, plan: { ...plan, credits: f.plan.credits, calls: f.plan.calls, cachedCalls: f.plan.cachedCalls, ms: f.plan.ms, asOf: f.plan.asOf, provenance: f.plan.provenance, errors: f.plan.errors } }, undefined, tag);
     console.log(`↻ ${path} re-derived (${plan.hash.slice(0, 12)})`);
   }
   process.exit(0);
