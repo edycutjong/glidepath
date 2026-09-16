@@ -1,0 +1,1499 @@
+{
+  "edge": "9 · TURBO on ethereum — smaller meme, few buyers",
+  "input": {
+    "chain": "ethereum",
+    "token": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+    "amount": 50000000
+  },
+  "now": 1789568361168,
+  "recordedAt": "2026-09-16T14:19:21.168Z",
+  "live": {
+    "calls": 8,
+    "credits": 12,
+    "ms": 1742
+  },
+  "responses": {
+    "bb0e458d4a91948272592e265332d479": {
+      "storedAt": "2026-09-16T14:19:21.673Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/token-information",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+        "timeframe": "7d"
+      },
+      "text": "{\"data\":{\"name\":\"Turbo\",\"symbol\":\"TURBO\",\"contract_address\":\"0xa35923162c49cf95e6bf26623385eb431ad920d3\",\"logo\":\"https://coin-images.coingecko.com/coins/images/30117/small/TurboMark-QL_200.png?1708079597\",\"token_details\":{\"token_deployment_date\":\"2023-04-29 03:58:11\",\"website\":\"https://turbotoken.io\",\"x\":\"TurboToadToken\",\"telegram\":\"TurboToadToken\",\"market_cap_usd\":58854861.969904914,\"fdv_usd\":58854046.3596247,\"circulating_supply\":69000000000.0,\"total_supply\":69000000000.0},\"spot_metrics\":{\"volume_total_usd\":169725.25813010527,\"buy_volume_usd\":81178.1506012157,\"sell_volume_usd\":88547.10752888955,\"total_buys\":141,\"total_sells\":156,\"unique_buyers\":54,\"unique_sellers\":84,\"liquidity_usd\":65323.13553869072,\"total_holders\":40061}}}",
+      "creditsUsed": 1
+    },
+    "a87987651e3a8b8bd05117ff68442bf7": {
+      "storedAt": "2026-09-16T14:19:21.774Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/who-bought-sold",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+        "buy_or_sell": "BUY",
+        "date": {
+          "from": "2026-09-09T14:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 1000
+        },
+        "filters": {
+          "include_smart_money_labels": [
+            "Smart Trader",
+            "30D Smart Trader",
+            "90D Smart Trader",
+            "180D Smart Trader",
+            "Fund",
+            "Whale",
+            "Exchange",
+            "Maestro Bot User",
+            "Top Maestro Bot User",
+            "BananaGun Bot User",
+            "Top BananaGun Bot User"
+          ]
+        },
+        "order_by": [
+          {
+            "field": "bought_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"data\":[],\"pagination\":{\"page\":1,\"per_page\":1000,\"is_last_page\":true}}",
+      "creditsUsed": 1
+    },
+    "bbd77f14ad9efc9a1b78474467fbf1cb": {
+      "storedAt": "2026-09-16T14:19:21.823Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flow-intelligence",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+        "timeframe": "1d"
+      },
+      "text": "{\"data\":[{\"public_figure_net_flow_usd\":0.9815926725889226,\"public_figure_avg_flow_usd\":null,\"public_figure_wallet_count\":4,\"top_pnl_net_flow_usd\":-201.77182924603036,\"top_pnl_avg_flow_usd\":201.7718293890498,\"top_pnl_wallet_count\":5,\"whale_net_flow_usd\":0.0,\"whale_avg_flow_usd\":null,\"whale_wallet_count\":0,\"smart_trader_net_flow_usd\":1.7925500597994841,\"smart_trader_avg_flow_usd\":null,\"smart_trader_wallet_count\":7,\"exchange_net_flow_usd\":-72791.62888290145,\"exchange_avg_flow_usd\":11073.973589759189,\"exchange_wallet_count\":0,\"fresh_wallets_net_flow_usd\":0.0,\"fresh_wallets_avg_flow_usd\":0.0,\"fresh_wallets_wallet_count\":0}],\"warnings\":[\"exchange_wallet_count is always 0 (not tracked), even when exchange net flow is non-zero.\"]}",
+      "creditsUsed": 1
+    },
+    "c5560cf5e286c7467b3532d38e2b900f": {
+      "storedAt": "2026-09-16T14:19:21.837Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flow-intelligence",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+        "timeframe": "7d"
+      },
+      "text": "{\"data\":[{\"public_figure_net_flow_usd\":2.588634867035413,\"public_figure_avg_flow_usd\":null,\"public_figure_wallet_count\":9,\"top_pnl_net_flow_usd\":-240.23299286551182,\"top_pnl_avg_flow_usd\":1663.312158933582,\"top_pnl_wallet_count\":16,\"whale_net_flow_usd\":0.0,\"whale_avg_flow_usd\":null,\"whale_wallet_count\":0,\"smart_trader_net_flow_usd\":5.900180764877421,\"smart_trader_avg_flow_usd\":null,\"smart_trader_wallet_count\":25,\"exchange_net_flow_usd\":94895.8499038728,\"exchange_avg_flow_usd\":35030.48028914093,\"exchange_wallet_count\":0,\"fresh_wallets_net_flow_usd\":0.0,\"fresh_wallets_avg_flow_usd\":0.0,\"fresh_wallets_wallet_count\":0}],\"warnings\":[\"exchange_wallet_count is always 0 (not tracked), even when exchange net flow is non-zero.\"]}",
+      "creditsUsed": 1
+    },
+    "feedc38473741c41300945df6e8d1aca": {
+      "storedAt": "2026-09-16T14:19:21.846Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/who-bought-sold",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+        "buy_or_sell": "BUY",
+        "date": {
+          "from": "2026-09-09T14:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 1000
+        },
+        "filters": {
+          "exclude_smart_money_labels": [
+            "Smart Trader",
+            "30D Smart Trader",
+            "90D Smart Trader",
+            "180D Smart Trader",
+            "Fund",
+            "Whale",
+            "Exchange",
+            "Maestro Bot User",
+            "Top Maestro Bot User",
+            "BananaGun Bot User",
+            "Top BananaGun Bot User"
+          ]
+        },
+        "order_by": [
+          {
+            "field": "bought_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"data\":[{\"address\":\"0xeff6cb8b614999d130e537751ee99724d01aa167\",\"address_label\":\"Token Millionaire\",\"bought_token_volume\":49071696.7354844,\"sold_token_volume\":1021995.4175408294,\"token_trade_volume\":48049701.31794357,\"bought_volume_usd\":44761.07452095404,\"sold_volume_usd\":945.0167946580207,\"trade_volume_usd\":43816.05772629602},{\"address\":\"0xbee3211ab312a8d065c4fef0247448e17a8da000\",\"address_label\":\"Token Millionaire\",\"bought_token_volume\":16130250.190555872,\"sold_token_volume\":6017320.326005519,\"token_trade_volume\":10112929.864550352,\"bought_volume_usd\":15073.845644903342,\"sold_volume_usd\":5552.202068970628,\"trade_volume_usd\":9521.643575932714},{\"address\":\"0x78ec245e59af5deab96165648aad1d8bc04d4335\",\"address_label\":\"\",\"bought_token_volume\":3413997.6089202114,\"sold_token_volume\":0.0,\"token_trade_volume\":3413997.6089202114,\"bought_volume_usd\":2982.0486031232535,\"sold_volume_usd\":0.0,\"trade_volume_usd\":2982.0486031232535},{\"address\":\"0x664ea834dee49348c90487acf8154e5642345876\",\"address_label\":\"\",\"bought_token_volume\":2130036.1363480017,\"sold_token_volume\":0.0,\"token_trade_volume\":2130036.1363480017,\"bought_volume_usd\":1997.4092660830493,\"sold_volume_usd\":0.0,\"trade_volume_usd\":1997.4092660830493},{\"address\":\"0x7551a91b9b6b903a1106e9737342137bccd40d00\",\"address_label\":\"\",\"bought_token_volume\":1626127.5974151723,\"sold_token_volume\":0.0,\"token_trade_volume\":1626127.5974151723,\"bought_volume_usd\":1535.2594998001975,\"sold_volume_usd\":0.0,\"trade_volume_usd\":1535.2594998001975},{\"address\":\"0x97058261eb17f8fa524ae265e55ad594a084c7ff\",\"address_label\":\"\\\"KBMehta\\\" on OpenSea\",\"bought_token_volume\":1238159.6274995354,\"sold_token_volume\":0.0,\"token_trade_volume\":1238159.6274995354,\"bought_volume_usd\":1160.8753832513448,\"sold_volume_usd\":0.0,\"trade_volume_usd\":1160.8753832513448},{\"address\":\"0x11a06c084b0e9583e3ce9d930c0c9ec35af5a4c8\",\"address_label\":\"\",\"bought_token_volume\":910022.4510761986,\"sold_token_volume\":0.0,\"token_trade_volume\":910022.4510761986,\"bought_volume_usd\":864.8964020525234,\"sold_volume_usd\":0.0,\"trade_volume_usd\":864.8964020525234},{\"address\":\"0x4a3f4cc42ff0b8a18474c68031d4ce46605bd86d\",\"address_label\":\"High Activity\",\"bought_token_volume\":684600.0,\"sold_token_volume\":0.0,\"token_trade_volume\":684600.0,\"bought_volume_usd\":679.1788424905635,\"sold_volume_usd\":0.0,\"trade_volume_usd\":679.1788424905635},{\"address\":\"0xc4954bb92dffda95352d152cd6224ac6fd43a195\",\"address_label\":\"\",\"bought_token_volume\":632119.4986157173,\"sold_token_volume\":0.0,\"token_trade_volume\":632119.4986157173,\"bought_volume_usd\":598.519317733699,\"sold_volume_usd\":0.0,\"trade_volume_usd\":598.519317733699},{\"address\":\"0x5c3e5e78c00601e43885aa20a3ff903d0d63bbc2\",\"address_label\":\"\",\"bought_token_volume\":545417.05186622,\"sold_token_volume\":0.0,\"token_trade_volume\":545417.05186622,\"bought_volume_usd\":518.3709975718929,\"sold_volume_usd\":0.0,\"trade_volume_usd\":518.3709975718929},{\"address\":\"0x4929e16fedd19ab9c2f473a93baa0e6aceb7359a\",\"address_label\":\"\",\"bought_token_volume\":420777.93943651824,\"sold_token_volume\":0.0,\"token_trade_volume\":420777.93943651824,\"bought_volume_usd\":389.49317064247225,\"sold_volume_usd\":0.0,\"trade_volume_usd\":389.49317064247225},{\"address\":\"0xaef00065499f759050e368d44984965a4bb36320\",\"address_label\":\"\",\"bought_token_volume\":350701.43312521843,\"sold_token_volume\":0.0,\"token_trade_volume\":350701.43312521843,\"bought_volume_usd\":321.5137499114037,\"sold_volume_usd\":0.0,\"trade_volume_usd\":321.5137499114037},{\"address\":\"0x14c1112390c18846a0db51c1f4169c45e3627b08\",\"address_label\":\"\",\"bought_token_volume\":333526.53796775785,\"sold_token_volume\":333526.53796775785,\"token_trade_volume\":0.0,\"bought_volume_usd\":294.3989013654262,\"sold_volume_usd\":293.3577112751812,\"trade_volume_usd\":1.0411900902449815},{\"address\":\"0x04c7b4e2db71b2abffe4f2131cf2754533cf32da\",\"address_label\":\"High Activity\",\"bought_token_volume\":296853.8481861133,\"sold_token_volume\":0.0,\"token_trade_volume\":296853.8481861133,\"bought_volume_usd\":274.58189921293285,\"sold_volume_usd\":0.0,\"trade_volume_usd\":274.58189921293285},{\"address\":\"0x4beb8dad5117216df2d32dfa45ed7191cf62da3b\",\"address_label\":\"\",\"bought_token_volume\":279055.1410220825,\"sold_token_volume\":0.0,\"token_trade_volume\":279055.1410220825,\"bought_volume_usd\":269.7064439327013,\"sold_volume_usd\":0.0,\"trade_volume_usd\":269.7064439327013},{\"address\":\"0xe90489c69f84281711467f8abac149e67f323aba\",\"address_label\":\"\",\"bought_token_volume\":269007.87567073357,\"sold_token_volume\":0.0,\"token_trade_volume\":269007.87567073357,\"bought_volume_usd\":242.31439690395408,\"sold_volume_usd\":0.0,\"trade_volume_usd\":242.31439690395408},{\"address\":\"0x0b55a01fc0c5a8398e389edab4f1e5d5c1cfed6e\",\"address_label\":\"\",\"bought_token_volume\":129252.11398886006,\"sold_token_volume\":0.0,\"token_trade_volume\":129252.11398886006,\"bought_volume_usd\":110.99137530405795,\"sold_volume_usd\":0.0,\"trade_volume_usd\":110.99137530405795},{\"address\":\"0x95ac554576199ad1be508963ac42f75596143c05\",\"address_label\":\"\",\"bought_token_volume\":99787.36227311591,\"sold_token_volume\":0.0,\"token_trade_volume\":99787.36227311591,\"bought_volume_usd\":99.13887118836556,\"sold_volume_usd\":0.0,\"trade_volume_usd\":99.13887118836556},{\"address\":\"0x52d73f9d8feb5527b9718a4d76ecbeef844f5a56\",\"address_label\":\"\",\"bought_token_volume\":105117.62555464939,\"sold_token_volume\":0.0,\"token_trade_volume\":105117.62555464939,\"bought_volume_usd\":93.9168283987422,\"sold_volume_usd\":0.0,\"trade_volume_usd\":93.9168283987422},{\"address\":\"0x49719d256a5ea16bfa579ea16e95bea9fa41a452\",\"address_label\":\"Uses \\\"MMREFCSI\\\" HL Referral Code\",\"bought_token_volume\":75476.89305422938,\"sold_token_volume\":0.0,\"token_trade_volume\":75476.89305422938,\"bought_volume_usd\":64.9515683763522,\"sold_volume_usd\":0.0,\"trade_volume_usd\":64.9515683763522},{\"address\":\"0x755e0e293a6e6ff81166f9979abbe1743ed694ab\",\"address_label\":\"\",\"bought_token_volume\":67324.48329021655,\"sold_token_volume\":0.0,\"token_trade_volume\":67324.48329021655,\"bought_volume_usd\":62.96454508239826,\"sold_volume_usd\":0.0,\"trade_volume_usd\":62.96454508239826},{\"address\":\"0x43d732c408c0ce6048ad5b5eca6e622caab8cefe\",\"address_label\":\"\",\"bought_token_volume\":60025.379077342135,\"sold_token_volume\":0.0,\"token_trade_volume\":60025.379077342135,\"bought_volume_usd\":54.227284664430286,\"sold_volume_usd\":0.0,\"trade_volume_usd\":54.227284664430286},{\"address\":\"0xd4a789f7ee949689ca289f00080c4fc5ef7b7ca5\",\"address_label\":\"\",\"bought_token_volume\":54221.55592804111,\"sold_token_volume\":0.0,\"token_trade_volume\":54221.55592804111,\"bought_volume_usd\":50.646650651279565,\"sold_volume_usd\":0.0,\"trade_volume_usd\":50.646650651279565},{\"address\":\"0x08fe714d59168e4f8b39dbe40117991898d434ce\",\"address_label\":\"\",\"bought_token_volume\":50202.98931053163,\"sold_token_volume\":0.0,\"token_trade_volume\":50202.98931053163,\"bought_volume_usd\":43.62996830271599,\"sold_volume_usd\":0.0,\"trade_volume_usd\":43.62996830271599},{\"address\":\"0xb2e407e40b77eea04e623c5e58ca9f0ee5528548\",\"address_label\":\"\",\"bought_token_volume\":44472.00525029923,\"sold_token_volume\":0.0,\"token_trade_volume\":44472.00525029923,\"bought_volume_usd\":41.505119553945434,\"sold_volume_usd\":0.0,\"trade_volume_usd\":41.505119553945434},{\"address\":\"0xcfef208803779e80938f8a23a2f9533cf7f40317\",\"address_label\":\"\",\"bought_token_volume\":38344.21895197384,\"sold_token_volume\":0.0,\"token_trade_volume\":38344.21895197384,\"bought_volume_usd\":33.36756245589644,\"sold_volume_usd\":0.0,\"trade_volume_usd\":33.36756245589644},{\"address\":\"0x80dff9f753de5970c98f206b8eaac0554beab7c3\",\"address_label\":\"\",\"bought_token_volume\":25542.101898560726,\"sold_token_volume\":0.0,\"token_trade_volume\":25542.101898560726,\"bought_volume_usd\":23.8385130973272,\"sold_volume_usd\":0.0,\"trade_volume_usd\":23.8385130973272},{\"address\":\"0xfbeedcfe378866dab6abbafd8b2986f5c1768737\",\"address_label\":\"Token Millionaire\",\"bought_token_volume\":22102.702551793747,\"sold_token_volume\":0.0,\"token_trade_volume\":22102.702551793747,\"bought_volume_usd\":19.91893667171609,\"sold_volume_usd\":0.0,\"trade_volume_usd\":19.91893667171609},{\"address\":\"0x2a1dd674f83ede4794824dfd60116479ba7b14a2\",\"address_label\":\"\",\"bought_token_volume\":20692.580652953555,\"sold_token_volume\":0.0,\"token_trade_volume\":20692.580652953555,\"bought_volume_usd\":17.570767885349035,\"sold_volume_usd\":0.0,\"trade_volume_usd\":17.570767885349035},{\"address\":\"0x6f71c27471dc57c9560c9fda1bfbcf3274726386\",\"address_label\":\"\",\"bought_token_volume\":15111.569820952365,\"sold_token_volume\":0.0,\"token_trade_volume\":15111.569820952365,\"bought_volume_usd\":14.50974066898326,\"sold_volume_usd\":0.0,\"trade_volume_usd\":14.50974066898326},{\"address\":\"0x51ba27eaa3eee5b9d3ecef10d4bb9a7a3835d9b6\",\"address_label\":\"\",\"bought_token_volume\":10673.698093759469,\"sold_token_volume\":0.0,\"token_trade_volume\":10673.698093759469,\"bought_volume_usd\":9.85139079338205,\"sold_volume_usd\":0.0,\"trade_volume_usd\":9.85139079338205},{\"address\":\"0x519aa5ef34f2c3baed53a1c35f2b49f92850e176\",\"address_label\":\"\",\"bought_token_volume\":10501.857297626515,\"sold_token_volume\":0.0,\"token_trade_volume\":10501.857297626515,\"bought_volume_usd\":9.725674221535538,\"sold_volume_usd\":0.0,\"trade_volume_usd\":9.725674221535538},{\"address\":\"0x957d8171e7e8f255a6f805ef27df6fe6a31a78ac\",\"address_label\":\"High Activity\",\"bought_token_volume\":8671.057800627936,\"sold_token_volume\":8671.057800627936,\"token_trade_volume\":0.0,\"bought_volume_usd\":7.691833977029183,\"sold_volume_usd\":7.691833977029183,\"trade_volume_usd\":0.0},{\"address\":\"0x672061b75f770331b0c7c2a566a9ac0a9ba331d2\",\"address_label\":\"High Activity\",\"bought_token_volume\":7744.7806404950525,\"sold_token_volume\":7744.775896427828,\"token_trade_volume\":0.004744067224237369,\"bought_volume_usd\":7.120231813033943,\"sold_volume_usd\":7.120227451534252,\"trade_volume_usd\":4.3614996911856e-6},{\"address\":\"0xe31dcedcc6b3e80fd81e31500c34e396a3c3438e\",\"address_label\":\"\",\"bought_token_volume\":8031.350761939731,\"sold_token_volume\":0.0,\"token_trade_volume\":8031.350761939731,\"bought_volume_usd\":6.974987666859128,\"sold_volume_usd\":0.0,\"trade_volume_usd\":6.974987666859128},{\"address\":\"0x364ca2048dfd43dbcceb971d709600c4d48eb275\",\"address_label\":\"\",\"bought_token_volume\":4947.887734678584,\"sold_token_volume\":0.0,\"token_trade_volume\":4947.887734678584,\"bought_volume_usd\":4.845635869018345,\"sold_volume_usd\":0.0,\"trade_volume_usd\":4.845635869018345},{\"address\":\"0x5786f4e1eb51807cc93e6102c2177353b4bbfabc\",\"address_label\":\"\",\"bought_token_volume\":4871.65061632156,\"sold_token_volume\":0.0,\"token_trade_volume\":4871.65061632156,\"bought_volume_usd\":4.843711131072111,\"sold_volume_usd\":0.0,\"trade_volume_usd\":4.843711131072111},{\"address\":\"0x76013ffb12a4af7aa1b5001fe3dde3a458af46c3\",\"address_label\":\"\",\"bought_token_volume\":3857.9310921195324,\"sold_token_volume\":0.0,\"token_trade_volume\":3857.9310921195324,\"bought_volume_usd\":3.605757301898194,\"sold_volume_usd\":0.0,\"trade_volume_usd\":3.605757301898194},{\"address\":\"0x937897fe19f675c96a71078820f21ca9bd637180\",\"address_label\":\"High Balance\",\"bought_token_volume\":3823.493878672309,\"sold_token_volume\":3823.493878672309,\"token_trade_volume\":0.0,\"bought_volume_usd\":3.5614601454359383,\"sold_volume_usd\":3.5614601454359383,\"trade_volume_usd\":0.0},{\"address\":\"0xf34ed6ea8f83851272aa962c8bf7660a3bb80371\",\"address_label\":\"Uses \\\"MMCSI\\\" HL Referral Code\",\"bought_token_volume\":3160.022156380745,\"sold_token_volume\":3160.022156380745,\"token_trade_volume\":0.0,\"bought_volume_usd\":2.94470943201393,\"sold_volume_usd\":2.9022689931877927,\"trade_volume_usd\":0.04244043882613724},{\"address\":\"0x9a7cea5385af8d271cda17e136d384227196470f\",\"address_label\":\"Uses \\\"PURPS\\\" HL Referral Code\",\"bought_token_volume\":2809.1329218054902,\"sold_token_volume\":0.0,\"token_trade_volume\":2809.1329218054902,\"bought_volume_usd\":2.49154975157637,\"sold_volume_usd\":0.0,\"trade_volume_usd\":2.49154975157637},{\"address\":\"0xa9fa53a6ba01f7697438c06adbf19aac8a4f151a\",\"address_label\":\"\",\"bought_token_volume\":1897.1963386084142,\"sold_token_volume\":0.0,\"token_trade_volume\":1897.1963386084142,\"bought_volume_usd\":1.7355741701717973,\"sold_volume_usd\":0.0,\"trade_volume_usd\":1.7355741701717973},{\"address\":\"0xff177e4bf56c6218f99038a09fc909fb6cc62506\",\"address_label\":\"\",\"bought_token_volume\":1606.4277041442858,\"sold_token_volume\":0.0,\"token_trade_volume\":1606.4277041442858,\"bought_volume_usd\":1.476883358655861,\"sold_volume_usd\":0.0,\"trade_volume_usd\":1.476883358655861},{\"address\":\"0x817b1019c39443198c4130b26b718162b201ae3b\",\"address_label\":\"\",\"bought_token_volume\":1053.4950816136047,\"sold_token_volume\":0.0,\"token_trade_volume\":1053.4950816136047,\"bought_volume_usd\":0.9775574638667958,\"sold_volume_usd\":0.0,\"trade_volume_usd\":0.9775574638667958},{\"address\":\"0x05e913919fe520259272505169478ba050618874\",\"address_label\":\"High Activity\",\"bought_token_volume\":3.892753329680385,\"sold_token_volume\":0.0,\"token_trade_volume\":3.892753329680385,\"bought_volume_usd\":0.003553839172067072,\"sold_volume_usd\":0.0,\"trade_volume_usd\":0.003553839172067072}],\"pagination\":{\"page\":1,\"per_page\":1000,\"is_last_page\":true}}",
+      "creditsUsed": 1
+    },
+    "4ca03c47778cebbabb0f20e4e269532a": {
+      "storedAt": "2026-09-16T14:19:22.348Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flows",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+        "date": {
+          "from": "2026-09-02T00:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "label": "smart_money",
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "date",
+            "direction": "ASC"
+          }
+        ]
+      },
+      "text": "{\"data\":[{\"date\":\"2026-09-03T00:00:00Z\",\"bucket_end\":\"2026-09-04T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000961869312302807,\"token_amount\":21141.00000007908,\"value_usd\":20.33487913146971,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-04T00:00:00Z\",\"bucket_end\":\"2026-09-05T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000964703246964846,\"token_amount\":21141.00000007908,\"value_usd\":20.394791344160097,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-05T00:00:00Z\",\"bucket_end\":\"2026-09-06T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.00102200254904771,\"token_amount\":21141.00000007908,\"value_usd\":21.606155889498456,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-06T00:00:00Z\",\"bucket_end\":\"2026-09-07T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000997126049107503,\"token_amount\":27501.00000007908,\"value_usd\":27.421963476584303,\"holders_count\":2,\"total_inflows_count\":6360.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-07T00:00:00Z\",\"bucket_end\":\"2026-09-08T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000994993246342276,\"token_amount\":27501.00000007908,\"value_usd\":27.363309267737613,\"holders_count\":2,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-08T00:00:00Z\",\"bucket_end\":\"2026-09-09T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0009997772406244339,\"token_amount\":27501.00000007908,\"value_usd\":27.494873894491622,\"holders_count\":2,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-09T00:00:00Z\",\"bucket_end\":\"2026-09-10T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000996626876194152,\"token_amount\":27501.00000007908,\"value_usd\":27.408235722294187,\"holders_count\":2,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-10T00:00:00Z\",\"bucket_end\":\"2026-09-11T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000937758001140455,\"token_amount\":27501.00000007908,\"value_usd\":25.78928278943781,\"holders_count\":2,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-11T00:00:00Z\",\"bucket_end\":\"2026-09-12T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000919098920153723,\"token_amount\":30396.00000007908,\"value_usd\":27.936930777065246,\"holders_count\":2,\"total_inflows_count\":2895.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-12T00:00:00Z\",\"bucket_end\":\"2026-09-13T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000928205375616171,\"token_amount\":32535.00000007908,\"value_usd\":30.199161895745526,\"holders_count\":2,\"total_inflows_count\":2139.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-13T00:00:00Z\",\"bucket_end\":\"2026-09-14T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000922638363601532,\"token_amount\":32535.00000007908,\"value_usd\":30.018039159848804,\"holders_count\":2,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-14T00:00:00Z\",\"bucket_end\":\"2026-09-15T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.00091691415695266,\"token_amount\":32535.00000007908,\"value_usd\":29.8318020965273,\"holders_count\":2,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-15T00:00:00Z\",\"bucket_end\":\"2026-09-16T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000879563326692583,\"token_amount\":35499.000000079075,\"value_usd\":31.223618534329557,\"holders_count\":2,\"total_inflows_count\":2964.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-16T00:00:00Z\",\"bucket_end\":\"2026-09-17T00:00:00Z\",\"is_complete\":false,\"price_usd\":0.000852969014056593,\"token_amount\":35499.000000079075,\"value_usd\":30.27954703006245,\"holders_count\":2,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null}],\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"warnings\":[\"total_inflows_dex, total_outflows_dex, total_inflows_cex and total_outflows_cex are only populated when label=exchange and are null for all other labels. For net flow per holder segment (e.g. smart money), use POST /api/v1/tgm/flow-intelligence.\"]}",
+      "creditsUsed": 1
+    },
+    "ba30998b91bc1974e79a83060091d7ee": {
+      "storedAt": "2026-09-16T14:19:22.901Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flows",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+        "date": {
+          "from": "2026-09-02T00:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "label": "exchange",
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "date",
+            "direction": "ASC"
+          }
+        ]
+      },
+      "text": "{\"data\":[{\"date\":\"2026-09-03T00:00:00Z\",\"bucket_end\":\"2026-09-04T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000961869312302807,\"token_amount\":41487494513.325615,\"value_usd\":39905547.81669897,\"holders_count\":4834,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-04T00:00:00Z\",\"bucket_end\":\"2026-09-05T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000964703246964846,\"token_amount\":41481425532.16738,\"value_usd\":40017265.89961232,\"holders_count\":4892,\"total_inflows_count\":231356681.5976022,\"total_outflows_count\":-237425662.75583073,\"total_inflows_dex\":24757.810029356497,\"total_outflows_dex\":-18716.857639487367,\"total_inflows_cex\":231301923.78757283,\"total_outflows_cex\":-237406945.89819124},{\"date\":\"2026-09-05T00:00:00Z\",\"bucket_end\":\"2026-09-06T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.00102200254904771,\"token_amount\":41492795483.46332,\"value_usd\":42405742.75121479,\"holders_count\":5019,\"total_inflows_count\":341698366.42791724,\"total_outflows_count\":-330328415.13199234,\"total_inflows_dex\":0.0,\"total_outflows_dex\":-115281.3781186887,\"total_inflows_cex\":341698366.42791724,\"total_outflows_cex\":-330102416.48661196},{\"date\":\"2026-09-06T00:00:00Z\",\"bucket_end\":\"2026-09-07T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000997126049107503,\"token_amount\":41496893713.454765,\"value_usd\":41377633.67873112,\"holders_count\":5096,\"total_inflows_count\":108224743.81918103,\"total_outflows_count\":-104126513.82774019,\"total_inflows_dex\":61646.3122533825,\"total_outflows_dex\":-57374.21035153993,\"total_inflows_cex\":108161666.50692764,\"total_outflows_cex\":-104069139.61738865},{\"date\":\"2026-09-07T00:00:00Z\",\"bucket_end\":\"2026-09-08T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000994993246342276,\"token_amount\":41523071731.4351,\"value_usd\":41315175.940163784,\"holders_count\":5238,\"total_inflows_count\":298403473.3736901,\"total_outflows_count\":-272225455.3933531,\"total_inflows_dex\":194957.6830305392,\"total_outflows_dex\":-780.6179534415714,\"total_inflows_cex\":298201973.20260787,\"total_outflows_cex\":-272222935.43034256},{\"date\":\"2026-09-08T00:00:00Z\",\"bucket_end\":\"2026-09-09T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0009997772406244339,\"token_amount\":41527781287.22863,\"value_usd\":41518530.58460041,\"holders_count\":5376,\"total_inflows_count\":161461589.07417405,\"total_outflows_count\":-156752033.28063408,\"total_inflows_dex\":21.03594935505337,\"total_outflows_dex\":-192792.98311262781,\"total_inflows_cex\":158462313.03822467,\"total_outflows_cex\":-156547439.77933094},{\"date\":\"2026-09-09T00:00:00Z\",\"bucket_end\":\"2026-09-10T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000996626876194152,\"token_amount\":41531414903.04976,\"value_usd\":41391324.29874972,\"holders_count\":5397,\"total_inflows_count\":110016147.8925924,\"total_outflows_count\":-106382532.07144938,\"total_inflows_dex\":225289.5350301677,\"total_outflows_dex\":-15141.417052792385,\"total_inflows_cex\":109790858.35756223,\"total_outflows_cex\":-106358614.3930194},{\"date\":\"2026-09-10T00:00:00Z\",\"bucket_end\":\"2026-09-11T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000937758001140455,\"token_amount\":41538439669.07316,\"value_usd\":38953004.15456343,\"holders_count\":5290,\"total_inflows_count\":312710206.01872873,\"total_outflows_count\":-305685439.99533963,\"total_inflows_dex\":719577.138949981,\"total_outflows_dex\":0.0,\"total_inflows_cex\":311990628.87977874,\"total_outflows_cex\":-305651939.97960114},{\"date\":\"2026-09-11T00:00:00Z\",\"bucket_end\":\"2026-09-12T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000919098920153723,\"token_amount\":41608071797.284065,\"value_usd\":38241933.85856235,\"holders_count\":5310,\"total_inflows_count\":396329726.9141657,\"total_outflows_count\":-326697598.70326453,\"total_inflows_dex\":380157.4136090546,\"total_outflows_dex\":0.0,\"total_inflows_cex\":394081755.0847566,\"total_outflows_cex\":-325838156.8472056},{\"date\":\"2026-09-12T00:00:00Z\",\"bucket_end\":\"2026-09-13T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000928205375616171,\"token_amount\":41606780949.899445,\"value_usd\":38619637.739781134,\"holders_count\":5387,\"total_inflows_count\":186627209.71824464,\"total_outflows_count\":-187918057.10287547,\"total_inflows_dex\":13498.000000014013,\"total_outflows_dex\":-141271.3966001158,\"total_inflows_cex\":186561257.518915,\"total_outflows_cex\":-187747507.21046937},{\"date\":\"2026-09-13T00:00:00Z\",\"bucket_end\":\"2026-09-14T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000922638363601532,\"token_amount\":41622195141.5822,\"value_usd\":38402234.01493301,\"holders_count\":5411,\"total_inflows_count\":197598714.26917893,\"total_outflows_count\":-182184522.58641666,\"total_inflows_dex\":180059.32970120385,\"total_outflows_dex\":-75.67900081352711,\"total_inflows_cex\":197383351.42869172,\"total_outflows_cex\":-182184446.90741584},{\"date\":\"2026-09-14T00:00:00Z\",\"bucket_end\":\"2026-09-15T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.00091691415695266,\"token_amount\":41684724936.06767,\"value_usd\":38221314.422557995,\"holders_count\":5449,\"total_inflows_count\":445445997.0028544,\"total_outflows_count\":-382916202.51737314,\"total_inflows_dex\":418896.9196942353,\"total_outflows_dex\":-1.62944e-12,\"total_inflows_cex\":445027100.0831601,\"total_outflows_cex\":-382892249.86813194},{\"date\":\"2026-09-15T00:00:00Z\",\"bucket_end\":\"2026-09-16T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000879563326692583,\"token_amount\":41604227337.39046,\"value_usd\":36593552.60134964,\"holders_count\":5455,\"total_inflows_count\":177431747.7189677,\"total_outflows_count\":-257929346.39617738,\"total_inflows_dex\":25154.00501704089,\"total_outflows_dex\":-454915.1155003947,\"total_inflows_cex\":177171692.75113013,\"total_outflows_cex\":-257452025.65938485},{\"date\":\"2026-09-16T00:00:00Z\",\"bucket_end\":\"2026-09-17T00:00:00Z\",\"is_complete\":false,\"price_usd\":0.000852969014056593,\"token_amount\":41622070623.18714,\"value_usd\":35502336.542453825,\"holders_count\":5450,\"total_inflows_count\":108540724.97786918,\"total_outflows_count\":-90697439.1811848,\"total_inflows_dex\":305283.2760557886,\"total_outflows_dex\":-8.826611e-12,\"total_inflows_cex\":108152831.8211155,\"total_outflows_cex\":-90697439.1811848}],\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"warnings\":null}",
+      "creditsUsed": 1
+    },
+    "629cab921234dcd55c7d7c74d616f7cc": {
+      "storedAt": "2026-09-16T14:19:22.909Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/indicators",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3"
+      },
+      "text": "{\"token_address\":\"0xa35923162c49cf95e6bf26623385eb431ad920d3\",\"chain\":\"ethereum\",\"token_info\":{\"market_cap_usd\":58874295.7677,\"market_cap_group\":\"lowcap\",\"is_stablecoin\":false},\"risk_indicators\":[{\"indicator_type\":\"btc-reflexivity\",\"score\":\"high\",\"signal\":1.3,\"signal_percentile\":45.37866932233129,\"last_trigger_on\":\"2026-08-28\"},{\"indicator_type\":\"liquidity-risk\",\"score\":\"high\",\"signal\":0.00147826007727058,\"signal_percentile\":7.3665513695428615,\"last_trigger_on\":\"2026-09-16\"},{\"indicator_type\":\"token-supply-inflation\",\"score\":\"medium\",\"signal\":0.005653605691139224,\"signal_percentile\":55.93008739076155,\"last_trigger_on\":\"2026-01-28\"}],\"reward_indicators\":[{\"indicator_type\":\"concentration-risk\",\"score\":\"medium\",\"signal\":0.17254541719051228,\"signal_percentile\":73.98945518453426,\"last_trigger_on\":\"2024-12-13\"},{\"indicator_type\":\"funding-rate\",\"score\":\"bullish\",\"signal\":1.0,\"signal_percentile\":34.624697336561745,\"last_trigger_on\":\"2026-09-16\"},{\"indicator_type\":\"price-momentum\",\"score\":\"neutral\",\"signal\":0.00047602867471918664,\"signal_percentile\":66.1037394451146,\"last_trigger_on\":\"2026-09-16\"}]}",
+      "creditsUsed": 5
+    }
+  },
+  "plan": {
+    "input": {
+      "chain": "ethereum",
+      "token": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+      "amount": 50000000
+    },
+    "resolved": {
+      "address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+      "symbol": "TURBO",
+      "name": "Turbo",
+      "viaSearch": false,
+      "logo": "https://coin-images.coingecko.com/coins/images/30117/small/TurboMark-QL_200.png?1708079597"
+    },
+    "status": "thin",
+    "statusReason": "27% of the position is still unsold after 90 days at this pace",
+    "price": {
+      "usd": 0.000852969014056593,
+      "source": "token-information market_cap_usd / circulating_supply"
+    },
+    "positionUsd": 42648.45070282965,
+    "organic": {
+      "totalBuy7dUsd": 81178.1506012157,
+      "proBuy7dUsd": 0,
+      "organicBuy7dUsd": 81178.1506012157,
+      "organicDailyUsd": 11596.878657316529,
+      "organicShare": 1,
+      "organicBuyers": 54,
+      "proBuyers": 0,
+      "proLabels": [],
+      "top1Share": 0.6151666740320595,
+      "top10Share": 0.9643904997632134
+    },
+    "liquidityUsd": 65323.13553869072,
+    "marketCapUsd": 58854861.969904914,
+    "totalHolders": 40061,
+    "risk": {
+      "scores": {
+        "liquidity-risk": "high",
+        "concentration-risk": "medium",
+        "btc-reflexivity": "high"
+      },
+      "highs": 2,
+      "mediums": 1,
+      "concentrated": true,
+      "k": 0.03
+    },
+    "today": {
+      "date": "2026-09-16",
+      "red": false,
+      "reason": null,
+      "smNetUsd": 1.7925500597994841,
+      "exNetUsd": -72791.62888290145,
+      "theta": {
+        "smUsd": 1159.687865731653,
+        "exUsd": 11596.878657316529
+      }
+    },
+    "history": [
+      {
+        "date": "2026-09-03",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-04",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": -5854.76582911155,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-05",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 11620.119206983563,
+        "red": true,
+        "reason": "Exchange net deposits +$11,620"
+      },
+      {
+        "date": "2026-09-06",
+        "complete": true,
+        "smNetUsd": 6.34172167232372,
+        "exNetUsd": 4086.451879699274,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-07",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 26046.951093062005,
+        "red": true,
+        "reason": "Exchange net deposits +$26,047"
+      },
+      {
+        "date": "2026-09-08",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 4708.506695832209,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-09",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 3621.359185115413,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-10",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 6587.530544572746,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-11",
+        "complete": true,
+        "smNetUsd": 2.660791373845028,
+        "exNetUsd": 63998.81384664483,
+        "red": true,
+        "reason": "Exchange net deposits +$63,999"
+      },
+      {
+        "date": "2026-09-12",
+        "complete": true,
+        "smNetUsd": 1.9854312984429896,
+        "exNetUsd": -1198.1714815144105,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-13",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 14221.72459042412,
+        "red": true,
+        "reason": "Exchange net deposits +$14,222"
+      },
+      {
+        "date": "2026-09-14",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 57334.45379507814,
+        "red": true,
+        "reason": "Exchange net deposits +$57,334"
+      },
+      {
+        "date": "2026-09-15",
+        "complete": true,
+        "smNetUsd": 2.6070257003168162,
+        "exNetUsd": -70802.73568329102,
+        "red": false,
+        "reason": null
+      }
+    ],
+    "redRate": 0.38461538461538464,
+    "redDays": 5,
+    "completeDays": 13,
+    "tranches": [
+      {
+        "day": 0,
+        "date": "2026-09-16",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 1,
+        "date": "2026-09-17",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 2,
+        "date": "2026-09-18",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 3,
+        "date": "2026-09-19",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 4,
+        "date": "2026-09-20",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 5,
+        "date": "2026-09-21",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 6,
+        "date": "2026-09-22",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 7,
+        "date": "2026-09-23",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 8,
+        "date": "2026-09-24",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 9,
+        "date": "2026-09-25",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 10,
+        "date": "2026-09-26",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 11,
+        "date": "2026-09-27",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 12,
+        "date": "2026-09-28",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 13,
+        "date": "2026-09-29",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 14,
+        "date": "2026-09-30",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 15,
+        "date": "2026-10-01",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 16,
+        "date": "2026-10-02",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 17,
+        "date": "2026-10-03",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 18,
+        "date": "2026-10-04",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 19,
+        "date": "2026-10-05",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 20,
+        "date": "2026-10-06",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 21,
+        "date": "2026-10-07",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 22,
+        "date": "2026-10-08",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 23,
+        "date": "2026-10-09",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 24,
+        "date": "2026-10-10",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 25,
+        "date": "2026-10-11",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 26,
+        "date": "2026-10-12",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 27,
+        "date": "2026-10-13",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 28,
+        "date": "2026-10-14",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 29,
+        "date": "2026-10-15",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 30,
+        "date": "2026-10-16",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 31,
+        "date": "2026-10-17",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 32,
+        "date": "2026-10-18",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 33,
+        "date": "2026-10-19",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 34,
+        "date": "2026-10-20",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 35,
+        "date": "2026-10-21",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 36,
+        "date": "2026-10-22",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 37,
+        "date": "2026-10-23",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 38,
+        "date": "2026-10-24",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 39,
+        "date": "2026-10-25",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 40,
+        "date": "2026-10-26",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 41,
+        "date": "2026-10-27",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 42,
+        "date": "2026-10-28",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 43,
+        "date": "2026-10-29",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 44,
+        "date": "2026-10-30",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 45,
+        "date": "2026-10-31",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 46,
+        "date": "2026-11-01",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 47,
+        "date": "2026-11-02",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 48,
+        "date": "2026-11-03",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 49,
+        "date": "2026-11-04",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 50,
+        "date": "2026-11-05",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 51,
+        "date": "2026-11-06",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 52,
+        "date": "2026-11-07",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 53,
+        "date": "2026-11-08",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 54,
+        "date": "2026-11-09",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 55,
+        "date": "2026-11-10",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 56,
+        "date": "2026-11-11",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 57,
+        "date": "2026-11-12",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 58,
+        "date": "2026-11-13",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 59,
+        "date": "2026-11-14",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 60,
+        "date": "2026-11-15",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 61,
+        "date": "2026-11-16",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 62,
+        "date": "2026-11-17",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 63,
+        "date": "2026-11-18",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 64,
+        "date": "2026-11-19",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 65,
+        "date": "2026-11-20",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 66,
+        "date": "2026-11-21",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 67,
+        "date": "2026-11-22",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 68,
+        "date": "2026-11-23",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 69,
+        "date": "2026-11-24",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 70,
+        "date": "2026-11-25",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 71,
+        "date": "2026-11-26",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 72,
+        "date": "2026-11-27",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 73,
+        "date": "2026-11-28",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 74,
+        "date": "2026-11-29",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 75,
+        "date": "2026-11-30",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 76,
+        "date": "2026-12-01",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 77,
+        "date": "2026-12-02",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 78,
+        "date": "2026-12-03",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 79,
+        "date": "2026-12-04",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 80,
+        "date": "2026-12-05",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 81,
+        "date": "2026-12-06",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 82,
+        "date": "2026-12-07",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 83,
+        "date": "2026-12-08",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 84,
+        "date": "2026-12-09",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 85,
+        "date": "2026-12-10",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 86,
+        "date": "2026-12-11",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 87,
+        "date": "2026-12-12",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 88,
+        "date": "2026-12-13",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      },
+      {
+        "day": 89,
+        "date": "2026-12-14",
+        "tokens": 407876.9028958101,
+        "usd": 347.90635971949587,
+        "red": false,
+        "reason": null,
+        "costUsd": 3.666790772249731
+      }
+    ],
+    "days": 90,
+    "truncated": true,
+    "remainderTokens": 13291078.739377243,
+    "remainderPct": 0.26582157478754487,
+    "expectedDays": 112,
+    "trancheUsd": 347.90635971949587,
+    "trancheCapReason": "organic",
+    "dumpToday": {
+      "usd": 42648.45070282965,
+      "costUsd": 24152.03693016914,
+      "shareOfOrganicDay": 3.6775801457509023,
+      "model": "constant-product",
+      "priceImpactPct": null
+    },
+    "glidepath": {
+      "costUsd": 330.01116950247547,
+      "model": "constant-product",
+      "firstTrancheCostUsd": 3.666790772249731,
+      "priceImpactPct": null
+    },
+    "savingsUsd": 23822.025760666664,
+    "quotes": null,
+    "warnings": [
+      "one organic buyer is 62% of page-1 organic volume — single-buyer dependence, k reduced by 2 pts"
+    ],
+    "errors": {},
+    "now": 1789568361168,
+    "computedAt": "2026-09-16T14:19:21.168Z",
+    "hash": "399d27d7a2c65401976c5a9c385ad605af55e84fcccc80b12f4824ed41f067d2",
+    "provenance": [
+      {
+        "endpoint": "tgm/token-information",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+          "timeframe": "7d"
+        },
+        "fieldsUsed": [
+          "data.symbol",
+          "data.name",
+          "token_details.market_cap_usd",
+          "token_details.circulating_supply",
+          "token_details.fdv_usd",
+          "token_details.total_supply",
+          "token_details.token_deployment_date",
+          "spot_metrics.buy_volume_usd",
+          "spot_metrics.unique_buyers",
+          "spot_metrics.liquidity_usd",
+          "spot_metrics.total_holders"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61435,
+        "ms": 505,
+        "status": 200,
+        "responseHash": "305e053a4fe078a49534c826076a2db80551cf50208c7d545a1de6848c101401",
+        "attempts": 1,
+        "totalMs": 505
+      },
+      {
+        "endpoint": "tgm/who-bought-sold",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+          "buy_or_sell": "BUY",
+          "date": {
+            "from": "2026-09-09T14:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "pagination": {
+            "page": 1,
+            "per_page": 1000
+          },
+          "filters": {
+            "include_smart_money_labels": [
+              "Smart Trader",
+              "30D Smart Trader",
+              "90D Smart Trader",
+              "180D Smart Trader",
+              "Fund",
+              "Whale",
+              "Exchange",
+              "Maestro Bot User",
+              "Top Maestro Bot User",
+              "BananaGun Bot User",
+              "Top BananaGun Bot User"
+            ]
+          },
+          "order_by": [
+            {
+              "field": "bought_volume_usd",
+              "direction": "DESC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].bought_volume_usd",
+          "data[].bought_token_volume",
+          "data[].address_label",
+          "pagination.is_last_page"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61434,
+        "ms": 605,
+        "status": 200,
+        "responseHash": "274c2e87ff7c9544313b71862e73267d3dc689e11579f281f97ed8cb8733c1a2",
+        "attempts": 1,
+        "totalMs": 606
+      },
+      {
+        "endpoint": "tgm/flow-intelligence",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+          "timeframe": "1d"
+        },
+        "fieldsUsed": [
+          "data[0].smart_trader_net_flow_usd",
+          "data[0].exchange_net_flow_usd",
+          "data[0].whale_net_flow_usd",
+          "data[0].smart_trader_wallet_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61432,
+        "ms": 653,
+        "status": 200,
+        "responseHash": "d119bd59d7fa5b4a16a46dad5c570b9815c745a9af50ebc0a12b9ff0c31a4db3",
+        "attempts": 1,
+        "totalMs": 654
+      },
+      {
+        "endpoint": "tgm/flow-intelligence",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+          "timeframe": "7d"
+        },
+        "fieldsUsed": [
+          "data[0].smart_trader_net_flow_usd",
+          "data[0].exchange_net_flow_usd",
+          "data[0].whale_net_flow_usd",
+          "data[0].smart_trader_wallet_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61433,
+        "ms": 668,
+        "status": 200,
+        "responseHash": "bb7f51bd7a6e8d50e316c65d337b9808806ae966ce1bb97b34fefc78f95f33b5",
+        "attempts": 1,
+        "totalMs": 669
+      },
+      {
+        "endpoint": "tgm/who-bought-sold",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+          "buy_or_sell": "BUY",
+          "date": {
+            "from": "2026-09-09T14:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "pagination": {
+            "page": 1,
+            "per_page": 1000
+          },
+          "filters": {
+            "exclude_smart_money_labels": [
+              "Smart Trader",
+              "30D Smart Trader",
+              "90D Smart Trader",
+              "180D Smart Trader",
+              "Fund",
+              "Whale",
+              "Exchange",
+              "Maestro Bot User",
+              "Top Maestro Bot User",
+              "BananaGun Bot User",
+              "Top BananaGun Bot User"
+            ]
+          },
+          "order_by": [
+            {
+              "field": "bought_volume_usd",
+              "direction": "DESC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].bought_volume_usd",
+          "data[].bought_token_volume",
+          "data[].address_label",
+          "pagination.is_last_page"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61431,
+        "ms": 677,
+        "status": 200,
+        "responseHash": "049a95e4b04c7a5d1da681891466fba3327627d85cb7ba1b745a6053be8bee55",
+        "attempts": 1,
+        "totalMs": 678
+      },
+      {
+        "endpoint": "tgm/flows",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+          "date": {
+            "from": "2026-09-02T00:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "label": "smart_money",
+          "pagination": {
+            "page": 1,
+            "per_page": 100
+          },
+          "order_by": [
+            {
+              "field": "date",
+              "direction": "ASC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].date",
+          "data[].is_complete",
+          "data[].price_usd",
+          "data[].total_inflows_count",
+          "data[].total_outflows_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61430,
+        "ms": 1179,
+        "status": 200,
+        "responseHash": "3f0d6e7de58ffc48710f1380201e07c52b98c92cec92dc1233bc14a2c4689314",
+        "attempts": 1,
+        "totalMs": 1180
+      },
+      {
+        "endpoint": "tgm/flows",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+          "date": {
+            "from": "2026-09-02T00:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "label": "exchange",
+          "pagination": {
+            "page": 1,
+            "per_page": 100
+          },
+          "order_by": [
+            {
+              "field": "date",
+              "direction": "ASC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].date",
+          "data[].is_complete",
+          "data[].price_usd",
+          "data[].total_inflows_count",
+          "data[].total_outflows_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61428,
+        "ms": 1731,
+        "status": 200,
+        "responseHash": "2aea0c4fb4fcd738e7345033241bbb11bb09948aa18d4eede153286f52bd2e4a",
+        "attempts": 1,
+        "totalMs": 1733
+      },
+      {
+        "endpoint": "tgm/indicators",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0xa35923162c49cf95e6bf26623385eb431ad920d3"
+        },
+        "fieldsUsed": [
+          "risk_indicators[].indicator_type",
+          "risk_indicators[].score",
+          "reward_indicators[].indicator_type",
+          "reward_indicators[].score"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 5,
+        "creditsRemaining": 61423,
+        "ms": 1739,
+        "status": 200,
+        "responseHash": "811e253a5e78ce9de5fd6cf74e07d12c1964a5f2dc230fbf5b7df6519e0edd3a",
+        "attempts": 1,
+        "totalMs": 1741
+      }
+    ],
+    "credits": 12,
+    "calls": 8,
+    "cachedCalls": 0,
+    "ms": 1742,
+    "asOf": null
+  }
+}

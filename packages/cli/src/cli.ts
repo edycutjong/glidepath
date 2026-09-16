@@ -47,7 +47,7 @@ if (p.status === "not-found") {
     const strip = p.history.map((h) => (!h.complete ? `${D}·${X}` : h.red ? `${R}■${X}` : `${G}■${X}`)).join("");
     console.log(`last ${p.history.length} days ${strip}  ${p.redDays} red of ${p.completeDays} ${D}(${p.history.filter((h) => h.red).map((h) => `${h.date.slice(5)} ${h.reason}`).join("; ") || "no red days"})${X}`);
   }
-  console.log(`\n${B}Dump today:${X} ${usd(p.dumpToday.usd)} · est. cost ${R}${usd(p.dumpToday.costUsd, 2)}${X} ${D}(${p.dumpToday.model ?? "no model"}${p.dumpToday.priceImpactPct != null ? `, impact ${p.dumpToday.priceImpactPct}%` : ""})${X} · you would be ${B}${pct(p.dumpToday.shareOfOrganicDay, 0)}${X} of a day's organic buys`);
+  console.log(`\n${B}Dump today:${X} ${usd(p.dumpToday.usd)} · est. cost ${R}${usd(p.dumpToday.costUsd, 2)}${X} ${D}(${p.dumpToday.model ?? "no model"}${p.dumpToday.priceImpactPct != null ? `, impact ${p.dumpToday.priceImpactPct}%` : ""})${X} · you would be ${B}${pct(p.dumpToday.shareOfOrganicDay, (p.dumpToday.shareOfOrganicDay ?? 1) < 0.01 ? 1 : 0)}${X} of a day's organic buys`);
   if (p.status === "no-organic-demand" || p.status === "no-price") {
     console.log(`\n${Y}${B}no glidepath${X} — ${p.statusReason}`);
   } else {

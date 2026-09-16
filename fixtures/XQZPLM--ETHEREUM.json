@@ -1,0 +1,147 @@
+{
+  "edge": "13 · ticker that does not exist → not-found, zero credits",
+  "input": {
+    "chain": "ethereum",
+    "token": "XQZPLM",
+    "amount": 1
+  },
+  "now": 1789568454573,
+  "recordedAt": "2026-09-16T14:20:54.573Z",
+  "live": {
+    "calls": 1,
+    "credits": 0,
+    "ms": 517
+  },
+  "responses": {
+    "a4019d223b1b6eb88b68645901fcda15": {
+      "storedAt": "2026-09-16T14:20:55.087Z",
+      "ttlMs": 3600000,
+      "endpoint": "search/general",
+      "body": {
+        "search_query": "XQZPLM",
+        "result_type": "token",
+        "limit": 25
+      },
+      "text": "{\"tokens\":[],\"entities\":[],\"total_results\":0}",
+      "creditsUsed": 0
+    }
+  },
+  "plan": {
+    "input": {
+      "chain": "ethereum",
+      "token": "XQZPLM",
+      "amount": 1
+    },
+    "resolved": {
+      "address": "",
+      "symbol": "XQZPLM",
+      "name": "XQZPLM",
+      "viaSearch": true,
+      "logo": null
+    },
+    "status": "not-found",
+    "statusReason": "no token named XQZPLM on Nansen (0 fuzzy results)",
+    "price": {
+      "usd": null,
+      "source": "unavailable"
+    },
+    "positionUsd": null,
+    "organic": {
+      "totalBuy7dUsd": null,
+      "proBuy7dUsd": null,
+      "organicBuy7dUsd": null,
+      "organicDailyUsd": null,
+      "organicShare": null,
+      "organicBuyers": null,
+      "proBuyers": null,
+      "proLabels": [],
+      "top1Share": null,
+      "top10Share": null
+    },
+    "liquidityUsd": null,
+    "marketCapUsd": null,
+    "totalHolders": null,
+    "risk": {
+      "scores": {},
+      "highs": 0,
+      "mediums": 0,
+      "concentrated": false,
+      "k": 0
+    },
+    "today": {
+      "date": "2026-09-16",
+      "red": false,
+      "reason": null,
+      "smNetUsd": null,
+      "exNetUsd": null,
+      "theta": {
+        "smUsd": 0,
+        "exUsd": 0
+      }
+    },
+    "history": [],
+    "redRate": null,
+    "redDays": 0,
+    "completeDays": 0,
+    "tranches": [],
+    "days": 0,
+    "expectedDays": 0,
+    "truncated": false,
+    "remainderTokens": 0,
+    "remainderPct": 0,
+    "trancheUsd": null,
+    "trancheCapReason": null,
+    "dumpToday": {
+      "usd": null,
+      "costUsd": null,
+      "shareOfOrganicDay": null,
+      "model": null,
+      "priceImpactPct": null
+    },
+    "glidepath": {
+      "costUsd": null,
+      "model": null,
+      "firstTrancheCostUsd": null,
+      "priceImpactPct": null
+    },
+    "savingsUsd": null,
+    "quotes": null,
+    "warnings": [],
+    "errors": {},
+    "now": 1789568454573,
+    "computedAt": "2026-09-16T14:20:54.573Z",
+    "hash": "8ab45ff4e3fe5b793910a0ccb809748f731795e20d7253ee06297d29fa468274",
+    "provenance": [
+      {
+        "endpoint": "search/general",
+        "method": "POST",
+        "body": {
+          "search_query": "XQZPLM",
+          "result_type": "token",
+          "limit": 25
+        },
+        "fieldsUsed": [
+          "tokens[].symbol",
+          "tokens[].name",
+          "tokens[].chain",
+          "tokens[].address",
+          "tokens[].rank",
+          "tokens[].price"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 0,
+        "ms": 512,
+        "status": 200,
+        "responseHash": "7b618709926104ef1e68ea865edbf638e1e0ab6511ad44e6943ad98f4a73c1ec",
+        "attempts": 1,
+        "totalMs": 512
+      }
+    ],
+    "credits": 0,
+    "calls": 1,
+    "cachedCalls": 0,
+    "ms": 517,
+    "asOf": null
+  }
+}

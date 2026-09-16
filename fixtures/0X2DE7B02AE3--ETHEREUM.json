@@ -1,0 +1,690 @@
+{
+  "edge": "12 · SHIB2 — $0 DEX buys in 7 days → no organic demand, no calendar, numbers still shown",
+  "input": {
+    "chain": "ethereum",
+    "token": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+    "amount": 100000000
+  },
+  "now": 1789568439859,
+  "recordedAt": "2026-09-16T14:20:39.859Z",
+  "live": {
+    "calls": 8,
+    "credits": 12,
+    "ms": 1253
+  },
+  "responses": {
+    "fb597b0d262aded73e4857c8fb8cd66d": {
+      "storedAt": "2026-09-16T14:20:40.156Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flow-intelligence",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+        "timeframe": "7d"
+      },
+      "text": "{\"data\":[{\"public_figure_net_flow_usd\":0.0,\"public_figure_avg_flow_usd\":null,\"public_figure_wallet_count\":0,\"top_pnl_net_flow_usd\":0.0,\"top_pnl_avg_flow_usd\":null,\"top_pnl_wallet_count\":0,\"whale_net_flow_usd\":0.0,\"whale_avg_flow_usd\":null,\"whale_wallet_count\":0,\"smart_trader_net_flow_usd\":0.0,\"smart_trader_avg_flow_usd\":null,\"smart_trader_wallet_count\":0,\"exchange_net_flow_usd\":108.21113573853464,\"exchange_avg_flow_usd\":108.21113565434652,\"exchange_wallet_count\":0,\"fresh_wallets_net_flow_usd\":0.0,\"fresh_wallets_avg_flow_usd\":0.0,\"fresh_wallets_wallet_count\":0}],\"warnings\":[\"exchange_wallet_count is always 0 (not tracked), even when exchange net flow is non-zero.\"]}",
+      "creditsUsed": 1
+    },
+    "ea514ad11c703751488f74bfc6cf01c3": {
+      "storedAt": "2026-09-16T14:20:40.186Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/token-information",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+        "timeframe": "7d"
+      },
+      "text": "{\"data\":{\"name\":\"SHIB2\",\"symbol\":\"SHIB2\",\"contract_address\":\"0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0\",\"logo\":\"https://coin-images.coingecko.com/coins/images/31776/small/IMG_6344_2.jpg?1696530594\",\"token_details\":{\"token_deployment_date\":\"2023-09-14 16:50:11\",\"website\":\"https://shib2official.com/\",\"x\":\"shib2__official\",\"telegram\":\"S2Portal\",\"market_cap_usd\":35781.696921887895,\"fdv_usd\":26876.8053402853,\"circulating_supply\":1000000000.0,\"total_supply\":1000000000.0},\"spot_metrics\":{\"volume_total_usd\":112.15242094024701,\"buy_volume_usd\":0.0,\"sell_volume_usd\":112.15242094024701,\"total_buys\":0,\"total_sells\":6,\"unique_buyers\":0,\"unique_sellers\":5,\"liquidity_usd\":10796.382119452952,\"total_holders\":568}}}",
+      "creditsUsed": 1
+    },
+    "571fdc2038d650af8f94a2b6ae468b1e": {
+      "storedAt": "2026-09-16T14:20:40.195Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/who-bought-sold",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+        "buy_or_sell": "BUY",
+        "date": {
+          "from": "2026-09-09T14:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 1000
+        },
+        "filters": {
+          "exclude_smart_money_labels": [
+            "Smart Trader",
+            "30D Smart Trader",
+            "90D Smart Trader",
+            "180D Smart Trader",
+            "Fund",
+            "Whale",
+            "Exchange",
+            "Maestro Bot User",
+            "Top Maestro Bot User",
+            "BananaGun Bot User",
+            "Top BananaGun Bot User"
+          ]
+        },
+        "order_by": [
+          {
+            "field": "bought_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"data\":[],\"pagination\":{\"page\":1,\"per_page\":1000,\"is_last_page\":true}}",
+      "creditsUsed": 1
+    },
+    "eb62e97796d5152dac129dace307692f": {
+      "storedAt": "2026-09-16T14:20:40.197Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flow-intelligence",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+        "timeframe": "1d"
+      },
+      "text": "{\"data\":[{\"public_figure_net_flow_usd\":0.0,\"public_figure_avg_flow_usd\":null,\"public_figure_wallet_count\":0,\"top_pnl_net_flow_usd\":0.0,\"top_pnl_avg_flow_usd\":null,\"top_pnl_wallet_count\":0,\"whale_net_flow_usd\":0.0,\"whale_avg_flow_usd\":null,\"whale_wallet_count\":0,\"smart_trader_net_flow_usd\":0.0,\"smart_trader_avg_flow_usd\":null,\"smart_trader_wallet_count\":0,\"exchange_net_flow_usd\":0.0,\"exchange_avg_flow_usd\":84.97676773085252,\"exchange_wallet_count\":0,\"fresh_wallets_net_flow_usd\":0.0,\"fresh_wallets_avg_flow_usd\":0.0,\"fresh_wallets_wallet_count\":0}],\"warnings\":null}",
+      "creditsUsed": 1
+    },
+    "7b0480a14dfb2ba193fcb5e76004d4c8": {
+      "storedAt": "2026-09-16T14:20:40.500Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/who-bought-sold",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+        "buy_or_sell": "BUY",
+        "date": {
+          "from": "2026-09-09T14:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 1000
+        },
+        "filters": {
+          "include_smart_money_labels": [
+            "Smart Trader",
+            "30D Smart Trader",
+            "90D Smart Trader",
+            "180D Smart Trader",
+            "Fund",
+            "Whale",
+            "Exchange",
+            "Maestro Bot User",
+            "Top Maestro Bot User",
+            "BananaGun Bot User",
+            "Top BananaGun Bot User"
+          ]
+        },
+        "order_by": [
+          {
+            "field": "bought_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"data\":[],\"pagination\":{\"page\":1,\"per_page\":1000,\"is_last_page\":true}}",
+      "creditsUsed": 1
+    },
+    "487a491e79edb4e8ecff57c885560471": {
+      "storedAt": "2026-09-16T14:20:40.569Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flows",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+        "date": {
+          "from": "2026-09-02T00:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "label": "exchange",
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "date",
+            "direction": "ASC"
+          }
+        ]
+      },
+      "text": "{\"data\":[{\"date\":\"2026-09-03T00:00:00Z\",\"bucket_end\":\"2026-09-04T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":276515397.1707544,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-04T00:00:00Z\",\"bucket_end\":\"2026-09-05T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":276515397.1707544,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-05T00:00:00Z\",\"bucket_end\":\"2026-09-06T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":276515397.1707544,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-06T00:00:00Z\",\"bucket_end\":\"2026-09-07T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":276515397.1707544,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-07T00:00:00Z\",\"bucket_end\":\"2026-09-08T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":274627107.14004385,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":-1888290.0307105184,\"total_inflows_dex\":0.0,\"total_outflows_dex\":-1888290.0307105184,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-08T00:00:00Z\",\"bucket_end\":\"2026-09-09T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":274627107.14004385,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-09T00:00:00Z\",\"bucket_end\":\"2026-09-10T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":274627107.14004385,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-10T00:00:00Z\",\"bucket_end\":\"2026-09-11T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":274627107.14004385,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-11T00:00:00Z\",\"bucket_end\":\"2026-09-12T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.000039751368380385244,\"token_amount\":275222803.6310219,\"value_usd\":10940.483053819182,\"holders_count\":24,\"total_inflows_count\":595696.4909780622,\"total_outflows_count\":0.0,\"total_inflows_dex\":595696.4909780622,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-12T00:00:00Z\",\"bucket_end\":\"2026-09-13T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":275222803.6310219,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-13T00:00:00Z\",\"bucket_end\":\"2026-09-14T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":275222803.6310219,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-14T00:00:00Z\",\"bucket_end\":\"2026-09-15T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.0,\"token_amount\":275222803.6310219,\"value_usd\":0.0,\"holders_count\":0,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-15T00:00:00Z\",\"bucket_end\":\"2026-09-16T00:00:00Z\",\"is_complete\":true,\"price_usd\":0.00003759660545830775,\"token_amount\":297881720.8328743,\"value_usd\":11199.341531395346,\"holders_count\":24,\"total_inflows_count\":22658917.20185238,\"total_outflows_count\":0.0,\"total_inflows_dex\":22658917.20185238,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-16T00:00:00Z\",\"bucket_end\":\"2026-09-17T00:00:00Z\",\"is_complete\":false,\"price_usd\":0.0000357816969218879,\"token_amount\":297881720.8328743,\"value_usd\":10658.713453412323,\"holders_count\":23,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0}],\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"warnings\":null}",
+      "creditsUsed": 1
+    },
+    "30a9de44a4361fa82a55883db497f4b3": {
+      "storedAt": "2026-09-16T14:20:41.030Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flows",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+        "date": {
+          "from": "2026-09-02T00:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "label": "smart_money",
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "date",
+            "direction": "ASC"
+          }
+        ]
+      },
+      "text": "{\"data\":[],\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"warnings\":[\"total_inflows_dex, total_outflows_dex, total_inflows_cex and total_outflows_cex are only populated when label=exchange and are null for all other labels. For net flow per holder segment (e.g. smart money), use POST /api/v1/tgm/flow-intelligence.\"]}",
+      "creditsUsed": 1
+    },
+    "9db08e33f3be3228add01986e6e4bfad": {
+      "storedAt": "2026-09-16T14:20:41.111Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/indicators",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0"
+      },
+      "text": "{\"token_address\":\"0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0\",\"chain\":\"ethereum\",\"token_info\":{\"market_cap_usd\":null,\"market_cap_group\":null,\"is_stablecoin\":null},\"risk_indicators\":[],\"reward_indicators\":[]}",
+      "creditsUsed": 5
+    }
+  },
+  "plan": {
+    "input": {
+      "chain": "ethereum",
+      "token": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+      "amount": 100000000
+    },
+    "resolved": {
+      "address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+      "symbol": "SHIB2",
+      "name": "SHIB2",
+      "viaSearch": false,
+      "logo": "https://coin-images.coingecko.com/coins/images/31776/small/IMG_6344_2.jpg?1696530594"
+    },
+    "status": "no-organic-demand",
+    "statusReason": "organic buys are $0/day from 0 buyers over 7 days — below the $50/day, 5-buyer floor; there is nobody to sell to at any pace",
+    "price": {
+      "usd": 0.0000357816969218879,
+      "source": "token-information market_cap_usd / circulating_supply"
+    },
+    "positionUsd": 3578.1696921887897,
+    "organic": {
+      "totalBuy7dUsd": 0,
+      "proBuy7dUsd": 0,
+      "organicBuy7dUsd": 0,
+      "organicDailyUsd": 0,
+      "organicShare": null,
+      "organicBuyers": 0,
+      "proBuyers": 0,
+      "proLabels": [],
+      "top1Share": null,
+      "top10Share": null
+    },
+    "liquidityUsd": 10796.382119452952,
+    "marketCapUsd": 35781.696921887895,
+    "totalHolders": 568,
+    "risk": {
+      "scores": {
+        "liquidity-risk": null,
+        "concentration-risk": null,
+        "btc-reflexivity": null
+      },
+      "highs": 0,
+      "mediums": 3,
+      "concentrated": false,
+      "k": 0.07
+    },
+    "today": {
+      "date": "2026-09-16",
+      "red": false,
+      "reason": null,
+      "smNetUsd": 0,
+      "exNetUsd": 0,
+      "theta": {
+        "smUsd": 1000,
+        "exUsd": 1000
+      }
+    },
+    "history": [
+      {
+        "date": "2026-09-03",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-04",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-05",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-06",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-07",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-08",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-09",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-10",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-11",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 23.679750655771784,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-12",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-13",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-14",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-15",
+        "complete": true,
+        "smNetUsd": null,
+        "exNetUsd": 851.8983701505066,
+        "red": false,
+        "reason": null
+      }
+    ],
+    "redRate": 0,
+    "redDays": 0,
+    "completeDays": 13,
+    "tranches": [],
+    "days": 0,
+    "truncated": false,
+    "remainderTokens": 0,
+    "remainderPct": 0,
+    "expectedDays": 0,
+    "trancheUsd": null,
+    "trancheCapReason": null,
+    "dumpToday": {
+      "usd": 3578.1696921887897,
+      "costUsd": 1426.3350928010116,
+      "shareOfOrganicDay": null,
+      "model": "constant-product",
+      "priceImpactPct": null
+    },
+    "glidepath": {
+      "costUsd": null,
+      "model": null,
+      "firstTrancheCostUsd": null,
+      "priceImpactPct": null
+    },
+    "savingsUsd": null,
+    "quotes": null,
+    "warnings": [
+      "indicator liquidity-risk missing — treated as medium",
+      "indicator concentration-risk missing — treated as medium",
+      "indicator btc-reflexivity missing — treated as medium"
+    ],
+    "errors": {},
+    "now": 1789568439859,
+    "computedAt": "2026-09-16T14:20:39.859Z",
+    "hash": "a1ecc466217eee6ae8e38cd45c02011b54be2a5430dab4fd0404210088dccad3",
+    "provenance": [
+      {
+        "endpoint": "tgm/flow-intelligence",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+          "timeframe": "7d"
+        },
+        "fieldsUsed": [
+          "data[0].smart_trader_net_flow_usd",
+          "data[0].exchange_net_flow_usd",
+          "data[0].whale_net_flow_usd",
+          "data[0].smart_trader_wallet_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61303,
+        "ms": 295,
+        "status": 200,
+        "responseHash": "651610eacc7465dcce9c7d610b78400c27b52e040c8d1d9f21bf639dd870013c",
+        "attempts": 1,
+        "totalMs": 297
+      },
+      {
+        "endpoint": "tgm/token-information",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+          "timeframe": "7d"
+        },
+        "fieldsUsed": [
+          "data.symbol",
+          "data.name",
+          "token_details.market_cap_usd",
+          "token_details.circulating_supply",
+          "token_details.fdv_usd",
+          "token_details.total_supply",
+          "token_details.token_deployment_date",
+          "spot_metrics.buy_volume_usd",
+          "spot_metrics.unique_buyers",
+          "spot_metrics.liquidity_usd",
+          "spot_metrics.total_holders"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61302,
+        "ms": 327,
+        "status": 200,
+        "responseHash": "aaf273133ceb8ee26b359073fc74ed31fce414608992eeda6a23262a73bd99da",
+        "attempts": 1,
+        "totalMs": 327
+      },
+      {
+        "endpoint": "tgm/who-bought-sold",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+          "buy_or_sell": "BUY",
+          "date": {
+            "from": "2026-09-09T14:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "pagination": {
+            "page": 1,
+            "per_page": 1000
+          },
+          "filters": {
+            "exclude_smart_money_labels": [
+              "Smart Trader",
+              "30D Smart Trader",
+              "90D Smart Trader",
+              "180D Smart Trader",
+              "Fund",
+              "Whale",
+              "Exchange",
+              "Maestro Bot User",
+              "Top Maestro Bot User",
+              "BananaGun Bot User",
+              "Top BananaGun Bot User"
+            ]
+          },
+          "order_by": [
+            {
+              "field": "bought_volume_usd",
+              "direction": "DESC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].bought_volume_usd",
+          "data[].bought_token_volume",
+          "data[].address_label",
+          "pagination.is_last_page"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61301,
+        "ms": 334,
+        "status": 200,
+        "responseHash": "274c2e87ff7c9544313b71862e73267d3dc689e11579f281f97ed8cb8733c1a2",
+        "attempts": 1,
+        "totalMs": 336
+      },
+      {
+        "endpoint": "tgm/flow-intelligence",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+          "timeframe": "1d"
+        },
+        "fieldsUsed": [
+          "data[0].smart_trader_net_flow_usd",
+          "data[0].exchange_net_flow_usd",
+          "data[0].whale_net_flow_usd",
+          "data[0].smart_trader_wallet_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61300,
+        "ms": 336,
+        "status": 200,
+        "responseHash": "d5ca427619a6dec49cf3af1dc1cd5ccdca887401f2010f04c09e6e677a2cf6a1",
+        "attempts": 1,
+        "totalMs": 338
+      },
+      {
+        "endpoint": "tgm/who-bought-sold",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+          "buy_or_sell": "BUY",
+          "date": {
+            "from": "2026-09-09T14:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "pagination": {
+            "page": 1,
+            "per_page": 1000
+          },
+          "filters": {
+            "include_smart_money_labels": [
+              "Smart Trader",
+              "30D Smart Trader",
+              "90D Smart Trader",
+              "180D Smart Trader",
+              "Fund",
+              "Whale",
+              "Exchange",
+              "Maestro Bot User",
+              "Top Maestro Bot User",
+              "BananaGun Bot User",
+              "Top BananaGun Bot User"
+            ]
+          },
+          "order_by": [
+            {
+              "field": "bought_volume_usd",
+              "direction": "DESC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].bought_volume_usd",
+          "data[].bought_token_volume",
+          "data[].address_label",
+          "pagination.is_last_page"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61299,
+        "ms": 640,
+        "status": 200,
+        "responseHash": "274c2e87ff7c9544313b71862e73267d3dc689e11579f281f97ed8cb8733c1a2",
+        "attempts": 1,
+        "totalMs": 641
+      },
+      {
+        "endpoint": "tgm/flows",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+          "date": {
+            "from": "2026-09-02T00:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "label": "exchange",
+          "pagination": {
+            "page": 1,
+            "per_page": 100
+          },
+          "order_by": [
+            {
+              "field": "date",
+              "direction": "ASC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].date",
+          "data[].is_complete",
+          "data[].price_usd",
+          "data[].total_inflows_count",
+          "data[].total_outflows_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61298,
+        "ms": 708,
+        "status": 200,
+        "responseHash": "87a12a4eb9528cab827c46830c34970cbccc8a6d603ccd5ac509e9cca45df699",
+        "attempts": 1,
+        "totalMs": 710
+      },
+      {
+        "endpoint": "tgm/flows",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0",
+          "date": {
+            "from": "2026-09-02T00:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "label": "smart_money",
+          "pagination": {
+            "page": 1,
+            "per_page": 100
+          },
+          "order_by": [
+            {
+              "field": "date",
+              "direction": "ASC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].date",
+          "data[].is_complete",
+          "data[].price_usd",
+          "data[].total_inflows_count",
+          "data[].total_outflows_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61297,
+        "ms": 1169,
+        "status": 200,
+        "responseHash": "27e6e0d9c7be946fac42cf349e48735c912f0c64166c45aaecc1ea73938d7266",
+        "attempts": 1,
+        "totalMs": 1171
+      },
+      {
+        "endpoint": "tgm/indicators",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0"
+        },
+        "fieldsUsed": [
+          "risk_indicators[].indicator_type",
+          "risk_indicators[].score",
+          "reward_indicators[].indicator_type",
+          "reward_indicators[].score"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 5,
+        "creditsRemaining": 61292,
+        "ms": 1250,
+        "status": 200,
+        "responseHash": "a99505e04baf1dce0536abebc49a322a64775818da62bebb366b8bd42d1c55e4",
+        "attempts": 1,
+        "totalMs": 1252
+      }
+    ],
+    "credits": 12,
+    "calls": 8,
+    "cachedCalls": 0,
+    "ms": 1253,
+    "asOf": null
+  }
+}

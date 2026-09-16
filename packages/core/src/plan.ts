@@ -167,6 +167,8 @@ export function computePlan(facts: Facts, input: PlanInput, resolved: Plan["reso
   else if (facts.flowsPriceUsd && facts.flowsPriceUsd > 0) { priceUsd = facts.flowsPriceUsd; priceSource = "tgm/flows price_usd (latest bucket)"; }
   else if (searchPrice && searchPrice > 0) { priceUsd = searchPrice; priceSource = "search/general price"; }
   const positionUsd = priceUsd == null ? null : input.amount * priceUsd;
+  if (facts.totalSupply != null && facts.totalSupply > 0 && input.amount > facts.totalSupply) warnings.push(`amount exceeds the token's total supply (${facts.totalSupply.toLocaleString("en-US")}) — check the units`);
+  if (positionUsd != null && facts.liquidityUsd != null && facts.liquidityUsd > 0 && positionUsd > 10 * facts.liquidityUsd) warnings.push(`position (${Math.round(positionUsd).toLocaleString("en-US")} USD at the quoted price) is ${Math.round(positionUsd / facts.liquidityUsd)}× the pool liquidity — the price is nominal, not realisable`);
 
   // organic demand
   const totalBuy7dUsd = facts.totalBuy7dUsd;

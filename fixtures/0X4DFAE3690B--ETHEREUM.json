@@ -1,0 +1,1502 @@
+{
+  "edge": "11 · OG Pepe (2020, 37K total supply, 5 buyers/7d, no indicators) — thin: unsold remainder after 90 days, single-buyer dependence",
+  "input": {
+    "chain": "ethereum",
+    "token": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+    "amount": 3000
+  },
+  "now": 1789568438458,
+  "recordedAt": "2026-09-16T14:20:38.458Z",
+  "live": {
+    "calls": 8,
+    "credits": 12,
+    "ms": 1400
+  },
+  "responses": {
+    "909aa7ceabe8a8c890923d11ae6a4557": {
+      "storedAt": "2026-09-16T14:20:38.853Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/who-bought-sold",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+        "buy_or_sell": "BUY",
+        "date": {
+          "from": "2026-09-09T14:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 1000
+        },
+        "filters": {
+          "include_smart_money_labels": [
+            "Smart Trader",
+            "30D Smart Trader",
+            "90D Smart Trader",
+            "180D Smart Trader",
+            "Fund",
+            "Whale",
+            "Exchange",
+            "Maestro Bot User",
+            "Top Maestro Bot User",
+            "BananaGun Bot User",
+            "Top BananaGun Bot User"
+          ]
+        },
+        "order_by": [
+          {
+            "field": "bought_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"data\":[],\"pagination\":{\"page\":1,\"per_page\":1000,\"is_last_page\":true}}",
+      "creditsUsed": 1
+    },
+    "d0c709b468fbddd71feffbf4d9b5dc7b": {
+      "storedAt": "2026-09-16T14:20:38.877Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flow-intelligence",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+        "timeframe": "1d"
+      },
+      "text": "{\"data\":[{\"public_figure_net_flow_usd\":0.0,\"public_figure_avg_flow_usd\":null,\"public_figure_wallet_count\":0,\"top_pnl_net_flow_usd\":0.0,\"top_pnl_avg_flow_usd\":null,\"top_pnl_wallet_count\":0,\"whale_net_flow_usd\":0.0,\"whale_avg_flow_usd\":null,\"whale_wallet_count\":0,\"smart_trader_net_flow_usd\":0.0,\"smart_trader_avg_flow_usd\":null,\"smart_trader_wallet_count\":0,\"exchange_net_flow_usd\":2200.9062055266295,\"exchange_avg_flow_usd\":341.1081461152817,\"exchange_wallet_count\":0,\"fresh_wallets_net_flow_usd\":0.0,\"fresh_wallets_avg_flow_usd\":0.0,\"fresh_wallets_wallet_count\":0}],\"warnings\":[\"exchange_wallet_count is always 0 (not tracked), even when exchange net flow is non-zero.\"]}",
+      "creditsUsed": 1
+    },
+    "e1e3ee25c483c96a1404fd52a66476a9": {
+      "storedAt": "2026-09-16T14:20:38.877Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/token-information",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+        "timeframe": "7d"
+      },
+      "text": "{\"data\":{\"name\":\"Pepe\",\"symbol\":\"PEPE\",\"contract_address\":\"0x4dfae3690b93c47470b03036a17b23c1be05127c\",\"logo\":\"https://coin-images.coingecko.com/coins/images/35702/small/logo.png?1709567988\",\"token_details\":{\"token_deployment_date\":\"2020-10-10 14:38:48\",\"website\":\"https://ogpepe.io/\",\"x\":\"theogpepe2020\",\"telegram\":\"OgPeperc20\",\"market_cap_usd\":203056.08743244142,\"fdv_usd\":203056.087432442,\"circulating_supply\":37320.21831358988,\"total_supply\":37320.21831358988},\"spot_metrics\":{\"volume_total_usd\":6857.383685974241,\"buy_volume_usd\":3429.0991011796013,\"sell_volume_usd\":3428.28458479464,\"total_buys\":16,\"total_sells\":9,\"unique_buyers\":5,\"unique_sellers\":8,\"liquidity_usd\":40081.97973683844,\"total_holders\":794}}}",
+      "creditsUsed": 1
+    },
+    "6504c3f22b551e23dbe73982b05fde1e": {
+      "storedAt": "2026-09-16T14:20:39.136Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/who-bought-sold",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+        "buy_or_sell": "BUY",
+        "date": {
+          "from": "2026-09-09T14:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 1000
+        },
+        "filters": {
+          "exclude_smart_money_labels": [
+            "Smart Trader",
+            "30D Smart Trader",
+            "90D Smart Trader",
+            "180D Smart Trader",
+            "Fund",
+            "Whale",
+            "Exchange",
+            "Maestro Bot User",
+            "Top Maestro Bot User",
+            "BananaGun Bot User",
+            "Top BananaGun Bot User"
+          ]
+        },
+        "order_by": [
+          {
+            "field": "bought_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"data\":[{\"address\":\"0xaf993626c7f526874ffa8fa51fabcb87edf6462a\",\"address_label\":\"\",\"bought_token_volume\":62.298314848595034,\"sold_token_volume\":0.0,\"token_trade_volume\":62.298314848595034,\"bought_volume_usd\":408.8405467332971,\"sold_volume_usd\":0.0,\"trade_volume_usd\":408.8405467332971},{\"address\":\"0xb9cec48d444e6b563dc613a4791787a81a8447aa\",\"address_label\":\"High Activity\",\"bought_token_volume\":34.01484136157597,\"sold_token_volume\":34.01484136157597,\"token_trade_volume\":0.0,\"bought_volume_usd\":219.85616019207743,\"sold_volume_usd\":219.85616019207743,\"trade_volume_usd\":0.0},{\"address\":\"0x1c0c6dc46c13ce4e31b11a3e2cf59b24954ed2b0\",\"address_label\":\"\",\"bought_token_volume\":21.14014228072099,\"sold_token_volume\":0.0,\"token_trade_volume\":21.14014228072099,\"bought_volume_usd\":136.64007597000779,\"sold_volume_usd\":0.0,\"trade_volume_usd\":136.64007597000779},{\"address\":\"0xf543e60b9acbf05d6c82258f13e3ee4a8d8dd719\",\"address_label\":\"blackvoid.eth*\",\"bought_token_volume\":3.3477581429365433,\"sold_token_volume\":0.0,\"token_trade_volume\":3.3477581429365433,\"bought_volume_usd\":19.572807331104848,\"sold_volume_usd\":0.0,\"trade_volume_usd\":19.572807331104848}],\"pagination\":{\"page\":1,\"per_page\":1000,\"is_last_page\":true}}",
+      "creditsUsed": 1
+    },
+    "fdb5e320102b118537621bd512ef0a0a": {
+      "storedAt": "2026-09-16T14:20:39.151Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flow-intelligence",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+        "timeframe": "7d"
+      },
+      "text": "{\"data\":[{\"public_figure_net_flow_usd\":0.0,\"public_figure_avg_flow_usd\":null,\"public_figure_wallet_count\":0,\"top_pnl_net_flow_usd\":0.0,\"top_pnl_avg_flow_usd\":null,\"top_pnl_wallet_count\":0,\"whale_net_flow_usd\":0.0,\"whale_avg_flow_usd\":null,\"whale_wallet_count\":0,\"smart_trader_net_flow_usd\":0.0,\"smart_trader_avg_flow_usd\":null,\"smart_trader_wallet_count\":0,\"exchange_net_flow_usd\":-207.83106838317613,\"exchange_avg_flow_usd\":1382.841092936231,\"exchange_wallet_count\":0,\"fresh_wallets_net_flow_usd\":0.0,\"fresh_wallets_avg_flow_usd\":0.0,\"fresh_wallets_wallet_count\":0}],\"warnings\":[\"exchange_wallet_count is always 0 (not tracked), even when exchange net flow is non-zero.\"]}",
+      "creditsUsed": 1
+    },
+    "759b13c637d9e1b8e2eb10f3dc5e934d": {
+      "storedAt": "2026-09-16T14:20:39.274Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flows",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+        "date": {
+          "from": "2026-09-02T00:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "label": "smart_money",
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "date",
+            "direction": "ASC"
+          }
+        ]
+      },
+      "text": "{\"data\":[{\"date\":\"2026-09-03T00:00:00Z\",\"bucket_end\":\"2026-09-04T00:00:00Z\",\"is_complete\":true,\"price_usd\":7.34221672866784,\"token_amount\":505.1804512693604,\"value_usd\":3709.1443603058665,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-04T00:00:00Z\",\"bucket_end\":\"2026-09-05T00:00:00Z\",\"is_complete\":true,\"price_usd\":7.01483458437284,\"token_amount\":505.1804512693604,\"value_usd\":3543.757300913387,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-05T00:00:00Z\",\"bucket_end\":\"2026-09-06T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.156330493228115,\"token_amount\":505.1804512693604,\"value_usd\":3110.057816732303,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-06T00:00:00Z\",\"bucket_end\":\"2026-09-07T00:00:00Z\",\"is_complete\":true,\"price_usd\":5.67422940357519,\"token_amount\":505.1804512693604,\"value_usd\":2866.509770703988,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-07T00:00:00Z\",\"bucket_end\":\"2026-09-08T00:00:00Z\",\"is_complete\":true,\"price_usd\":5.75506156044815,\"token_amount\":505.1804512693604,\"value_usd\":2907.3445961901457,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-08T00:00:00Z\",\"bucket_end\":\"2026-09-09T00:00:00Z\",\"is_complete\":true,\"price_usd\":5.693535526760955,\"token_amount\":505.1804512693604,\"value_usd\":2876.262846727235,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-09T00:00:00Z\",\"bucket_end\":\"2026-09-10T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.48677791626464,\"token_amount\":505.1804512693604,\"value_usd\":3276.993395022692,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-10T00:00:00Z\",\"bucket_end\":\"2026-09-11T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.460260511709625,\"token_amount\":505.1804512693604,\"value_usd\":3263.597320623097,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-11T00:00:00Z\",\"bucket_end\":\"2026-09-12T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.496273537770575,\"token_amount\":505.1804512693604,\"value_usd\":3281.7903973801435,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-12T00:00:00Z\",\"bucket_end\":\"2026-09-13T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.67915732465658,\"token_amount\":505.1804512693604,\"value_usd\":3374.1797113690645,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-13T00:00:00Z\",\"bucket_end\":\"2026-09-14T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.64700270784442,\"token_amount\":505.1804512693604,\"value_usd\":3357.9358275375043,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-14T00:00:00Z\",\"bucket_end\":\"2026-09-15T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.61584766422256,\"token_amount\":505.1804512693604,\"value_usd\":3342.1969085412966,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-15T00:00:00Z\",\"bucket_end\":\"2026-09-16T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.33200949012802,\"token_amount\":505.1804512693604,\"value_usd\":3198.8074116647454,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null},{\"date\":\"2026-09-16T00:00:00Z\",\"bucket_end\":\"2026-09-17T00:00:00Z\",\"is_complete\":false,\"price_usd\":5.44091370865588,\"token_amount\":505.1804512693604,\"value_usd\":2748.6432426564265,\"holders_count\":4,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":null,\"total_outflows_dex\":null,\"total_inflows_cex\":null,\"total_outflows_cex\":null}],\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"warnings\":[\"total_inflows_dex, total_outflows_dex, total_inflows_cex and total_outflows_cex are only populated when label=exchange and are null for all other labels. For net flow per holder segment (e.g. smart money), use POST /api/v1/tgm/flow-intelligence.\"]}",
+      "creditsUsed": 1
+    },
+    "a1f97b20111aa679d849e0d4ea14a78a": {
+      "storedAt": "2026-09-16T14:20:39.800Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/indicators",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c"
+      },
+      "text": "{\"token_address\":\"0x4dfae3690b93c47470b03036a17b23c1be05127c\",\"chain\":\"ethereum\",\"token_info\":{\"market_cap_usd\":null,\"market_cap_group\":null,\"is_stablecoin\":null},\"risk_indicators\":[],\"reward_indicators\":[]}",
+      "creditsUsed": 5
+    },
+    "2e2fc86444b793a8af3fe21e22548702": {
+      "storedAt": "2026-09-16T14:20:39.831Z",
+      "ttlMs": 3600000,
+      "endpoint": "tgm/flows",
+      "body": {
+        "chain": "ethereum",
+        "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+        "date": {
+          "from": "2026-09-02T00:00:00Z",
+          "to": "2026-09-16T14:00:00Z"
+        },
+        "label": "exchange",
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "date",
+            "direction": "ASC"
+          }
+        ]
+      },
+      "text": "{\"data\":[{\"date\":\"2026-09-03T00:00:00Z\",\"bucket_end\":\"2026-09-04T00:00:00Z\",\"is_complete\":true,\"price_usd\":7.34221672866784,\"token_amount\":6702.416418630625,\"value_usd\":49210.59395136778,\"holders_count\":30,\"total_inflows_count\":0.0,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.0,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-04T00:00:00Z\",\"bucket_end\":\"2026-09-05T00:00:00Z\",\"is_complete\":true,\"price_usd\":7.01483458437284,\"token_amount\":6707.063663413582,\"value_usd\":47048.94214570399,\"holders_count\":30,\"total_inflows_count\":4.647244782956477,\"total_outflows_count\":0.0,\"total_inflows_dex\":4.647244782956477,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-05T00:00:00Z\",\"bucket_end\":\"2026-09-06T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.156330493228115,\"token_amount\":7487.452170210261,\"value_usd\":46095.23011205246,\"holders_count\":30,\"total_inflows_count\":780.38850679668,\"total_outflows_count\":0.0,\"total_inflows_dex\":780.38850679668,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-06T00:00:00Z\",\"bucket_end\":\"2026-09-07T00:00:00Z\",\"is_complete\":true,\"price_usd\":5.67422940357519,\"token_amount\":7368.607383261145,\"value_usd\":41811.16867750162,\"holders_count\":30,\"total_inflows_count\":0.0,\"total_outflows_count\":-118.84478694911687,\"total_inflows_dex\":0.0,\"total_outflows_dex\":-118.84478694911687,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-07T00:00:00Z\",\"bucket_end\":\"2026-09-08T00:00:00Z\",\"is_complete\":true,\"price_usd\":5.75506156044815,\"token_amount\":7373.818418681142,\"value_usd\":42436.7789350764,\"holders_count\":30,\"total_inflows_count\":5.211035419997643,\"total_outflows_count\":0.0,\"total_inflows_dex\":5.211035419997643,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-08T00:00:00Z\",\"bucket_end\":\"2026-09-09T00:00:00Z\",\"is_complete\":true,\"price_usd\":5.693535526760955,\"token_amount\":7368.842697382667,\"value_usd\":41954.767688661246,\"holders_count\":30,\"total_inflows_count\":0.0,\"total_outflows_count\":-4.975721298475037,\"total_inflows_dex\":0.0,\"total_outflows_dex\":-4.975721298475037,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-09T00:00:00Z\",\"bucket_end\":\"2026-09-10T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.48677791626464,\"token_amount\":6945.621182160952,\"value_usd\":45054.70209918156,\"holders_count\":30,\"total_inflows_count\":0.0,\"total_outflows_count\":-423.22151522171487,\"total_inflows_dex\":0.0,\"total_outflows_dex\":-423.22151522171487,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-10T00:00:00Z\",\"bucket_end\":\"2026-09-11T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.460260511709625,\"token_amount\":6922.242299517048,\"value_usd\":44719.48858005602,\"holders_count\":30,\"total_inflows_count\":0.0,\"total_outflows_count\":-23.378882643904035,\"total_inflows_dex\":0.0,\"total_outflows_dex\":-23.378882643904035,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-11T00:00:00Z\",\"bucket_end\":\"2026-09-12T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.496273537770575,\"token_amount\":6884.906057389361,\"value_usd\":44726.233030654854,\"holders_count\":30,\"total_inflows_count\":0.0,\"total_outflows_count\":-37.33624212768663,\"total_inflows_dex\":0.0,\"total_outflows_dex\":-37.33624212768663,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-12T00:00:00Z\",\"bucket_end\":\"2026-09-13T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.67915732465658,\"token_amount\":6885.738560691119,\"value_usd\":45990.931143310336,\"holders_count\":30,\"total_inflows_count\":0.8325033017581518,\"total_outflows_count\":0.0,\"total_inflows_dex\":0.8325033017581518,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-13T00:00:00Z\",\"bucket_end\":\"2026-09-14T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.64700270784442,\"token_amount\":6886.801507619392,\"value_usd\":45776.58826953313,\"holders_count\":30,\"total_inflows_count\":1.0629469282730497,\"total_outflows_count\":0.0,\"total_inflows_dex\":1.0629469282730497,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-14T00:00:00Z\",\"bucket_end\":\"2026-09-15T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.61584766422256,\"token_amount\":6890.16257648482,\"value_usd\":45584.2659877508,\"holders_count\":30,\"total_inflows_count\":3.361068865428024,\"total_outflows_count\":0.0,\"total_inflows_dex\":3.361068865428024,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-15T00:00:00Z\",\"bucket_end\":\"2026-09-16T00:00:00Z\",\"is_complete\":true,\"price_usd\":6.33200949012802,\"token_amount\":7013.638270197319,\"value_usd\":44410.4240872145,\"holders_count\":30,\"total_inflows_count\":123.47569371249803,\"total_outflows_count\":0.0,\"total_inflows_dex\":123.47569371249803,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0},{\"date\":\"2026-09-16T00:00:00Z\",\"bucket_end\":\"2026-09-17T00:00:00Z\",\"is_complete\":false,\"price_usd\":5.44091370865588,\"token_amount\":7417.318654780612,\"value_usd\":40356.990750264835,\"holders_count\":30,\"total_inflows_count\":403.68038458329306,\"total_outflows_count\":0.0,\"total_inflows_dex\":403.68038458329306,\"total_outflows_dex\":0.0,\"total_inflows_cex\":0.0,\"total_outflows_cex\":0.0}],\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"warnings\":null}",
+      "creditsUsed": 1
+    }
+  },
+  "plan": {
+    "input": {
+      "chain": "ethereum",
+      "token": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+      "amount": 3000
+    },
+    "resolved": {
+      "address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+      "symbol": "PEPE",
+      "name": "Pepe",
+      "viaSearch": false,
+      "logo": "https://coin-images.coingecko.com/coins/images/35702/small/logo.png?1709567988"
+    },
+    "status": "thin",
+    "statusReason": "87% of the position is still unsold after 90 days at this pace",
+    "price": {
+      "usd": 5.44091370865588,
+      "source": "token-information market_cap_usd / circulating_supply"
+    },
+    "positionUsd": 16322.74112596764,
+    "organic": {
+      "totalBuy7dUsd": 3429.0991011796013,
+      "proBuy7dUsd": 0,
+      "organicBuy7dUsd": 3429.0991011796013,
+      "organicDailyUsd": 489.8713001685145,
+      "organicShare": 1,
+      "organicBuyers": 5,
+      "proBuyers": 0,
+      "proLabels": [],
+      "top1Share": 0.5208759732637811,
+      "top10Share": 1
+    },
+    "liquidityUsd": 40081.97973683844,
+    "marketCapUsd": 203056.08743244142,
+    "totalHolders": 794,
+    "risk": {
+      "scores": {
+        "liquidity-risk": null,
+        "concentration-risk": null,
+        "btc-reflexivity": null
+      },
+      "highs": 0,
+      "mediums": 3,
+      "concentrated": true,
+      "k": 0.05
+    },
+    "today": {
+      "date": "2026-09-16",
+      "red": true,
+      "reason": "Exchange net deposits +$2,201",
+      "smNetUsd": 0,
+      "exNetUsd": 2200.9062055266295,
+      "theta": {
+        "smUsd": 1000,
+        "exUsd": 1000
+      }
+    },
+    "history": [
+      {
+        "date": "2026-09-03",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 0,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-04",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 32.59965342552935,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-05",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 4804.329560957157,
+        "red": true,
+        "reason": "Exchange net deposits +$4,804"
+      },
+      {
+        "date": "2026-09-06",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": -674.3525845683079,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-07",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 29.989829635762213,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-08",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": -28.32944598412877,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-09",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": -2745.3439786282793,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-10",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": -151.03367235230675,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-11",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": -242.54644173388562,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-12",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 5.5604205257387465,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-13",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 7.06541111052587,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-14",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 22.236319602633163,
+        "red": false,
+        "reason": null
+      },
+      {
+        "date": "2026-09-15",
+        "complete": true,
+        "smNetUsd": 0,
+        "exNetUsd": 781.8492643876782,
+        "red": false,
+        "reason": null
+      }
+    ],
+    "redRate": 0.07692307692307693,
+    "redDays": 1,
+    "completeDays": 13,
+    "tranches": [
+      {
+        "day": 0,
+        "date": "2026-09-16",
+        "tokens": 2.2508687253630972,
+        "usd": 12.246782504212863,
+        "red": true,
+        "reason": "Exchange net deposits +$2,201",
+        "costUsd": 0.007479275506310235
+      },
+      {
+        "day": 1,
+        "date": "2026-09-17",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 2,
+        "date": "2026-09-18",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 3,
+        "date": "2026-09-19",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 4,
+        "date": "2026-09-20",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 5,
+        "date": "2026-09-21",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 6,
+        "date": "2026-09-22",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 7,
+        "date": "2026-09-23",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 8,
+        "date": "2026-09-24",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 9,
+        "date": "2026-09-25",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 10,
+        "date": "2026-09-26",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 11,
+        "date": "2026-09-27",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 12,
+        "date": "2026-09-28",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 13,
+        "date": "2026-09-29",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 14,
+        "date": "2026-09-30",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 15,
+        "date": "2026-10-01",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 16,
+        "date": "2026-10-02",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 17,
+        "date": "2026-10-03",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 18,
+        "date": "2026-10-04",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 19,
+        "date": "2026-10-05",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 20,
+        "date": "2026-10-06",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 21,
+        "date": "2026-10-07",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 22,
+        "date": "2026-10-08",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 23,
+        "date": "2026-10-09",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 24,
+        "date": "2026-10-10",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 25,
+        "date": "2026-10-11",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 26,
+        "date": "2026-10-12",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 27,
+        "date": "2026-10-13",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 28,
+        "date": "2026-10-14",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 29,
+        "date": "2026-10-15",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 30,
+        "date": "2026-10-16",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 31,
+        "date": "2026-10-17",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 32,
+        "date": "2026-10-18",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 33,
+        "date": "2026-10-19",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 34,
+        "date": "2026-10-20",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 35,
+        "date": "2026-10-21",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 36,
+        "date": "2026-10-22",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 37,
+        "date": "2026-10-23",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 38,
+        "date": "2026-10-24",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 39,
+        "date": "2026-10-25",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 40,
+        "date": "2026-10-26",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 41,
+        "date": "2026-10-27",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 42,
+        "date": "2026-10-28",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 43,
+        "date": "2026-10-29",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 44,
+        "date": "2026-10-30",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 45,
+        "date": "2026-10-31",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 46,
+        "date": "2026-11-01",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 47,
+        "date": "2026-11-02",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 48,
+        "date": "2026-11-03",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 49,
+        "date": "2026-11-04",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 50,
+        "date": "2026-11-05",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 51,
+        "date": "2026-11-06",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 52,
+        "date": "2026-11-07",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 53,
+        "date": "2026-11-08",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 54,
+        "date": "2026-11-09",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 55,
+        "date": "2026-11-10",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 56,
+        "date": "2026-11-11",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 57,
+        "date": "2026-11-12",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 58,
+        "date": "2026-11-13",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 59,
+        "date": "2026-11-14",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 60,
+        "date": "2026-11-15",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 61,
+        "date": "2026-11-16",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 62,
+        "date": "2026-11-17",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 63,
+        "date": "2026-11-18",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 64,
+        "date": "2026-11-19",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 65,
+        "date": "2026-11-20",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 66,
+        "date": "2026-11-21",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 67,
+        "date": "2026-11-22",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 68,
+        "date": "2026-11-23",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 69,
+        "date": "2026-11-24",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 70,
+        "date": "2026-11-25",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 71,
+        "date": "2026-11-26",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 72,
+        "date": "2026-11-27",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 73,
+        "date": "2026-11-28",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 74,
+        "date": "2026-11-29",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 75,
+        "date": "2026-11-30",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 76,
+        "date": "2026-12-01",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 77,
+        "date": "2026-12-02",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 78,
+        "date": "2026-12-03",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 79,
+        "date": "2026-12-04",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 80,
+        "date": "2026-12-05",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 81,
+        "date": "2026-12-06",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 82,
+        "date": "2026-12-07",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 83,
+        "date": "2026-12-08",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 84,
+        "date": "2026-12-09",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 85,
+        "date": "2026-12-10",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 86,
+        "date": "2026-12-11",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 87,
+        "date": "2026-12-12",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 88,
+        "date": "2026-12-13",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      },
+      {
+        "day": 89,
+        "date": "2026-12-14",
+        "tokens": 4.5017374507261945,
+        "usd": 24.493565008425726,
+        "red": false,
+        "reason": null,
+        "costUsd": 0.029898842398311185
+      }
+    ],
+    "days": 90,
+    "truncated": true,
+    "remainderTokens": 2597.094498160017,
+    "remainderPct": 0.8656981660533389,
+    "expectedDays": 94,
+    "trancheUsd": 24.493565008425726,
+    "trancheCapReason": "organic",
+    "dumpToday": {
+      "usd": 16322.74112596764,
+      "costUsd": 7326.857574281417,
+      "shareOfOrganicDay": 33.320468295147435,
+      "model": "constant-product",
+      "priceImpactPct": null
+    },
+    "glidepath": {
+      "costUsd": 2.6684762489560057,
+      "model": "constant-product",
+      "firstTrancheCostUsd": 0.007479275506310235,
+      "priceImpactPct": null
+    },
+    "savingsUsd": 7324.1890980324615,
+    "quotes": null,
+    "warnings": [
+      "indicator liquidity-risk missing — treated as medium",
+      "indicator concentration-risk missing — treated as medium",
+      "indicator btc-reflexivity missing — treated as medium",
+      "one organic buyer is 52% of page-1 organic volume — single-buyer dependence, k reduced by 2 pts"
+    ],
+    "errors": {},
+    "now": 1789568438458,
+    "computedAt": "2026-09-16T14:20:38.458Z",
+    "hash": "0dd2f1fd28173d2c860fe3c7ea2d8579c7ed77e4486cf043dc7d7ec1ec4e176b",
+    "provenance": [
+      {
+        "endpoint": "tgm/who-bought-sold",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+          "buy_or_sell": "BUY",
+          "date": {
+            "from": "2026-09-09T14:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "pagination": {
+            "page": 1,
+            "per_page": 1000
+          },
+          "filters": {
+            "include_smart_money_labels": [
+              "Smart Trader",
+              "30D Smart Trader",
+              "90D Smart Trader",
+              "180D Smart Trader",
+              "Fund",
+              "Whale",
+              "Exchange",
+              "Maestro Bot User",
+              "Top Maestro Bot User",
+              "BananaGun Bot User",
+              "Top BananaGun Bot User"
+            ]
+          },
+          "order_by": [
+            {
+              "field": "bought_volume_usd",
+              "direction": "DESC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].bought_volume_usd",
+          "data[].bought_token_volume",
+          "data[].address_label",
+          "pagination.is_last_page"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61315,
+        "ms": 380,
+        "status": 200,
+        "responseHash": "274c2e87ff7c9544313b71862e73267d3dc689e11579f281f97ed8cb8733c1a2",
+        "attempts": 1,
+        "totalMs": 392
+      },
+      {
+        "endpoint": "tgm/flow-intelligence",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+          "timeframe": "1d"
+        },
+        "fieldsUsed": [
+          "data[0].smart_trader_net_flow_usd",
+          "data[0].exchange_net_flow_usd",
+          "data[0].whale_net_flow_usd",
+          "data[0].smart_trader_wallet_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61314,
+        "ms": 404,
+        "status": 200,
+        "responseHash": "bbb03199387d798abc1664b42557284d25a42de045227938f20dd1253ada5a7d",
+        "attempts": 1,
+        "totalMs": 417
+      },
+      {
+        "endpoint": "tgm/token-information",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+          "timeframe": "7d"
+        },
+        "fieldsUsed": [
+          "data.symbol",
+          "data.name",
+          "token_details.market_cap_usd",
+          "token_details.circulating_supply",
+          "token_details.fdv_usd",
+          "token_details.total_supply",
+          "token_details.token_deployment_date",
+          "spot_metrics.buy_volume_usd",
+          "spot_metrics.unique_buyers",
+          "spot_metrics.liquidity_usd",
+          "spot_metrics.total_holders"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61313,
+        "ms": 417,
+        "status": 200,
+        "responseHash": "7cc4d81ee7858f38bb0076d86a76967b109b74d3c970ed42f735aa493065dcd1",
+        "attempts": 1,
+        "totalMs": 418
+      },
+      {
+        "endpoint": "tgm/who-bought-sold",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+          "buy_or_sell": "BUY",
+          "date": {
+            "from": "2026-09-09T14:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "pagination": {
+            "page": 1,
+            "per_page": 1000
+          },
+          "filters": {
+            "exclude_smart_money_labels": [
+              "Smart Trader",
+              "30D Smart Trader",
+              "90D Smart Trader",
+              "180D Smart Trader",
+              "Fund",
+              "Whale",
+              "Exchange",
+              "Maestro Bot User",
+              "Top Maestro Bot User",
+              "BananaGun Bot User",
+              "Top BananaGun Bot User"
+            ]
+          },
+          "order_by": [
+            {
+              "field": "bought_volume_usd",
+              "direction": "DESC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].bought_volume_usd",
+          "data[].bought_token_volume",
+          "data[].address_label",
+          "pagination.is_last_page"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61312,
+        "ms": 663,
+        "status": 200,
+        "responseHash": "1de146de7c65661f86b9ba09f17a3d0b90433718b4f3265ac18b4eeaad040398",
+        "attempts": 1,
+        "totalMs": 676
+      },
+      {
+        "endpoint": "tgm/flow-intelligence",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+          "timeframe": "7d"
+        },
+        "fieldsUsed": [
+          "data[0].smart_trader_net_flow_usd",
+          "data[0].exchange_net_flow_usd",
+          "data[0].whale_net_flow_usd",
+          "data[0].smart_trader_wallet_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61311,
+        "ms": 678,
+        "status": 200,
+        "responseHash": "e0185b9e69c392a04ac1f150f5d3e2b805517ffac4c9511335a99832746d9efa",
+        "attempts": 1,
+        "totalMs": 691
+      },
+      {
+        "endpoint": "tgm/flows",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+          "date": {
+            "from": "2026-09-02T00:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "label": "smart_money",
+          "pagination": {
+            "page": 1,
+            "per_page": 100
+          },
+          "order_by": [
+            {
+              "field": "date",
+              "direction": "ASC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].date",
+          "data[].is_complete",
+          "data[].price_usd",
+          "data[].total_inflows_count",
+          "data[].total_outflows_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61310,
+        "ms": 801,
+        "status": 200,
+        "responseHash": "f70e13fdfbed0a3cf08a82716daa82771abe2d7293410b3a28774a816811042f",
+        "attempts": 1,
+        "totalMs": 814
+      },
+      {
+        "endpoint": "tgm/indicators",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c"
+        },
+        "fieldsUsed": [
+          "risk_indicators[].indicator_type",
+          "risk_indicators[].score",
+          "reward_indicators[].indicator_type",
+          "reward_indicators[].score"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 5,
+        "creditsRemaining": 61305,
+        "ms": 1326,
+        "status": 200,
+        "responseHash": "f0803c1a25fd41dd9b4549b0671aa9ab40a2317a1de024e7054156975a9313f5",
+        "attempts": 1,
+        "totalMs": 1340
+      },
+      {
+        "endpoint": "tgm/flows",
+        "method": "POST",
+        "body": {
+          "chain": "ethereum",
+          "token_address": "0x4dfae3690b93c47470b03036a17b23c1be05127c",
+          "date": {
+            "from": "2026-09-02T00:00:00Z",
+            "to": "2026-09-16T14:00:00Z"
+          },
+          "label": "exchange",
+          "pagination": {
+            "page": 1,
+            "per_page": 100
+          },
+          "order_by": [
+            {
+              "field": "date",
+              "direction": "ASC"
+            }
+          ]
+        },
+        "fieldsUsed": [
+          "data[].date",
+          "data[].is_complete",
+          "data[].price_usd",
+          "data[].total_inflows_count",
+          "data[].total_outflows_count"
+        ],
+        "cached": false,
+        "ok": true,
+        "credits": 1,
+        "creditsRemaining": 61304,
+        "ms": 1357,
+        "status": 200,
+        "responseHash": "0110554c5cb9db41856a8a94c509212dcc07650966a7902cc3b421b8ce7be0c4",
+        "attempts": 1,
+        "totalMs": 1371
+      }
+    ],
+    "credits": 12,
+    "calls": 8,
+    "cachedCalls": 0,
+    "ms": 1400,
+    "asOf": null
+  }
+}
