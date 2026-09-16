@@ -58,7 +58,7 @@ export const LABELS = EXCLUDED_LABELS;
 
 const num = (v: unknown): number | null => (typeof v === "number" && Number.isFinite(v) ? v : null);
 const topN = <T extends { bought_volume_usd?: number | null }>(rows: T[], n: number) => [...rows].sort((a, b) => (num(b.bought_volume_usd) ?? 0) - (num(a.bought_volume_usd) ?? 0)).slice(0, n);
-const errMsg = (e: unknown) => (e instanceof Error ? (e.name === "AbortError" ? "timeout" : e.message.slice(0, 140)) : String(e));
+const errMsg = (e: unknown) => (e instanceof Error ? (e.name === "AbortError" ? "timeout" : e.message.slice(0, 260)) : String(e));
 
 function mergeHistory(sm: FlowsRow[] | null, ex: FlowsRow[] | null): DayFlow[] {
   const byDate = new Map<string, DayFlow>();

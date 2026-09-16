@@ -51,7 +51,16 @@ export class NansenError extends Error {
     public status: number,
     public bodyText: string,
   ) {
-    super(`Nansen ${endpoint} → HTTP ${status}: ${bodyText.slice(0, 200)}`);
+    super(`Nansen ${endpoint} → HTTP ${status}: ${NansenError.reason(bodyText)}`);
+  }
+  /** Nansen error bodies are JSON `{error, message}`; show the message, not the envelope, so a 422 reads as a sentence on screen. */
+  static reason(bodyText: string): string {
+    try {
+      const j = JSON.parse(bodyText) as { message?: unknown; error?: unknown; detail?: unknown };
+      const m = [j.message, j.detail, j.error].find((v) => typeof v === "string" && v.trim());
+      if (typeof m === "string") return m.trim().slice(0, 240);
+    } catch { /* not JSON */ }
+    return bodyText.slice(0, 200);
   }
 }
 

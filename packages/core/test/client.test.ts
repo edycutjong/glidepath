@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { NansenClient } from "../src/client";
+import { NansenClient, NansenError } from "../src/client";
 import { fakeClient, KEY } from "./helpers";
 
 describe("NansenClient", () => {
@@ -51,6 +51,11 @@ describe("NansenClient", () => {
     expect(n).toBe(1);
     expect(c.calls[0]).toMatchObject({ ok: false, status: 422, credits: 0, attempts: 1 });
     expect(c.calls[0].error).toMatch(/HTTP 422/);
+  });
+  it("a JSON error body surfaces its `message` as a sentence, not the envelope", () => {
+    const e = new NansenError("tgm/flows", 422, JSON.stringify({ error: "Unprocessable Entity", message: "Token 0xdac1 on ethereum is a stablecoin. The TGM flows endpoint does not support stablecoins." }));
+    expect(e.message).toBe("Nansen tgm/flows → HTTP 422: Token 0xdac1 on ethereum is a stablecoin. The TGM flows endpoint does not support stablecoins.");
+    expect(new NansenError("x", 500, "<html>gateway</html>").message).toBe("Nansen x → HTTP 500: <html>gateway</html>");
   });
   it("honours retries: 0 — a 503 is not retried", async () => {
     let n = 0;
