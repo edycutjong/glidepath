@@ -100,7 +100,7 @@ export function PlanView({ p, exportBase }: { p: PlanResult; exportBase: string 
             <div className="actions">
               <a className="btn" href={`${exportBase}&format=ics`} download>Add to calendar (.ics)</a>
               <a className="btn ghost" href={`${exportBase}&format=csv`} download>Download CSV</a>
-              <a className="btn ghost" href={`/p/${p.input.chain}/${encodeURIComponent(p.resolved.address || p.input.token)}?amount=${p.input.amount}`}>Share card</a>
+              <a className="btn ghost" href={`/p?chain=${p.input.chain}&token=${encodeURIComponent(p.resolved.address || p.input.token)}&amount=${p.input.amount}`}>Share card</a>
             </div>
           )}
         </>

@@ -5,21 +5,19 @@ import { planFor, parseInput } from "@/lib/server";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-type Props = { params: Promise<{ chain: string; token: string }>; searchParams: Promise<{ amount?: string }> };
+type Props = { searchParams: Promise<{ chain?: string; token?: string; amount?: string }> };
 
-export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
-  const { chain, token } = await params;
-  const { amount = "1" } = await searchParams;
-  const t = decodeURIComponent(token);
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const { chain = "ethereum", token = "", amount = "1" } = await searchParams;
+  const t = token;
   const og = `/api/og?chain=${chain}&token=${encodeURIComponent(t)}&amount=${encodeURIComponent(amount)}`;
   const title = `Glidepath — ${t} on ${chain}`;
   return { title, description: `A dated selling calendar for ${amount} ${t} on ${chain}, paced to organic demand (Nansen).`, openGraph: { title, images: [og] }, twitter: { card: "summary_large_image", title, images: [og] } };
 }
 
-export default async function SharePage({ params, searchParams }: Props) {
-  const { chain, token } = await params;
-  const { amount = "1" } = await searchParams;
-  const input = parseInput(chain, decodeURIComponent(token), amount);
+export default async function SharePage({ searchParams }: Props) {
+  const { chain = "ethereum", token = "", amount = "1" } = await searchParams;
+  const input = parseInput(chain, token, amount);
   if ("error" in input) return <main><p className="error">{input.error}</p></main>;
   const plan = await planFor(input);
   const exportBase = `/api/export?chain=${plan.input.chain}&token=${encodeURIComponent(plan.resolved.address || plan.input.token)}&amount=${plan.input.amount}`;
