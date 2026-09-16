@@ -4,7 +4,7 @@
 
 **You have to sell a token you never meant to own. Glidepath turns it into a dated selling calendar sized to the market's organic demand — so you are never the biggest seller on a day the pros are exiting.**
 
-[![ci](https://github.com/edycutjong/glidepath/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/glidepath/actions/workflows/ci.yml) ![tests](https://img.shields.io/badge/tests-89%20passing-16a34a) ![fixtures](https://img.shields.io/badge/fixtures-13%2F13%20replay%20offline-16a34a) ![Nansen](https://img.shields.io/badge/Nansen%20API-7%20endpoints%20%C2%B7%2011%20calls-111827) ![license](https://img.shields.io/badge/license-MIT-blue)
+[![ci](https://github.com/edycutjong/glidepath/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/glidepath/actions/workflows/ci.yml) ![tests](https://img.shields.io/badge/tests-92%20passing-16a34a) ![fixtures](https://img.shields.io/badge/fixtures-13%2F13%20replay%20offline-16a34a) ![Nansen](https://img.shields.io/badge/Nansen%20API-7%20endpoints%20%C2%B7%2011%20calls-111827) ![license](https://img.shields.io/badge/license-MIT-blue)
 
 ![PEPE plan](docs/screenshots/01-pepe-plan.png)
 
@@ -75,7 +75,7 @@ CLI flags: `--json` (full plan + provenance) · `--explain` (every tranche and e
 
 ## Tests, fixtures, benchmark
 
-- **89 vitest tests** (`npm test`): tranche-sizing table, red-day rule, risk dial vs indicator scores, impact model, decision-hash stability, pagination cap (the 20,000-buyer case), cache and offline mode, client retries/timeouts/header credits, ICS/CSV, resolver, end-to-end on a fake Nansen, and one replay test per fixture.
+- **92 vitest tests** (`npm test`): tranche-sizing table, red-day rule, risk dial vs indicator scores, impact model, decision-hash stability, pagination cap (the 20,000-buyer case), cache and offline mode, client retries/timeouts/header credits, ICS/CSV, resolver, end-to-end on a fake Nansen, and one replay test per fixture.
 - **13 fixtures, 13/13 reproduced offline** (`npm run verify`): each stores the raw Nansen responses byte-for-byte, the plan and the clock; replay must match the hash with zero network calls and zero credits.
 - **Bench** (`npm run bench`, 7 tokens × 3 runs): cold **p50 3.5 s / p95 6.0 s**, warm **p50 5 ms / p95 356 ms**, **13.0 credits/plan**, 9.3 calls/plan, 2.0 who-bought-sold pages/plan, 7 of 195 calls failed (6 deterministic: `tgm/flows` refuses stablecoins). Full table and reproduce steps: [DEMO.md](DEMO.md).
 
