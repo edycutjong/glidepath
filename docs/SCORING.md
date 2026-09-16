@@ -30,7 +30,7 @@ red-day rule     θ_sm = max($1,000, 0.10 × organicDailyUsd)     θ_ex = max($1
                  regime  ← the same fields over 7 d against 3·θ                    tgm/flow-intelligence (7d) — context line, never changes the hash
                  history ← (total_inflows_count + total_outflows_count) × price_usd per daily bucket, complete buckets only
                                                                                   tgm/flows label=smart_money and label=exchange, 14 d
-                 a red today halves today's tranche;  expectedDays = ceil(N / (1 − 0.5 · redRate))
+                 a red today halves today's tranche;  expectedDays = ceil(N / (1 − 0.5 · redRate)), or 1 when N = 1 (today's colour is known)
 
 impact           constant product, both pool sides ≈ liquidity_usd / 2:  cost(V) = V² / (L/2 + V)
                  dumpTodayCost = cost(positionUsd) ;  glidepathCost = Σ cost(trancheUsd_i)

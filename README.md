@@ -21,7 +21,7 @@ Paste **token · chain · amount held**. Glidepath:
 1. Computes **organic daily buy volume** — DEX buys over the last 7 days by wallets that carry **none** of Nansen's Smart Money / Fund / Whale / Exchange / sniper-bot labels — via `tgm/who-bought-sold` label filters and `tgm/token-information`.
 2. Prints the **dump-today line**: position value, estimated impact, and what share of a full day's organic buying you would be.
 3. Sizes daily **tranches** to `k` × organic/day, where `k` slides from 10 % to 3 % as Nansen's peer-percentile risk indicators rise (`tgm/indicators`), capped at 1 % of `liquidity_usd`.
-4. Flags **red days**: today from `tgm/flow-intelligence` (Smart Money net-selling, or net deposits to exchanges), the last 14 days from `tgm/flows` daily cohort history. A red today halves the first tranche; the observed red-day rate stretches the expected finish.
+4. Flags **red days**: today from `tgm/flow-intelligence` (Smart Money net-selling, or net deposits to exchanges), the 13 complete days before it from `tgm/flows` daily cohort history (a 14-day strip with today). A red today halves the first tranche; the observed red-day rate stretches the expected finish.
 5. Shows **dump today vs glidepath cost** — constant-product from `liquidity_usd`, or a real routed `trade/quote` on solana/base, labelled as such.
 6. Exports the plan as **ICS** (one calendar event per tranche, with the go/no-go rule inside) and **CSV**, plus a share card with an OG image.
 7. Opens a **provenance drawer**: every Nansen call, the fields used, credits (from Nansen's response headers), cached or live, ms — and a "computed Ns ago" badge.
@@ -71,7 +71,7 @@ CLI flags: `--json` (full plan + provenance) · `--explain` (every tranche and e
 - **Honest states**: no organic demand (< $50/day or < 5 buyers) → "there is nobody to sell to at any pace", numbers shown, no calendar. Calendar beyond 90 days → "N % still unsold after 90 days". Ticker unknown on the chain → the chains where it exists.
 - **Impact-model caveat**: the constant-product estimate treats `liquidity_usd` as one pool with the token on one side. It is optimistic for tokens whose depth sits in a single thin pool, and it ignores MEV and gas. On solana and base the routed `trade/quote` replaces it and the label changes to "route quote". Not financial advice.
 - **The pro share is small.** On the 11 tokens tried, Smart Money / funds / whales / exchanges were 0–3.6 % of DEX buys — Glidepath shows that split rather than dramatising it ([DX-REPORT.md](docs/DX-REPORT.md)).
-- **Future days cannot be known red or green.** Today is live; the last 14 days are real; each ICS event carries the rule to re-check on the morning.
+- **Future days cannot be known red or green.** Today is live; the 13 complete days before it are real; each ICS event carries the rule to re-check on the morning.
 
 ## Tests, fixtures, benchmark
 
