@@ -2,7 +2,22 @@ import type { Plan } from "./plan";
 
 const fmtUsd = (v: number | null | undefined) => (v == null ? "—" : `$${Math.round(v).toLocaleString("en-US")}`);
 const fmtTok = (v: number) => (v >= 1000 ? Math.round(v).toLocaleString("en-US") : v.toPrecision(6));
-const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+/** RFC 5545 §3.1: content lines longer than 75 octets are folded with CRLF + one space. */
+export const foldLine = (line: string): string => {
+  const bytes = Buffer.from(line, "utf8");
+  if (bytes.length <= 75) return line;
+  const parts: string[] = [];
+  let start = 0, first = true;
+  while (start < bytes.length) {
+    const width = first ? 75 : 74;
+    let end = Math.min(bytes.length, start + width);
+    while (end < bytes.length && end > start && (bytes[end] & 0xc0) === 0x80) end--; // never split a UTF-8 sequence
+    parts.push((first ? "" : " ") + bytes.subarray(start, end).toString("utf8"));
+    start = end; first = false;
+  }
+  return parts.join("\r\n");
+};
 const icsDate = (d: string) => d.replace(/-/g, "");
 
 /** One all-day VEVENT per tranche; the description carries the go/no-go rule so the seller never needs the app open. */
@@ -22,7 +37,7 @@ export function toICS(p: Plan): string {
       `SUMMARY:${esc(`Sell ${fmtTok(t.tokens)} ${sym} (${fmtUsd(t.usd)})${t.red ? " — red day, halved" : ""}`)}`, `DESCRIPTION:${esc(desc)}`, "END:VEVENT");
   }
   lines.push("END:VCALENDAR");
-  return lines.join("\r\n") + "\r\n";
+  return lines.map(foldLine).join("\r\n") + "\r\n";
 }
 
 export function toCSV(p: Plan): string {
