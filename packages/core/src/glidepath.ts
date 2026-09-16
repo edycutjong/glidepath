@@ -65,7 +65,7 @@ export async function glidepath(client: NansenClient, input: PlanInput, opts: Gl
   }
 
   const facts = await fetchFacts(client, chain, res.address, now);
-  const resolved: Plan["resolved"] = { address: res.address, symbol: facts.symbol ?? res.symbol, name: facts.name ?? res.name, viaSearch: res.viaSearch, logo: facts.logo };
+  const resolved: Plan["resolved"] = { address: res.address, symbol: facts.symbol || res.symbol || res.address.slice(0, 6) + "…", name: facts.name || res.name, viaSearch: res.viaSearch, logo: facts.logo };
   let plan = computePlan(facts, { chain, token: input.token, amount }, resolved, now, res.searchPrice);
 
   if (plan.status !== "no-price" && plan.status !== "no-organic-demand" && quoteSupported(chain) && opts.quotes !== false) {

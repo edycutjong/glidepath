@@ -216,6 +216,7 @@ export function computePlan(facts: Facts, input: PlanInput, resolved: Plan["reso
     trancheUsd = Math.min(byOrganic, byLiquidity);
     trancheCapReason = byLiquidity < byOrganic ? "liquidity" : "organic";
     if (facts.liquidityUsd == null) warnings.push("liquidity_usd unavailable — no liquidity cap on tranches and no impact estimate");
+    else if (facts.liquidityUsd <= 0) warnings.push("liquidity_usd is 0 for this token on Nansen — no liquidity cap on tranches and no impact estimate");
     sized = sizeTranches(input.amount, trancheUsd / priceUsd, priceUsd, now, todayRed);
     if (sized.truncated) { status = "thin"; statusReason = `${Math.round(sized.remainderPct * 100)}% of the position is still unsold after ${MAX_DAYS} days at this pace`; }
   }
@@ -254,12 +255,13 @@ export function applyQuotes(plan: Plan, quotes: RouteQuotes | null): Plan {
   for (const e of quotes.errors) p.warnings.push(`route quote: ${e}`);
   const bag = quotes.legs.find((l) => l.label === "whole-bag");
   const one = quotes.legs.find((l) => l.label === "one-tranche");
-  if (bag) p.dumpToday = { ...p.dumpToday, costUsd: bag.costUsd, model: "route-quote", priceImpactPct: bag.priceImpactPct };
+  const pctOf = (v: number | null) => (v == null ? null : Math.round(Math.abs(v) * 100) / 100);
+  if (bag) p.dumpToday = { ...p.dumpToday, costUsd: bag.costUsd, model: "route-quote", priceImpactPct: pctOf(bag.priceImpactPct) };
   if (one && p.tranches.length) {
     // one quoted tranche scales to the calendar: full-size tranches carry the quoted cost, the partial ones scale by (size/full)²
     const full = one.tokens;
     for (const t of p.tranches) { const r = t.tokens / full; t.costUsd = one.costUsd * r * r; }
-    p.glidepath = { costUsd: p.tranches.reduce((n, t) => n + t.costUsd, 0), model: "route-quote", firstTrancheCostUsd: p.tranches[0].costUsd, priceImpactPct: one.priceImpactPct };
+    p.glidepath = { costUsd: p.tranches.reduce((n, t) => n + t.costUsd, 0), model: "route-quote", firstTrancheCostUsd: p.tranches[0].costUsd, priceImpactPct: pctOf(one.priceImpactPct) };
   }
   p.savingsUsd = p.dumpToday.costUsd != null && p.glidepath.costUsd != null ? p.dumpToday.costUsd - p.glidepath.costUsd : null;
   p.hash = planHash(p);

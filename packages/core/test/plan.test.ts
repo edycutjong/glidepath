@@ -239,3 +239,21 @@ describe("applyQuotes", () => {
     expect(applyQuotes(base, null)).toBe(base);
   });
 });
+
+describe("qa round 1 — edge display states", () => {
+  it("liquidity_usd = 0 → no impact model, a warning that says so, tranche bound by organic only", () => {
+    const p = computePlan(pepeFacts({ liquidityUsd: 0 }), INPUT, RESOLVED, NOW);
+    expect(p.dumpToday.model).toBeNull();
+    expect(p.warnings.join()).toMatch(/liquidity_usd is 0/);
+    expect(p.trancheCapReason).toBe("organic");
+  });
+  it("route impact percentages are stored as absolute values rounded to 2 dp", () => {
+    const base = computePlan(pepeFacts(), INPUT, RESOLVED, NOW);
+    const p = applyQuotes(base, { decimals: 5, spotPriceUsd: 1, errors: [], legs: [
+      { label: "one-tranche", tokens: base.tranches[0].tokens, outUsd: 1, inUsd: 2, costUsd: 1, priceImpactPct: -0.286238, aggregator: "okx" },
+      { label: "whole-bag", tokens: INPUT.amount, outUsd: 1, inUsd: 2, costUsd: 1, priceImpactPct: 3.899, aggregator: "okx" },
+    ] });
+    expect(p.glidepath.priceImpactPct).toBe(0.29);
+    expect(p.dumpToday.priceImpactPct).toBe(3.9);
+  });
+});

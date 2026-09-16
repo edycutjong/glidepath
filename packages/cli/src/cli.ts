@@ -52,7 +52,7 @@ if (p.status === "not-found") {
     console.log(`\n${Y}${B}no glidepath${X} — ${p.statusReason}`);
   } else {
     const max = Math.max(...p.tranches.map((x) => x.usd));
-    console.log(`\n${B}Glidepath:${X} ${p.days} tranche${p.days === 1 ? "" : "s"} of ≤ ${usd(p.trancheUsd)} ${D}(${p.trancheCapReason === "liquidity" ? "capped at 1% of liquidity" : `${(p.risk.k * 100).toFixed(1)}% of organic/day`})${X} · est. cost ${G}${usd(p.glidepath.costUsd, 2)}${X} ${D}(${p.glidepath.model})${X} · saves ${usd(p.savingsUsd, 2)}${p.redRate ? ` · expect ~${p.expectedDays} days at the ${pct(p.redRate, 0)} red-day rate` : ""}`);
+    console.log(`\n${B}Glidepath:${X} ${p.days} tranche${p.days === 1 ? "" : "s"} of ≤ ${usd(p.trancheUsd)} ${D}(${p.trancheCapReason === "liquidity" ? "capped at 1% of liquidity" : `${(p.risk.k * 100).toFixed(1)}% of organic/day`})${X} · est. cost ${G}${usd(p.glidepath.costUsd, 2)}${X} ${D}(${p.glidepath.model ?? "no impact model"})${X}${p.days === 1 ? ` ${D}· fits in one day — no split needed${X}` : ` · saves ${usd(p.savingsUsd, 2)}`}${p.redRate ? ` · expect ~${p.expectedDays} days at the ${pct(p.redRate, 0)} red-day rate` : ""}`);
     const shown = p.tranches.slice(0, flag("--explain") ? p.tranches.length : 14);
     for (const x of shown) console.log(`  ${x.date}  ${x.red ? R : G}${bar(x.usd, max)}${X} ${tok(x.tokens).padStart(16)} ${p.resolved.symbol}  ${usd(x.usd).padStart(9)}${x.red ? `  ${R}red — ${x.reason}, halved${X}` : ""}`);
     if (shown.length < p.tranches.length) console.log(`  ${D}… ${p.tranches.length - shown.length} more (--explain to list all)${X}`);

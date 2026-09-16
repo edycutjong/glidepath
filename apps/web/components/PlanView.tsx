@@ -85,7 +85,7 @@ export function PlanView({ p, exportBase }: { p: PlanResult; exportBase: string 
                 <span className="label">Glidepath</span>
                 <strong>{p.days} tranche{p.days === 1 ? "" : "s"}</strong>
                 <span>est. cost <b className="green">{usd(p.glidepath.costUsd, 2)}</b> vs <b className="red">{usd(p.dumpToday.costUsd, 2)}</b> dumping today</span>
-                {p.savingsUsd != null && p.savingsUsd > 0 && <span>· saves <b>{usd(p.savingsUsd, 2)}</b></span>}
+                {p.days === 1 ? <span className="muted">· fits in one day — no split needed</span> : p.savingsUsd != null && p.savingsUsd > 0 && <span>· saves <b>{usd(p.savingsUsd, 2)}</b></span>}
                 {p.redRate != null && p.redRate > 0 && <span className="muted">· expect ~{p.expectedDays} days at the {pct(p.redRate, 0)} red-day rate</span>}
                 <div className="tiny muted">{modelLabel(p.glidepath.model)}{p.glidepath.priceImpactPct != null ? ` · one tranche ${Math.abs(p.glidepath.priceImpactPct)}% route impact` : ""}</div>
               </div>

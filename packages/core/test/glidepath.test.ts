@@ -56,3 +56,17 @@ describe("glidepath end to end (fake Nansen)", () => {
     expect(nf.hash).toHaveLength(64);
   });
 });
+
+describe("qa round 1 — symbol fallback", () => {
+  it("an empty symbol from token-information falls back to the search symbol, then a short address", async () => {
+    const c = fakeCachedClient((e, b) => {
+      const out = pepeRoutes(e, b) as { data?: Record<string, unknown> };
+      if (e === "tgm/token-information") return { data: { ...out.data, symbol: "", name: "" } };
+      return out;
+    });
+    const viaTicker = await glidepath(c, { chain: "ethereum", token: "PEPE", amount: 1e9 }, { now: NOW });
+    expect(viaTicker.resolved.symbol).toBe("PEPE");
+    const viaAddress = await glidepath(c, { chain: "ethereum", token: PEPE, amount: 1e9 }, { now: NOW });
+    expect(viaAddress.resolved.symbol).toBe("0x6982…");
+  });
+});
