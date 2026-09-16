@@ -8,9 +8,11 @@ export const pct = (v: number | null | undefined, d = 1) => (v == null ? "—" :
 const md = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 
 function Age({ asOf, computedAt }: { asOf: string | null; computedAt: string }) {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => { const t = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(t); }, []);
+  // null until mounted: the share page is server-rendered, and a server clock in the markup would hydrate to a mismatch
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => { setNow(Date.now()); const t = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(t); }, []);
   const ref = asOf ?? computedAt;
+  if (now == null) return <span className="badge" title={asOf ? "oldest cached Nansen response used by this plan" : "every call was live"}>{asOf ? "computed" : "live"}</span>;
   const s = Math.max(0, Math.round((now - Date.parse(ref)) / 1000));
   const label = s < 90 ? `${s}s ago` : s < 5400 ? `${Math.round(s / 60)} min ago` : `${(s / 3600).toFixed(1)} h ago`;
   return <span className="badge" title={asOf ? "oldest cached Nansen response used by this plan" : "every call was live"}>{asOf ? "computed" : "live"} {label}</span>;
@@ -86,7 +88,7 @@ export function PlanView({ p, exportBase }: { p: PlanResult; exportBase: string 
                 <strong>{p.days} tranche{p.days === 1 ? "" : "s"}</strong>
                 <span>est. cost <b className="green">{usd(p.glidepath.costUsd, 2)}</b> vs <b className="red">{usd(p.dumpToday.costUsd, 2)}</b> dumping today</span>
                 {p.days === 1 ? <span className="muted">· fits in one day — no split needed</span> : p.savingsUsd != null && p.savingsUsd > 0 && <span>· saves <b>{usd(p.savingsUsd, 2)}</b></span>}
-                {p.redRate != null && p.redRate > 0 && <span className="muted">· expect ~{p.expectedDays} days at the {pct(p.redRate, 0)} red-day rate</span>}
+                {p.days > 1 && p.redRate != null && p.redRate > 0 && <span className="muted">· expect ~{p.expectedDays} days at the {pct(p.redRate, 0)} red-day rate</span>}
                 <div className="tiny muted">{modelLabel(p.glidepath.model)}{p.glidepath.priceImpactPct != null ? ` · one tranche ${Math.abs(p.glidepath.priceImpactPct)}% route impact` : ""}</div>
               </div>
               {p.truncated && <div className="state warn">{p.statusReason}</div>}

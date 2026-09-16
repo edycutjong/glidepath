@@ -242,7 +242,8 @@ export function computePlan(facts: Facts, input: PlanInput, resolved: Plan["reso
     regime,
     history: hist.history, redRate: hist.redRate, redDays: hist.redDays, completeDays: hist.completeDays,
     ...sized,
-    expectedDays: sized.days ? Math.ceil(sized.days / (1 - RED_DAY_FACTOR * (hist.redRate ?? 0))) : 0,
+    // a one-tranche plan sells today, whose colour is already known — the red-day rate only stretches multi-day calendars
+    expectedDays: sized.days <= 1 ? sized.days : Math.ceil(sized.days / (1 - RED_DAY_FACTOR * (hist.redRate ?? 0))),
     trancheUsd, trancheCapReason,
     dumpToday: { usd: positionUsd, costUsd: dumpCost, shareOfOrganicDay: positionUsd != null && organicDailyUsd ? positionUsd / organicDailyUsd : null, model: modelOk ? "constant-product" : null, priceImpactPct: null },
     glidepath: { costUsd: glideCost, model: modelOk && sized.tranches.length ? "constant-product" : null, firstTrancheCostUsd: sized.tranches[0]?.costUsd ?? null, priceImpactPct: null },

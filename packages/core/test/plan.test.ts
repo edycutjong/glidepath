@@ -144,6 +144,12 @@ describe("computePlan — the PEPE hero (facts from the 2026-09-16 probe)", () =
     expect(p.redRate).toBeCloseTo(0.5);
     expect(p.expectedDays).toBe(Math.ceil(2 / (1 - 0.5 * 0.5)));
   });
+  it("a one-tranche plan expects one day — today's colour is already known, the red-day rate cannot stretch it", () => {
+    const one = computePlan(pepeFacts(), { ...INPUT, amount: 1_000_000 }, RESOLVED, NOW);
+    expect(one.days).toBe(1);
+    expect(one.redRate).toBeCloseTo(0.5);
+    expect(one.expectedDays).toBe(1);
+  });
 });
 
 describe("computePlan — honest states", () => {
