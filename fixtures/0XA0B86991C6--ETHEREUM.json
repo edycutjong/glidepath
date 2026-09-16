@@ -209,6 +209,12 @@
         "exUsd": 250937811.37033805
       }
     },
+    "regime": {
+      "red": false,
+      "reason": null,
+      "smNet7dUsd": -625776.6087107417,
+      "exNet7dUsd": -69633399.4695641
+    },
     "history": [],
     "redRate": null,
     "redDays": 0,
@@ -252,8 +258,8 @@
       "14-day cohort history unavailable (tgm/flows failed)"
     ],
     "errors": {
-      "flows-smart-money": "Nansen tgm/flows → HTTP 422: {\"error\":\"Unprocessable Entity\",\"message\":\"Token 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 on ethereum is a st",
-      "flows-exchange": "Nansen tgm/flows → HTTP 422: {\"error\":\"Unprocessable Entity\",\"message\":\"Token 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 on ethereum is a st"
+      "flows-smart-money": "NANSEN_OFFLINE=1 and no cached response for POST tgm/flows {\"chain\":\"ethereum\",\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",",
+      "flows-exchange": "NANSEN_OFFLINE=1 and no cached response for POST tgm/flows {\"chain\":\"ethereum\",\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\","
     },
     "now": 1789568362914,
     "computedAt": "2026-09-16T14:19:22.914Z",

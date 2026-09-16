@@ -14,7 +14,7 @@ if (files.length === 0) { console.error("no fixtures/ — run `npm run seed` fir
 function projection(p: Plan) {
   return {
     hash: p.hash, status: p.status, statusReason: p.statusReason, price: p.price, k: p.risk.k, scores: p.risk.scores,
-    organicDailyUsd: p.organic.organicDailyUsd, today: p.today, days: p.days, truncated: p.truncated,
+    organicDailyUsd: p.organic.organicDailyUsd, today: p.today, regime: p.regime, days: p.days, truncated: p.truncated,
     tranches: p.tranches.map((t) => ({ date: t.date, tokens: t.tokens, usd: t.usd, red: t.red, reason: t.reason })),
     history: p.history.map((h) => ({ date: h.date, red: h.red, reason: h.reason })),
     dump: p.dumpToday, glide: p.glidepath, warnings: p.warnings,

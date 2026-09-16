@@ -39,6 +39,8 @@ export type Plan = {
   totalHolders: number | null;
   risk: { scores: Record<string, string | null>; highs: number; mediums: number; concentrated: boolean; k: number };
   today: { date: string; red: boolean; reason: string | null; smNetUsd: number | null; exNetUsd: number | null; theta: Theta };
+  /** the 7-day cohort flows (flow-intelligence 7d) against 3× the daily thresholds: a week of distribution, not one bad day */
+  regime: { red: boolean; reason: string | null; smNet7dUsd: number | null; exNet7dUsd: number | null };
   history: HistoryDay[];
   redRate: number | null;
   redDays: number;
@@ -196,6 +198,8 @@ export function computePlan(facts: Facts, input: PlanInput, resolved: Plan["reso
   const todayRed = redDay(facts.smNet1dUsd, facts.exNet1dUsd, th);
   if (facts.smNet1dUsd == null && facts.exNet1dUsd == null) warnings.push("today's cohort flows unavailable (flow-intelligence 1d failed) — today not red-tested");
   const hist = historyDays(facts.history, th, todayDate);
+  const regimeTest = redDay(facts.smNet7dUsd, facts.exNet7dUsd, { smUsd: th.smUsd * 3, exUsd: th.exUsd * 3 });
+  const regime = { red: regimeTest.red, reason: regimeTest.red ? `${regimeTest.reason} over 7 days` : null, smNet7dUsd: facts.smNet7dUsd, exNet7dUsd: facts.exNet7dUsd };
   if (facts.history == null) warnings.push("14-day cohort history unavailable (tgm/flows failed)");
 
   // status
@@ -235,6 +239,7 @@ export function computePlan(facts: Facts, input: PlanInput, resolved: Plan["reso
     liquidityUsd: L, marketCapUsd: facts.marketCapUsd, totalHolders: facts.totalHolders,
     risk,
     today: { date: todayDate, ...todayRed, smNetUsd: facts.smNet1dUsd, exNetUsd: facts.exNet1dUsd, theta: th },
+    regime,
     history: hist.history, redRate: hist.redRate, redDays: hist.redDays, completeDays: hist.completeDays,
     ...sized,
     expectedDays: sized.days ? Math.ceil(sized.days / (1 - RED_DAY_FACTOR * (hist.redRate ?? 0))) : 0,

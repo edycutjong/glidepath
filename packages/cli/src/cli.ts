@@ -9,7 +9,7 @@ const consumed = new Set(["--chain", "--amount", "--csv", "--ics"].flatMap((n) =
 const positional = args.filter((a, i) => !a.startsWith("--") && !consumed.has(i));
 const token = positional[0];
 const chain = opt("--chain") ?? "ethereum";
-const amount = Number(opt("--amount") ?? positional[1]);
+const amount = Number(String(opt("--amount") ?? positional[1] ?? "").replace(/[,_\s]/g, ""));
 
 if (!token || !(amount > 0) || flag("--help")) {
   console.log(`usage: glidepath <token-address-or-ticker> --chain <chain> --amount <tokens> [--json] [--explain] [--csv out.csv] [--ics out.ics] [--no-cache] [--no-quotes]
@@ -43,6 +43,7 @@ if (p.status === "not-found") {
   console.log(`risk dial  k = ${B}${(p.risk.k * 100).toFixed(1)}%${X} ${D}(${Object.entries(p.risk.scores).map(([k, v]) => `${k}=${v ?? "missing"}`).join(", ")}${p.risk.concentrated ? ", concentrated buyers" : ""})${X}`);
   const t = p.today;
   console.log(`today ${t.date}  ${t.red ? `${R}${B}RED${X} — ${t.reason}` : `${G}green${X}`} ${D}(Smart Money net ${usd(t.smNetUsd)}, exchange net ${usd(t.exNetUsd)}, θ_sm = ${usd(t.theta.smUsd)}, θ_ex = ${usd(t.theta.exUsd)})${X}`);
+  if (p.regime.red) console.log(`${R}7-day regime: ${p.regime.reason}${X} ${D}(pros have been net-selling all week; today's rule still decides each tranche)${X}`);
   if (p.history.length) {
     const strip = p.history.map((h) => (!h.complete ? `${D}·${X}` : h.red ? `${R}■${X}` : `${G}■${X}`)).join("");
     console.log(`last ${p.history.length} days ${strip}  ${p.redDays} red of ${p.completeDays} ${D}(${p.history.filter((h) => h.red).map((h) => `${h.date.slice(5)} ${h.reason}`).join("; ") || "no red days"})${X}`);

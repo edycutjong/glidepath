@@ -79,6 +79,12 @@
         "exUsd": 0
       }
     },
+    "regime": {
+      "red": false,
+      "reason": null,
+      "smNet7dUsd": null,
+      "exNet7dUsd": null
+    },
     "history": [],
     "redRate": null,
     "redDays": 0,

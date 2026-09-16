@@ -252,6 +252,12 @@
         "exUsd": 11596.878657316529
       }
     },
+    "regime": {
+      "red": true,
+      "reason": "Exchange net deposits +$94,896 over 7 days",
+      "smNet7dUsd": 5.900180764877421,
+      "exNet7dUsd": 94895.8499038728
+    },
     "history": [
       {
         "date": "2026-09-03",

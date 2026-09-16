@@ -257,3 +257,16 @@ describe("qa round 1 — edge display states", () => {
     expect(p.dumpToday.priceImpactPct).toBe(3.9);
   });
 });
+
+describe("qa round 2 — 7-day regime", () => {
+  it("flow-intelligence 7d against 3× the daily thresholds: PEPE's +$1.9M weekly exchange deposits are a red regime; withdrawals are not", () => {
+    const p = computePlan(pepeFacts({ exNet7dUsd: 1_895_861 }), INPUT, RESOLVED, NOW);
+    expect(p.regime.red).toBe(true);
+    expect(p.regime.reason).toBe("Exchange net deposits +$1,895,861 over 7 days");
+    expect(computePlan(pepeFacts({ exNet7dUsd: -1_895_861, smNet7dUsd: 29_948 }), INPUT, RESOLVED, NOW).regime.red).toBe(false);
+    expect(computePlan(pepeFacts({ smNet7dUsd: null, exNet7dUsd: null }), INPUT, RESOLVED, NOW).regime).toMatchObject({ red: false, reason: null });
+  });
+  it("the regime never changes the decision hash — it is context, the daily rule decides", () => {
+    expect(computePlan(pepeFacts({ exNet7dUsd: 9e9 }), INPUT, RESOLVED, NOW).hash).toBe(computePlan(pepeFacts({ exNet7dUsd: 0 }), INPUT, RESOLVED, NOW).hash);
+  });
+});

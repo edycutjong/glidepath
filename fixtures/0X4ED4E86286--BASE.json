@@ -297,6 +297,12 @@
         "exUsd": 11755.522792949983
       }
     },
+    "regime": {
+      "red": false,
+      "reason": null,
+      "smNet7dUsd": 0,
+      "exNet7dUsd": -91230.26134520317
+    },
     "history": [
       {
         "date": "2026-09-03",

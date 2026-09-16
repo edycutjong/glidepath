@@ -48,7 +48,7 @@ Each fixture stores every raw Nansen response (keyed by request, byte-for-byte),
 
 ## 3. Tests, typecheck, readiness
 ```bash
-npm test          # 87 vitest tests (tranche sizing table, red-day rule, risk dial, impact model, hash stability, pagination cap, cache, client, exports, resolver, end-to-end on a fake Nansen, every fixture)
+npm test          # 89 vitest tests (tranche sizing table, red-day rule, risk dial, impact model, hash stability, pagination cap, cache, client, exports, resolver, end-to-end on a fake Nansen, every fixture)
 npm run typecheck
 npm run check     # submission readiness: files, secrets, kitchen leaks, fixtures, verify, tests, README claims
 ```
@@ -104,5 +104,6 @@ Pages `tgm/who-bought-sold` three ways for 8 tokens and probes `trade/quote`; th
 | engine bring-up, live CLI runs | ≈ 60 |
 | `npm run seed` (13 fixtures, twice for two of them) | 166 |
 | `npm run bench` (7 tokens × 3 runs) | 272 |
-| web app smoke tests, screenshots, Vercel preview checks, QA | ≈ 120 |
-| **total** | **≈ 720 credits · ≈ 560 live calls** (balance 62,320 → see README) |
+| `npm run seed -- BONK WIF BRETT DEGEN` after QA round 1 | 60 |
+| web app smoke tests, screenshots, Vercel preview checks, live QA on 6 unseen tokens | ≈ 140 |
+| **total** | **≈ 800 credits · ≈ 700 live calls** on the shared `meridian` key (header balance 62,320 at the first probe → 59,360 after the QA loop; sibling entries ran on the same key in the same window) |

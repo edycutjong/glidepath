@@ -6,7 +6,7 @@
  *   set -a; source ~/.config/nansen/meridian.env; set +a; npm run seed          # all (~150 credits)
  *   npm run seed -- PEPE BONK                                                    # a subset by token
  */
-import { CachedNansenClient, MemoryCache, glidepath, writeFixture, type Fixture, type PlanInput } from "../packages/core/src/index";
+import { CachedNansenClient, MemoryCache, glidepath, writeFixture, listFixtures, readFixture, fixtureStore, type Fixture, type PlanInput } from "../packages/core/src/index";
 
 export const FIXTURE_SET: Array<{ input: PlanInput; edge: string; tag?: string }> = [
   { input: { chain: "ethereum", token: "0x6982508145454ce325ddbe47a25d4ec3d2311933", amount: 12_000_000_000 }, edge: "1 · hero — PEPE 12B (≈$40K donation); large, liquid; exchange-driven red days in history" },
@@ -23,6 +23,24 @@ export const FIXTURE_SET: Array<{ input: PlanInput; edge: string; tag?: string }
   { input: { chain: "ethereum", token: "0x2de7b02ae3b1f11d51ca7b2495e9094874a064c0", amount: 100_000_000 }, edge: "12 · SHIB2 — $0 DEX buys in 7 days → no organic demand, no calendar, numbers still shown" },
   { input: { chain: "ethereum", token: "XQZPLM", amount: 1 }, edge: "13 · ticker that does not exist → not-found, zero credits" },
 ];
+
+/**
+ * --rederive: no network. Replay every existing fixture from its recorded responses (same clock) and rewrite the stored
+ * plan — for engine changes that add output fields without changing the decision. `live` stats are kept as recorded.
+ */
+if (process.argv.includes("--rederive")) {
+  process.env.NANSEN_OFFLINE = "1";
+  for (const path of listFixtures()) {
+    const f = readFixture(path);
+    const client = new CachedNansenClient("nsn_offline_replay_000000000000000", { store: fixtureStore(f), offline: true });
+    const plan = await glidepath(client, f.input, { now: f.now });
+    if (plan.hash !== f.plan.hash) { console.error(`✖ ${path}: hash changed ${f.plan.hash.slice(0, 12)} → ${plan.hash.slice(0, 12)} — the decision moved, re-seed live instead`); process.exit(1); }
+    const tag = path.match(/--[A-Z]+--([A-Z]+)\.json$/)?.[1];
+    writeFixture({ ...f, plan: { ...plan, credits: f.plan.credits, calls: f.plan.calls, cachedCalls: f.plan.cachedCalls, ms: f.plan.ms, asOf: f.plan.asOf, provenance: f.plan.provenance } }, undefined, tag);
+    console.log(`↻ ${path} re-derived (${plan.hash.slice(0, 12)})`);
+  }
+  process.exit(0);
+}
 
 const wanted = process.argv.slice(2).map((q) => q.toUpperCase());
 const set = wanted.length ? FIXTURE_SET.filter((f) => wanted.some((w) => f.input.token.toUpperCase().includes(w) || (f.tag ?? "").includes(w) || f.edge.toUpperCase().includes(w))) : FIXTURE_SET;

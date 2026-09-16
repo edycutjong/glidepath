@@ -2,7 +2,7 @@
 
 Every term below is a Nansen response field. The constants live in one place (`packages/core/src/plan.ts`) and every plan carries a provenance list (endpoint · fields used · credits · cached or live · ms) that the web app shows in the drawer and the CLI prints with `--explain`.
 
-## The pipeline (one plan = 8–11 calls, 12–15 credits)
+## The pipeline (one plan = 8–12 calls to 7 endpoints, 12–15 credits)
 
 ```
 price            = market_cap_usd / circulating_supply                            tgm/token-information (7d)
@@ -27,6 +27,7 @@ tranche i        = UTC date(now + i days)
 red-day rule     θ_sm = max($1,000, 0.10 × organicDailyUsd)     θ_ex = max($1,000, 1.00 × organicDailyUsd)
                  red(day) ⇔ smart_money_net < −θ_sm  ∨  exchange_net_deposits > +θ_ex
                  today   ← smart_trader_net_flow_usd, exchange_net_flow_usd        tgm/flow-intelligence (1d)
+                 regime  ← the same fields over 7 d against 3·θ                    tgm/flow-intelligence (7d) — context line, never changes the hash
                  history ← (total_inflows_count + total_outflows_count) × price_usd per daily bucket, complete buckets only
                                                                                   tgm/flows label=smart_money and label=exchange, 14 d
                  a red today halves today's tranche;  expectedDays = ceil(N / (1 − 0.5 · redRate))

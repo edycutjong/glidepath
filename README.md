@@ -4,7 +4,7 @@
 
 **You have to sell a token you never meant to own. Glidepath turns it into a dated selling calendar sized to the market's organic demand — so you are never the biggest seller on a day the pros are exiting.**
 
-[![ci](https://github.com/edycutjong/glidepath/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/glidepath/actions/workflows/ci.yml) ![tests](https://img.shields.io/badge/tests-87%20passing-16a34a) ![fixtures](https://img.shields.io/badge/fixtures-13%2F13%20replay%20offline-16a34a) ![Nansen](https://img.shields.io/badge/Nansen%20API-8%20endpoints-111827) ![license](https://img.shields.io/badge/license-MIT-blue)
+[![ci](https://github.com/edycutjong/glidepath/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/glidepath/actions/workflows/ci.yml) ![tests](https://img.shields.io/badge/tests-89%20passing-16a34a) ![fixtures](https://img.shields.io/badge/fixtures-13%2F13%20replay%20offline-16a34a) ![Nansen](https://img.shields.io/badge/Nansen%20API-7%20endpoints%20%C2%B7%2011%20calls-111827) ![license](https://img.shields.io/badge/license-MIT-blue)
 
 ![PEPE plan](docs/screenshots/01-pepe-plan.png)
 
@@ -53,7 +53,7 @@ CLI flags: `--json` (full plan + provenance) · `--explain` (every tranche and e
 | `tgm/who-bought-sold` BUY 7d, `include_smart_money_labels` = pro labels | 1 | `data[].bought_volume_usd`, `address_label` | the pro share subtracted from total buys → **organic/day** |
 | `tgm/who-bought-sold` BUY 7d, `exclude_smart_money_labels`, page 1 of 1000 | 1 | `data[].bought_volume_usd` | single-buyer dependence (top organic buyer > 25 %) → k − 2 pts |
 | `tgm/flow-intelligence` 1d | 1 | `smart_trader_net_flow_usd`, `exchange_net_flow_usd` | **is today red** (halve tranche 1) |
-| `tgm/flow-intelligence` 7d | 1 | same | regime shown in provenance |
+| `tgm/flow-intelligence` 7d | 1 | same | **7-day regime** — a week of net-selling past 3× the daily thresholds, shown beside today |
 | `tgm/flows` label `smart_money`, 14d | 1 | `date`, `is_complete`, `price_usd`, `total_inflows_count`, `total_outflows_count` | daily Smart Money net flow → red-day history |
 | `tgm/flows` label `exchange`, 14d | 1 | same | daily exchange net deposits → red-day history and rate |
 | `tgm/indicators` | 5 | `liquidity-risk`, `concentration-risk`, `btc-reflexivity` scores | the participation rate `k` (10 % → 3 %) |
@@ -75,7 +75,7 @@ CLI flags: `--json` (full plan + provenance) · `--explain` (every tranche and e
 
 ## Tests, fixtures, benchmark
 
-- **87 vitest tests** (`npm test`): tranche-sizing table, red-day rule, risk dial vs indicator scores, impact model, decision-hash stability, pagination cap (the 20,000-buyer case), cache and offline mode, client retries/timeouts/header credits, ICS/CSV, resolver, end-to-end on a fake Nansen, and one replay test per fixture.
+- **89 vitest tests** (`npm test`): tranche-sizing table, red-day rule, risk dial vs indicator scores, impact model, decision-hash stability, pagination cap (the 20,000-buyer case), cache and offline mode, client retries/timeouts/header credits, ICS/CSV, resolver, end-to-end on a fake Nansen, and one replay test per fixture.
 - **13 fixtures, 13/13 reproduced offline** (`npm run verify`): each stores the raw Nansen responses byte-for-byte, the plan and the clock; replay must match the hash with zero network calls and zero credits.
 - **Bench** (`npm run bench`, 7 tokens × 3 runs): cold **p50 3.5 s / p95 6.0 s**, warm **p50 5 ms / p95 356 ms**, **13.0 credits/plan**, 9.3 calls/plan, 2.0 who-bought-sold pages/plan, 7 of 195 calls failed (6 deterministic: `tgm/flows` refuses stablecoins). Full table and reproduce steps: [DEMO.md](DEMO.md).
 

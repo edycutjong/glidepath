@@ -41,6 +41,7 @@ export async function glidepath(client: NansenClient, input: PlanInput, opts: Gl
       liquidityUsd: null, marketCapUsd: null, totalHolders: null,
       risk: { scores: {}, highs: 0, mediums: 0, concentrated: false, k: 0 },
       today: { date: new Date(now).toISOString().slice(0, 10), red: false, reason: null, smNetUsd: null, exNetUsd: null, theta: { smUsd: 0, exUsd: 0 } },
+      regime: { red: false, reason: null, smNet7dUsd: null, exNet7dUsd: null },
       history: [], redRate: null, redDays: 0, completeDays: 0, tranches: [], days: 0, expectedDays: 0, truncated: false, remainderTokens: 0, remainderPct: 0,
       trancheUsd: null, trancheCapReason: null,
       dumpToday: { usd: null, costUsd: null, shareOfOrganicDay: null, model: null, priceImpactPct: null },
