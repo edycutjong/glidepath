@@ -897,7 +897,7 @@ code {
   flex: none;
   width: 150px;
   font: 500 16px var(--sans);
-  padding: 14px 12px;
+  padding: 14px 16px 14px 12px; /* 4px more on the right so the native arrow clears the edge */
   border-radius: var(--r-md);
   border: 1px solid var(--border-2);
   background: var(--bg-2);
