@@ -35,13 +35,13 @@ export async function GET(req: Request) {
       {p && p.status !== "not-found" ? (
         <div style={{ display: "flex", flexDirection: "column", marginTop: 30, gap: 14 }}>
           <div style={{ display: "flex", fontSize: 34 }}>
-            <span style={{ color: "#ef4444", fontWeight: 700, marginRight: 10 }}>Dump today:</span>
+            <span style={{ color: "#ef4444", fontWeight: 700, whiteSpace: "pre" }}>{"Dump today: "}</span>
             {usd(p.dumpToday.usd)} · est. impact {usd(p.dumpToday.costUsd)}
             {p.dumpToday.shareOfOrganicDay != null ? ` · ${Math.round(p.dumpToday.shareOfOrganicDay * 100)}% of a day's organic buys` : ""}
           </div>
           {ok ? (
             <div style={{ display: "flex", fontSize: 34 }}>
-              <span style={{ color: "#22c55e", fontWeight: 700, marginRight: 10 }}>Glidepath:</span>
+              <span style={{ color: "#22c55e", fontWeight: 700, whiteSpace: "pre" }}>{"Glidepath: "}</span>
               {p.days} tranches · est. cost {usd(p.glidepath.costUsd)}
               {p.redDays ? ` · ${p.redDays} red days in the last ${p.completeDays}` : ""}
             </div>
