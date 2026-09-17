@@ -1,10 +1,13 @@
 {
   "name": "glidepath",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Paste a token, a chain and the amount you hold. Glidepath turns it into a dated selling calendar sized to organic demand — Nansen labels decide what counts as organic.",
   "license": "MIT",
-  "workspaces": ["packages/*", "apps/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
@@ -23,6 +26,8 @@
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "type": "module"
 }
