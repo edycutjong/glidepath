@@ -46,7 +46,7 @@ CI / deterministic replay — no key, no network, 0 credits (this is proof the e
 
 ```bash
 npm run verify        # 13/13 plans reproduced offline (NANSEN_OFFLINE=1 inside the script)
-npm test              # 221 tests incl. 60,000 property cases
+npm test              # 228 tests incl. 60,000 property cases
 npm run check         # submission-readiness audit
 ```
 

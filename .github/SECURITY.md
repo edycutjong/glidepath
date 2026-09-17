@@ -15,6 +15,11 @@ The Nansen API key lives on the server (`NANSEN_API_KEY`, or `~/.config/…` for
 
 Glidepath plans; it never trades and never holds keys to a wallet.
 
+**The key cannot be drained through the public route** (`apps/web/lib/guard.ts`, `apps/web/test/guard.test.ts`):
+6 requests per minute per address (**429** + `Retry-After`) and 3,000 live credits per UTC day counted from each
+plan's own total, after which the route answers an honest **503** before any Nansen call. Counters are per
+instance — a ceiling, not accounting. Tunable with `GUARD_IP_PER_MIN` / `GUARD_DAILY_CREDITS`.
+
 ## Reporting a Vulnerability
 Please **do not** open a public issue for security vulnerabilities. Instead,
 report them privately:
