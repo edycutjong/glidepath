@@ -2,7 +2,7 @@
   "name": "glidepath",
   "version": "1.1.0",
   "private": true,
-  "description": "Paste a token, a chain and the amount you hold. Glidepath turns it into a dated selling calendar sized to organic demand — Nansen labels decide what counts as organic.",
+  "description": "Paste a token, a chain and the amount you hold. Glidepath turns it into a dated selling calendar sized to organic demand \u2014 Nansen labels decide what counts as organic.",
   "license": "MIT",
   "workspaces": [
     "packages/*",
@@ -39,7 +39,7 @@
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.63.0",
     "@types/node": "^22.10.0",
-    "@vitest/coverage-v8": "^3.2.7",
+    "@vitest/coverage-v8": "^3.0.0",
     "eslint": "^9.39.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "fast-check": "^4.10.1",
@@ -55,6 +55,9 @@
   },
   "type": "module",
   "overrides": {
-    "postcss": "^8.5.28"
+    "postcss": "^8.5.28",
+    "tmp": "^0.2.6",
+    "uuid": "^11.1.1",
+    "sharp": "^0.35.4"
   }
 }
