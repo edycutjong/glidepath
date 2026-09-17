@@ -15,6 +15,8 @@ import { pepeFacts, RESOLVED, NOW } from "./helpers";
 
 export const PROPERTY_RUNS = 10_000;
 const REL = 1e-9; // float tolerance on sums and bounds
+/** sizeTranches stops once the residue is below 1e-12 tokens (dust, never sold): Σ + remainder may fall short of the bag by that much */
+const DUST = 1e-12;
 
 const score = fc.constantFrom<string | null>("low", "medium", "high", null);
 const usd = (max: number) => fc.double({ min: 0, max, noNaN: true, noDefaultInfinity: true });
@@ -69,7 +71,7 @@ describe(`tranche planner — properties (${PROPERTY_RUNS.toLocaleString("en-US"
         const p = plan(f, input.amount);
         const sum = p.tranches.reduce((n, t) => n + t.tokens, 0);
         if (p.tranches.length) {
-          expect(Math.abs(sum + p.remainderTokens - input.amount)).toBeLessThanOrEqual(input.amount * REL);
+          expect(Math.abs(sum + p.remainderTokens - input.amount)).toBeLessThanOrEqual(input.amount * REL + DUST);
           expect(p.tranches.every((t) => t.tokens > 0)).toBe(true);
           expect(["ok", "thin"]).toContain(p.status);
         } else if (p.status === "thin") {
@@ -179,7 +181,7 @@ describe(`tranche planner — properties (${PROPERTY_RUNS.toLocaleString("en-US"
         (amount, size, price, red) => {
           const r = sizeTranches(amount, size, price, NOW, { red, reason: red ? "Smart Money net −$1" : null });
           const sum = r.tranches.reduce((n, t) => n + t.tokens, 0);
-          expect(Math.abs(sum + r.remainderTokens - amount)).toBeLessThanOrEqual(amount * REL);
+          expect(Math.abs(sum + r.remainderTokens - amount)).toBeLessThanOrEqual(amount * REL + DUST);
           expect(r.days).toBe(r.tranches.length);
           expect(r.days).toBeGreaterThanOrEqual(1);
           expect(r.days).toBeLessThanOrEqual(MAX_DAYS);
