@@ -26,7 +26,7 @@ Nansen labels decide what counts as organic. It plans; it never trades.
 | **Bench** | 7 tokens × 3 runs, 2026-09-16 14:22 UTC — cold **p50 3.47 s / p95 5.95 s**, warm **p50 5 ms / p95 356 ms**, **13.0 credits/plan**, 9.3 calls/plan, 2.0 who-bought-sold pages/plan, 7 of 195 calls failed (6 deterministic: `tgm/flows` refuses stablecoins), 272 credits total |
 | **Credits spent building** | ≈ 800 credits · ≈ 700 live Nansen calls (header balance 62,320 → 59,360 across the build; table in [DEMO.md](DEMO.md)) |
 | **Nansen surface** | 7 endpoints · 11 calls per plan · 12 credits on EVM chains, 15 on solana/base, 0 on a cache hit |
-| **Tests** | **112 vitest tests** (unit, end-to-end on a fake Nansen, one replay per fixture, key-boundary) · **13/13 recorded plans reproduce offline** byte-for-byte |
+| **Tests** | **221 vitest tests** (unit, end-to-end on a fake Nansen, one replay per fixture, key-boundary) · **13/13 recorded plans reproduce offline** byte-for-byte |
 | **Property-based verification** | **60,000 generated cases** (fast-check, 6 properties × 10,000) on the tranche planner: Σ tranches + remainder = amount held; every tranche ≤ k × organic/day and ≤ 1% of liquidity; a red today halves tranche 1 and only tranche 1; consecutive UTC dates, ≤ 90 of them, expectedDays ≥ days ≥ 1; the decision hash is deterministic and invariant to timing and context fields. It found one real defect (a zero-token tranche emitted 90 empty rows) — fixed and pinned. `packages/core/test/plan.property.test.ts` |
 | **E2E** | 4 Playwright suites (home, planner flow, responsive 375/768/1440, this page) — run in CI with no key; the built app is asserted to never contain an `nsn_` key |
 | **Clean clone** | ≈ 15 s from `git clone` to the first live plan (independent reviewer, 2026-09-16 23:51 UTC, warm npm cache) — budget 10 minutes on a cold cache |
@@ -46,7 +46,7 @@ CI / deterministic replay — no key, no network, 0 credits (this is proof the e
 
 ```bash
 npm run verify        # 13/13 plans reproduced offline (NANSEN_OFFLINE=1 inside the script)
-npm test              # 112 tests incl. 60,000 property cases
+npm test              # 221 tests incl. 60,000 property cases
 npm run check         # submission-readiness audit
 ```
 

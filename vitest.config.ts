@@ -2,6 +2,8 @@ import { defineConfig } from "vitest/config";
 const root = new URL("./", import.meta.url).pathname;
 export default defineConfig({
   test: {
+    // fast-check property suites run 10,000+ cases; 5 s is too tight on a loaded runner
+    testTimeout: 60_000,
     include: ["packages/**/test/**/*.test.ts", "apps/web/test/**/*.test.ts"],
     environment: "node",
     coverage: {

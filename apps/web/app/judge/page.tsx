@@ -83,7 +83,7 @@ export default function JudgePage() {
             <tr>
               <th>Tests</th>
               <td>
-                <strong>112 vitest tests</strong> (unit, end-to-end on a fake Nansen, one replay per fixture, key-boundary) · <strong>13/13 recorded plans reproduce offline</strong> byte-for-byte
+                <strong>221 vitest tests</strong> (unit, end-to-end on a fake Nansen, one replay per fixture, key-boundary) · <strong>13/13 recorded plans reproduce offline</strong> byte-for-byte
               </td>
             </tr>
             <tr>
@@ -119,7 +119,7 @@ npm run glidepath -- PEPE --chain ethereum --amount 12000000000 --explain   # 12
 npm run bench                                                              # ~270 credits, 7 tokens × 3 runs`}</pre>
         <p className="tiny muted">CI / deterministic replay — no key, no network, 0 credits (this is proof the engine is a pure function of the recorded responses, not the product):</p>
         <pre>{`npm run verify        # 13/13 plans reproduced offline (NANSEN_OFFLINE=1 inside the script)
-npm test              # 112 tests incl. 60,000 property cases
+npm test              # 221 tests incl. 60,000 property cases
 npm run check         # submission-readiness audit`}</pre>
       </section>
 
