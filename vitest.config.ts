@@ -2,6 +2,8 @@ import { defineConfig } from "vitest/config";
 const root = new URL("./", import.meta.url).pathname;
 export default defineConfig({
   // guard.test.ts renders the /api/og route (TSX) — use the automatic JSX runtime, as next build does
+  // Vite 8 (vitest ≥ 4) transforms with oxc and would keep Next's `jsx: preserve`; Vite ≤ 7 reads the esbuild key
+  oxc: { jsx: { runtime: "automatic" } },
   esbuild: { jsx: "automatic" },
   test: {
     // fast-check property suites run 10,000+ cases; 5 s is too tight on a loaded runner
