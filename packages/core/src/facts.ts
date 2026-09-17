@@ -1,8 +1,5 @@
 import type { NansenClient } from "./client";
-import {
-  EXCLUDED_LABELS, tokenInformation, whoBoughtPaged, flowIntelligence, flows, indicators,
-  type FlowsRow, type Indicator,
-} from "./nansen";
+import { EXCLUDED_LABELS, tokenInformation, whoBoughtPaged, flowIntelligence, flows, indicators, type FlowsRow, type Indicator } from "./nansen";
 
 /** One day of cohort flow history from tgm/flows: net token amount × that day's median price. */
 export type DayFlow = { date: string; complete: boolean; priceUsd: number | null; smNetUsd: number | null; exNetUsd: number | null };
@@ -84,8 +81,13 @@ function mergeHistory(sm: FlowsRow[] | null, ex: FlowsRow[] | null): DayFlow[] {
  */
 export async function fetchFacts(client: NansenClient, chain: string, address: string, now: number): Promise<Facts> {
   const errors: Record<string, string> = {};
-  const settle = async <T,>(term: string, p: Promise<T>): Promise<T | null> => {
-    try { return await p; } catch (e) { errors[term] = errMsg(e); return null; }
+  const settle = async <T>(term: string, p: Promise<T>): Promise<T | null> => {
+    try {
+      return await p;
+    } catch (e) {
+      errors[term] = errMsg(e);
+      return null;
+    }
   };
   const [info, pros, organic, fi1, fi7, fsm, fex, ind] = await Promise.all([
     settle("token-information", tokenInformation(client, chain, address, "7d", { timeoutMs: 12000 })),
@@ -120,21 +122,39 @@ export async function fetchFacts(client: NansenClient, chain: string, address: s
   const latest = history?.length ? history[history.length - 1] : null;
 
   return {
-    chain, address,
-    symbol: d?.symbol ?? null, name: d?.name ?? null, logo: d?.logo ?? null,
+    chain,
+    address,
+    symbol: d?.symbol ?? null,
+    name: d?.name ?? null,
+    logo: d?.logo ?? null,
     deployedAt: td?.token_deployment_date ?? null,
-    marketCapUsd: num(td?.market_cap_usd), circulatingSupply: num(td?.circulating_supply), fdvUsd: num(td?.fdv_usd), totalSupply: num(td?.total_supply),
-    liquidityUsd: num(sm?.liquidity_usd), totalHolders: num(sm?.total_holders),
-    totalBuy7dUsd: num(sm?.buy_volume_usd), uniqueBuyers7d: num(sm?.unique_buyers),
-    proBuy7dUsd: proRows ? usdOf(proRows) : null, proBuyers: proRows ? proRows.length : null, proPages: pros?.pages ?? null,
+    marketCapUsd: num(td?.market_cap_usd),
+    circulatingSupply: num(td?.circulating_supply),
+    fdvUsd: num(td?.fdv_usd),
+    totalSupply: num(td?.total_supply),
+    liquidityUsd: num(sm?.liquidity_usd),
+    totalHolders: num(sm?.total_holders),
+    totalBuy7dUsd: num(sm?.buy_volume_usd),
+    uniqueBuyers7d: num(sm?.unique_buyers),
+    proBuy7dUsd: proRows ? usdOf(proRows) : null,
+    proBuyers: proRows ? proRows.length : null,
+    proPages: pros?.pages ?? null,
     proLabels: proRows ? [...new Set(proRows.map((r) => r.address_label).filter((l): l is string => !!l))].slice(0, 8) : [],
-    organicPage1Usd: orgRows ? usdOf(orgRows) : null, organicPage1Rows: orgRows ? orgRows.length : null,
+    organicPage1Usd: orgRows ? usdOf(orgRows) : null,
+    organicPage1Rows: orgRows ? orgRows.length : null,
     organicTop10Usd: orgRows ? usdOf(topN(orgRows, 10)) : null,
     organicTop1Usd: orgRows ? usdOf(topN(orgRows, 1)) : null,
-    smNet1dUsd: num(f1?.smart_trader_net_flow_usd), exNet1dUsd: num(f1?.exchange_net_flow_usd), whaleNet1dUsd: num(f1?.whale_net_flow_usd), smWallets1d: num(f1?.smart_trader_wallet_count),
-    smNet7dUsd: num(f7?.smart_trader_net_flow_usd), exNet7dUsd: num(f7?.exchange_net_flow_usd),
-    history, flowsPriceUsd: latest?.priceUsd ?? null,
-    indicatorScores, marketCapGroup: ind?.token_info?.market_cap_group ?? null, isStablecoin: ind?.token_info?.is_stablecoin ?? null,
+    smNet1dUsd: num(f1?.smart_trader_net_flow_usd),
+    exNet1dUsd: num(f1?.exchange_net_flow_usd),
+    whaleNet1dUsd: num(f1?.whale_net_flow_usd),
+    smWallets1d: num(f1?.smart_trader_wallet_count),
+    smNet7dUsd: num(f7?.smart_trader_net_flow_usd),
+    exNet7dUsd: num(f7?.exchange_net_flow_usd),
+    history,
+    flowsPriceUsd: latest?.priceUsd ?? null,
+    indicatorScores,
+    marketCapGroup: ind?.token_info?.market_cap_group ?? null,
+    isStablecoin: ind?.token_info?.is_stablecoin ?? null,
     errors,
   };
 }

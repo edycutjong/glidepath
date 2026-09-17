@@ -19,7 +19,10 @@ const SET: Array<PlanInput & { name: string }> = [
 const runsIdx = process.argv.indexOf("--runs");
 const RUNS = runsIdx >= 0 ? Number(process.argv[runsIdx + 1]) : 3;
 const apiKey = process.env.NANSEN_API_KEY ?? "";
-const pct = (xs: number[], p: number) => { const s = [...xs].sort((a, b) => a - b); return s[Math.min(s.length - 1, Math.floor((p / 100) * s.length))]; };
+const pct = (xs: number[], p: number) => {
+  const s = [...xs].sort((a, b) => a - b);
+  return s[Math.min(s.length - 1, Math.floor((p / 100) * s.length))];
+};
 
 type Row = { name: string; run: number; coldMs: number; warmMs: number; credits: number; calls: number; pages: number; failed: number; hashStable: boolean };
 const rows: Row[] = [];
@@ -30,16 +33,39 @@ for (let run = 1; run <= RUNS; run++) {
     const now = Date.now();
     const cold = await glidepath(client, t, { now });
     const warm = await glidepath(client, t, { now });
-    rows.push({ name: t.name, run, coldMs: cold.ms, warmMs: warm.ms, credits: cold.credits, calls: cold.calls, pages: cold.provenance.filter((c) => c.endpoint === "tgm/who-bought-sold").length, failed: cold.provenance.filter((c) => !c.ok).length, hashStable: cold.hash === warm.hash });
-    console.error(`run ${run} ${t.name.padEnd(16)} cold ${(cold.ms / 1000).toFixed(1)}s warm ${warm.ms}ms · ${cold.credits} cr · ${cold.calls} calls${cold.provenance.some((c) => !c.ok) ? " · FAILED: " + cold.provenance.filter((c) => !c.ok).map((c) => c.endpoint).join(",") : ""}`);
+    rows.push({
+      name: t.name,
+      run,
+      coldMs: cold.ms,
+      warmMs: warm.ms,
+      credits: cold.credits,
+      calls: cold.calls,
+      pages: cold.provenance.filter((c) => c.endpoint === "tgm/who-bought-sold").length,
+      failed: cold.provenance.filter((c) => !c.ok).length,
+      hashStable: cold.hash === warm.hash,
+    });
+    console.error(
+      `run ${run} ${t.name.padEnd(16)} cold ${(cold.ms / 1000).toFixed(1)}s warm ${warm.ms}ms · ${cold.credits} cr · ${cold.calls} calls${
+        cold.provenance.some((c) => !c.ok)
+          ? " · FAILED: " +
+            cold.provenance
+              .filter((c) => !c.ok)
+              .map((c) => c.endpoint)
+              .join(",")
+          : ""
+      }`,
+    );
   }
 }
-const cold = rows.map((r) => r.coldMs), warm = rows.map((r) => r.warmMs);
+const cold = rows.map((r) => r.coldMs),
+  warm = rows.map((r) => r.warmMs);
 console.log(`## Bench — ${SET.length} tokens × ${RUNS} runs, ${new Date().toISOString().slice(0, 16)}Z\n`);
 console.log(`| metric | cold (fresh cache, live Nansen) | warm (second call, same cache) |\n|---|---|---|`);
 console.log(`| p50 latency | ${(pct(cold, 50) / 1000).toFixed(2)} s | ${pct(warm, 50)} ms |`);
 console.log(`| p95 latency | ${(pct(cold, 95) / 1000).toFixed(2)} s | ${pct(warm, 95)} ms |`);
-console.log(`| credits / plan | ${(rows.reduce((n, r) => n + r.credits, 0) / rows.length).toFixed(1)} (min ${Math.min(...rows.map((r) => r.credits))}, max ${Math.max(...rows.map((r) => r.credits))}) | 0 |`);
+console.log(
+  `| credits / plan | ${(rows.reduce((n, r) => n + r.credits, 0) / rows.length).toFixed(1)} (min ${Math.min(...rows.map((r) => r.credits))}, max ${Math.max(...rows.map((r) => r.credits))}) | 0 |`,
+);
 console.log(`| calls / plan | ${(rows.reduce((n, r) => n + r.calls, 0) / rows.length).toFixed(1)} | same, all cached |`);
 console.log(`| who-bought-sold pages / plan | ${(rows.reduce((n, r) => n + r.pages, 0) / rows.length).toFixed(1)} | — |`);
 console.log(`| failed calls | ${rows.reduce((n, r) => n + r.failed, 0)} of ${rows.reduce((n, r) => n + r.calls, 0)} | — |`);
@@ -47,6 +73,16 @@ console.log(`| hash cold == warm | ${rows.filter((r) => r.hashStable).length}/${
 console.log(`\n| token | cold p50 | cold max | warm p50 | credits | calls |\n|---|---|---|---|---|---|`);
 for (const t of SET) {
   const rs = rows.filter((r) => r.name === t.name);
-  console.log(`| ${t.name} | ${(pct(rs.map((r) => r.coldMs), 50) / 1000).toFixed(1)} s | ${(Math.max(...rs.map((r) => r.coldMs)) / 1000).toFixed(1)} s | ${pct(rs.map((r) => r.warmMs), 50)} ms | ${rs[0].credits} | ${rs[0].calls} |`);
+  console.log(
+    `| ${t.name} | ${(
+      pct(
+        rs.map((r) => r.coldMs),
+        50,
+      ) / 1000
+    ).toFixed(1)} s | ${(Math.max(...rs.map((r) => r.coldMs)) / 1000).toFixed(1)} s | ${pct(
+      rs.map((r) => r.warmMs),
+      50,
+    )} ms | ${rs[0].credits} | ${rs[0].calls} |`,
+  );
 }
 console.log(`\ntotal credits this bench: ${rows.reduce((n, r) => n + r.credits, 0)}`);

@@ -8,13 +8,15 @@ export const foldLine = (line: string): string => {
   const bytes = Buffer.from(line, "utf8");
   if (bytes.length <= 75) return line;
   const parts: string[] = [];
-  let start = 0, first = true;
+  let start = 0,
+    first = true;
   while (start < bytes.length) {
     const width = first ? 75 : 74;
     let end = Math.min(bytes.length, start + width);
     while (end < bytes.length && end > start && (bytes[end] & 0xc0) === 0x80) end--; // never split a UTF-8 sequence
     parts.push((first ? "" : " ") + bytes.subarray(start, end).toString("utf8"));
-    start = end; first = false;
+    start = end;
+    first = false;
   }
   return parts.join("\r\n");
 };
@@ -32,9 +34,19 @@ export function toICS(p: Plan): string {
       t.red ? `Planned on a RED day (${t.reason}): size halved.` : "",
       `Rule before selling: re-run glidepath. If today shows Smart Money net-selling past ${fmtUsd(p.today.theta.smUsd)} or net exchange deposits past ${fmtUsd(p.today.theta.exUsd)}, halve this tranche and add a day.`,
       `Sized to ${(p.risk.k * 100).toFixed(1)}% of ${fmtUsd(p.organic.organicDailyUsd)}/day organic buys (Nansen who-bought-sold, labels excluded). Plan ${p.hash.slice(0, 12)}.`,
-    ].filter(Boolean).join("\n");
-    lines.push("BEGIN:VEVENT", `UID:glidepath-${p.hash.slice(0, 16)}-${t.day}@glidepath`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${icsDate(t.date)}`, `DTEND;VALUE=DATE:${icsDate(next)}`,
-      `SUMMARY:${esc(`Sell ${fmtTok(t.tokens)} ${sym} (${fmtUsd(t.usd)})${t.red ? " — red day, halved" : ""}`)}`, `DESCRIPTION:${esc(desc)}`, "END:VEVENT");
+    ]
+      .filter(Boolean)
+      .join("\n");
+    lines.push(
+      "BEGIN:VEVENT",
+      `UID:glidepath-${p.hash.slice(0, 16)}-${t.day}@glidepath`,
+      `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${icsDate(t.date)}`,
+      `DTEND;VALUE=DATE:${icsDate(next)}`,
+      `SUMMARY:${esc(`Sell ${fmtTok(t.tokens)} ${sym} (${fmtUsd(t.usd)})${t.red ? " — red day, halved" : ""}`)}`,
+      `DESCRIPTION:${esc(desc)}`,
+      "END:VEVENT",
+    );
   }
   lines.push("END:VCALENDAR");
   return lines.map(foldLine).join("\r\n") + "\r\n";

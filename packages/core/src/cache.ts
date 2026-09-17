@@ -12,25 +12,47 @@ export interface CacheStore {
 
 export class DiskCache implements CacheStore {
   constructor(private dir = join(process.cwd(), ".cache")) {
-    try { mkdirSync(dir, { recursive: true }); } catch { /* read-only FS (serverless): reads miss, writes are dropped */ }
+    try {
+      mkdirSync(dir, { recursive: true });
+    } catch {
+      /* read-only FS (serverless): reads miss, writes are dropped */
+    }
   }
-  private path(key: string) { return join(this.dir, `${key}.json`); }
+  private path(key: string) {
+    return join(this.dir, `${key}.json`);
+  }
   get(key: string): CacheEntry | undefined {
     const p = this.path(key);
     if (!existsSync(p)) return undefined;
-    try { return JSON.parse(readFileSync(p, "utf8")) as CacheEntry; } catch { return undefined; }
+    try {
+      return JSON.parse(readFileSync(p, "utf8")) as CacheEntry;
+    } catch {
+      return undefined;
+    }
   }
   set(key: string, entry: CacheEntry) {
-    try { writeFileSync(this.path(key), JSON.stringify(entry)); } catch { /* ignore */ }
+    try {
+      writeFileSync(this.path(key), JSON.stringify(entry));
+    } catch {
+      /* ignore */
+    }
   }
 }
 
 export class MemoryCache implements CacheStore {
   private m = new Map<string, CacheEntry>();
-  get(key: string) { return this.m.get(key); }
-  set(key: string, entry: CacheEntry) { this.m.set(key, entry); }
-  entries(): Record<string, CacheEntry> { return Object.fromEntries(this.m); }
-  get size() { return this.m.size; }
+  get(key: string) {
+    return this.m.get(key);
+  }
+  set(key: string, entry: CacheEntry) {
+    this.m.set(key, entry);
+  }
+  entries(): Record<string, CacheEntry> {
+    return Object.fromEntries(this.m);
+  }
+  get size() {
+    return this.m.size;
+  }
 }
 
 /** Two stores in series: memory first, then disk; a disk hit is promoted to memory. */
@@ -39,11 +61,16 @@ export class LayeredCache implements CacheStore {
   get(key: string) {
     for (let i = 0; i < this.layers.length; i++) {
       const hit = this.layers[i].get(key);
-      if (hit) { for (let j = 0; j < i; j++) this.layers[j].set(key, hit); return hit; }
+      if (hit) {
+        for (let j = 0; j < i; j++) this.layers[j].set(key, hit);
+        return hit;
+      }
     }
     return undefined;
   }
-  set(key: string, entry: CacheEntry) { for (const l of this.layers) l.set(key, entry); }
+  set(key: string, entry: CacheEntry) {
+    for (const l of this.layers) l.set(key, entry);
+  }
 }
 
 export const DEFAULT_TTL_MS = 60 * 60 * 1000;
@@ -51,7 +78,12 @@ export const DEFAULT_TTL_MS = 60 * 60 * 1000;
 /** Recursively sort object keys so `{a:{y,x}}` and `{a:{x,y}}` serialize identically (arrays keep order). */
 export function canonicalize(v: unknown): unknown {
   if (Array.isArray(v)) return v.map(canonicalize);
-  if (v && typeof v === "object") return Object.fromEntries(Object.keys(v as object).sort().map((k) => [k, canonicalize((v as Record<string, unknown>)[k])]));
+  if (v && typeof v === "object")
+    return Object.fromEntries(
+      Object.keys(v as object)
+        .sort()
+        .map((k) => [k, canonicalize((v as Record<string, unknown>)[k])]),
+    );
   return v;
 }
 
@@ -98,8 +130,12 @@ export class CachedNansenClient extends NansenClient {
     if (this.offline) throw new Error(`NANSEN_OFFLINE=1 and no cached response for ${method} ${endpoint} ${JSON.stringify(body)}`);
     const t0 = Date.now();
     let raw: RawResult;
-    try { raw = await this.raw(method, endpoint, body, opts); }
-    catch (e) { this.recordFailure(method, endpoint, body, fieldsUsed, e, Date.now() - t0); throw e; }
+    try {
+      raw = await this.raw(method, endpoint, body, opts);
+    } catch (e) {
+      this.recordFailure(method, endpoint, body, fieldsUsed, e, Date.now() - t0);
+      throw e;
+    }
     this.record(method, endpoint, body, fieldsUsed, raw);
     this.store.set(key, { storedAt: new Date().toISOString(), ttlMs: this.ttlMs, endpoint, body, text: raw.text, creditsUsed: raw.creditsUsed ?? CREDITS[endpoint] ?? 1 });
     return JSON.parse(raw.text) as T;

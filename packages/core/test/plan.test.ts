@@ -7,18 +7,19 @@ const INPUT = { chain: "ethereum", token: "PEPE", amount: 12_000_000_000 };
 
 describe("risk dial → k", () => {
   it.each([
-    [{ "liquidity-risk": "low", "concentration-risk": "low", "btc-reflexivity": "low" }, null, 0.10],
-    [{ "liquidity-risk": "medium", "concentration-risk": "low", "btc-reflexivity": "high" }, null, 0.0667],  // PEPE live
+    [{ "liquidity-risk": "low", "concentration-risk": "low", "btc-reflexivity": "low" }, null, 0.1],
+    [{ "liquidity-risk": "medium", "concentration-risk": "low", "btc-reflexivity": "high" }, null, 0.0667], // PEPE live
     [{ "liquidity-risk": "high", "concentration-risk": "high", "btc-reflexivity": "high" }, null, 0.03],
     [{ "liquidity-risk": "medium", "concentration-risk": "medium", "btc-reflexivity": "medium" }, null, 0.07],
-    [{ "liquidity-risk": "low", "concentration-risk": "low", "btc-reflexivity": "low" }, 0.3, 0.08],           // single-buyer dependence
-    [{ "liquidity-risk": "high", "concentration-risk": "high", "btc-reflexivity": "high" }, 0.9, 0.03],       // never below K_MIN
-    [{}, null, 0.07],                                                                                        // missing = medium
+    [{ "liquidity-risk": "low", "concentration-risk": "low", "btc-reflexivity": "low" }, 0.3, 0.08], // single-buyer dependence
+    [{ "liquidity-risk": "high", "concentration-risk": "high", "btc-reflexivity": "high" }, 0.9, 0.03], // never below K_MIN
+    [{}, null, 0.07], // missing = medium
   ])("scores %o top1=%s → k=%s", (scores, top1, k) => {
     expect(riskDial(scores as Record<string, string | null>, top1).k).toBeCloseTo(k, 4);
   });
   it("bounds are the published constants", () => {
-    expect(K_MIN).toBe(0.03); expect(K_MAX).toBe(0.10);
+    expect(K_MIN).toBe(0.03);
+    expect(K_MAX).toBe(0.1);
     expect(riskDial({}, null).mediums).toBe(3);
   });
 });
@@ -100,7 +101,8 @@ describe("impact model", () => {
     expect(constantProductCost(100, 0)).toBe(0);
   });
   it("splitting always costs less than dumping (convex)", () => {
-    const L = 1e6, V = 50_000;
+    const L = 1e6,
+      V = 50_000;
     const split = Array.from({ length: 5 }, () => constantProductCost(V / 5, L)).reduce((a, b) => a + b, 0);
     expect(split).toBeLessThan(constantProductCost(V, L));
   });
@@ -221,10 +223,15 @@ describe("applyQuotes", () => {
   const base = computePlan(pepeFacts(), INPUT, RESOLVED, NOW);
   it("replaces model costs with route quotes and relabels; partial tranches scale quadratically", () => {
     const one = base.tranches[0].tokens;
-    const q = { decimals: 18, spotPriceUsd: 3.3e-6, errors: [], legs: [
-      { label: "one-tranche", tokens: one, outUsd: 30_000, inUsd: 30_300, costUsd: 300, priceImpactPct: 1, aggregator: "okx" },
-      { label: "whole-bag", tokens: INPUT.amount, outUsd: 39_000, inUsd: 40_000, costUsd: 1000, priceImpactPct: 2.5, aggregator: "okx" },
-    ] };
+    const q = {
+      decimals: 18,
+      spotPriceUsd: 3.3e-6,
+      errors: [],
+      legs: [
+        { label: "one-tranche", tokens: one, outUsd: 30_000, inUsd: 30_300, costUsd: 300, priceImpactPct: 1, aggregator: "okx" },
+        { label: "whole-bag", tokens: INPUT.amount, outUsd: 39_000, inUsd: 40_000, costUsd: 1000, priceImpactPct: 2.5, aggregator: "okx" },
+      ],
+    };
     const p = applyQuotes(base, q);
     expect(p.dumpToday).toMatchObject({ costUsd: 1000, model: "route-quote", priceImpactPct: 2.5 });
     expect(p.glidepath.model).toBe("route-quote");
@@ -255,10 +262,15 @@ describe("qa round 1 — edge display states", () => {
   });
   it("route impact percentages are stored as absolute values rounded to 2 dp", () => {
     const base = computePlan(pepeFacts(), INPUT, RESOLVED, NOW);
-    const p = applyQuotes(base, { decimals: 5, spotPriceUsd: 1, errors: [], legs: [
-      { label: "one-tranche", tokens: base.tranches[0].tokens, outUsd: 1, inUsd: 2, costUsd: 1, priceImpactPct: -0.286238, aggregator: "okx" },
-      { label: "whole-bag", tokens: INPUT.amount, outUsd: 1, inUsd: 2, costUsd: 1, priceImpactPct: 3.899, aggregator: "okx" },
-    ] });
+    const p = applyQuotes(base, {
+      decimals: 5,
+      spotPriceUsd: 1,
+      errors: [],
+      legs: [
+        { label: "one-tranche", tokens: base.tranches[0].tokens, outUsd: 1, inUsd: 2, costUsd: 1, priceImpactPct: -0.286238, aggregator: "okx" },
+        { label: "whole-bag", tokens: INPUT.amount, outUsd: 1, inUsd: 2, costUsd: 1, priceImpactPct: 3.899, aggregator: "okx" },
+      ],
+    });
     expect(p.glidepath.priceImpactPct).toBe(0.29);
     expect(p.dumpToday.priceImpactPct).toBe(3.9);
   });

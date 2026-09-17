@@ -34,12 +34,22 @@ export type RouteQuotes = {
 };
 
 type RawQuote = {
-  aggregator?: string; inAmount?: string; outAmount?: string; priceImpactPct?: string | number;
-  inUsdValue?: string | number; outUsdValue?: string | number; fromTokenPrice?: string | number; toTokenPrice?: string | number;
-  fromTokenDecimals?: string | number; toTokenDecimals?: string | number;
+  aggregator?: string;
+  inAmount?: string;
+  outAmount?: string;
+  priceImpactPct?: string | number;
+  inUsdValue?: string | number;
+  outUsdValue?: string | number;
+  fromTokenPrice?: string | number;
+  toTokenPrice?: string | number;
+  fromTokenDecimals?: string | number;
+  toTokenDecimals?: string | number;
 };
 
-const n = (v: unknown): number | null => { const x = typeof v === "string" ? Number(v) : v; return typeof x === "number" && Number.isFinite(x) ? x : null; };
+const n = (v: unknown): number | null => {
+  const x = typeof v === "string" ? Number(v) : v;
+  return typeof x === "number" && Number.isFinite(x) ? x : null;
+};
 const errMsg = (e: unknown) => (e instanceof Error ? (e.name === "AbortError" ? "timeout" : e.message.slice(0, 160)) : String(e));
 
 /** Token amount → base-unit integer string (BigInt; avoids float overflow on 18-decimal tokens). */
@@ -69,9 +79,15 @@ export async function fetchRouteQuotes(client: NansenClient, chain: string, toke
   try {
     const q = await quote(client, chain, USDC[chain], token, "5000000", { timeoutMs: 12000, retries: 0 });
     probe = (q.quotes ?? [])[0] as RawQuote | undefined;
-  } catch (e) { out.errors.push(`probe: ${errMsg(e)}`); return out; }
+  } catch (e) {
+    out.errors.push(`probe: ${errMsg(e)}`);
+    return out;
+  }
   const decimals = n(probe?.toTokenDecimals);
-  if (decimals == null) { out.errors.push("probe returned no toTokenDecimals"); return out; }
+  if (decimals == null) {
+    out.errors.push("probe returned no toTokenDecimals");
+    return out;
+  }
   out.decimals = decimals;
   out.spotPriceUsd = n(probe?.toTokenPrice);
   for (const leg of legs) {
@@ -79,10 +95,16 @@ export async function fetchRouteQuotes(client: NansenClient, chain: string, toke
     try {
       const q = await quote(client, chain, token, USDC[chain], toBaseUnits(leg.tokens, decimals), { timeoutMs: 12000, retries: 0 });
       const best = (q.quotes ?? []).map((x) => x as RawQuote).sort((a, b) => (n(b.outUsdValue) ?? 0) - (n(a.outUsdValue) ?? 0))[0];
-      const outUsd = n(best?.outUsdValue), inUsd = n(best?.inUsdValue);
-      if (outUsd == null || inUsd == null) { out.errors.push(`${leg.label}: quote had no USD values`); continue; }
+      const outUsd = n(best?.outUsdValue),
+        inUsd = n(best?.inUsdValue);
+      if (outUsd == null || inUsd == null) {
+        out.errors.push(`${leg.label}: quote had no USD values`);
+        continue;
+      }
       out.legs.push({ label: leg.label, tokens: leg.tokens, outUsd, inUsd, costUsd: Math.max(0, inUsd - outUsd), priceImpactPct: n(best?.priceImpactPct), aggregator: best?.aggregator ?? null });
-    } catch (e) { out.errors.push(`${leg.label}: ${errMsg(e)}`); }
+    } catch (e) {
+      out.errors.push(`${leg.label}: ${errMsg(e)}`);
+    }
   }
   return out;
 }

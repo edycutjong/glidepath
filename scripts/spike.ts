@@ -28,14 +28,20 @@ for (const tk of TOKENS) {
   const before = client.calls.length;
   const run = async (filter: Parameters<typeof whoBoughtPaged>[4]) => {
     const t0 = Date.now();
-    try { const r = await whoBoughtPaged(client, tk.chain, tk.address, now, filter, 20); return { ...r, ms: Date.now() - t0, err: "" }; }
-    catch (e) { return { rows: [], pages: 0, truncated: false, ms: Date.now() - t0, err: (e as Error).message.slice(0, 80) }; }
+    try {
+      const r = await whoBoughtPaged(client, tk.chain, tk.address, now, filter, 20);
+      return { ...r, ms: Date.now() - t0, err: "" };
+    } catch (e) {
+      return { rows: [], pages: 0, truncated: false, ms: Date.now() - t0, err: (e as Error).message.slice(0, 80) };
+    }
   };
   const all = await run({});
   const excl = await run({ exclude: EXCLUDED_LABELS });
   const incl = await run({ include: EXCLUDED_LABELS });
   const sum = (rows: { bought_volume_usd?: number | null }[]) => rows.reduce((n, r) => n + (r.bought_volume_usd ?? 0), 0);
-  const sAll = sum(all.rows), sEx = sum(excl.rows), sIn = sum(incl.rows);
+  const sAll = sum(all.rows),
+    sEx = sum(excl.rows),
+    sIn = sum(incl.rows);
   const exclSet = new Set(excl.rows.map((r) => r.address));
   const removed = all.rows.filter((r) => !exclSet.has(r.address));
   const labels = [...new Set(removed.map((r) => r.address_label || "∅"))].slice(0, 6).join(", ");
@@ -57,9 +63,13 @@ for (const chain of ["solana", "base"] as const) {
     const last = client.calls[client.calls.length - 1];
     console.log(`${chain} USDC→${tk.symbol} $5: HTTP ${last.status} ${t(Date.now() - t0)} credits=${last.credits} keys=${Object.keys(q1).join(",")} quotes=${q1.quotes?.length}`);
     console.log(JSON.stringify(q1.quotes?.[0] ?? q1).slice(0, 1200));
-  } catch (e) { console.log(`${chain} quote failed: ${(e as Error).message.slice(0, 300)}`); }
+  } catch (e) {
+    console.log(`${chain} quote failed: ${(e as Error).message.slice(0, 300)}`);
+  }
 }
 // token-information cross-check for PEPE: buy_volume_usd (all venues) vs who-bought-sold Σ
 const info = await tokenInformation(client, "ethereum", TOKENS[0].address, "7d");
-console.log(`\nPEPE token-information 7d buy_volume_usd=${usd(info.data.spot_metrics?.buy_volume_usd ?? 0)} unique_buyers=${info.data.spot_metrics?.unique_buyers} liquidity=${usd(info.data.spot_metrics?.liquidity_usd ?? 0)}`);
+console.log(
+  `\nPEPE token-information 7d buy_volume_usd=${usd(info.data.spot_metrics?.buy_volume_usd ?? 0)} unique_buyers=${info.data.spot_metrics?.unique_buyers} liquidity=${usd(info.data.spot_metrics?.liquidity_usd ?? 0)}`,
+);
 console.log(`\ncalls: ${client.calls.length} · credits: ${client.creditsSpent} · remaining: ${client.creditsRemaining} · failed: ${client.calls.filter((c) => !c.ok).length}`);

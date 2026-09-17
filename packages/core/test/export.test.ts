@@ -21,10 +21,17 @@ describe("exports", () => {
   it("ICS escapes semicolons and folds long UTF-8 lines without splitting a multi-byte character", () => {
     expect(foldLine("a".repeat(80))).toBe("a".repeat(75) + "\r\n " + "a".repeat(5));
     const folded = foldLine("é".repeat(60)); // 120 octets
-    for (const l of folded.split("\r\n")) { expect(Buffer.byteLength(l, "utf8")).toBeLessThanOrEqual(75); expect(l).not.toContain("\ufffd"); }
+    for (const l of folded.split("\r\n")) {
+      expect(Buffer.byteLength(l, "utf8")).toBeLessThanOrEqual(75);
+      expect(l).not.toContain("\ufffd");
+    }
     expect(folded.replace(/\r\n /g, "")).toBe("é".repeat(60));
     const odd = computePlan(pepeFacts(), { chain: "ethereum", token: "PEPE", amount: 12_000_000_000 }, { ...RESOLVED, symbol: "A;B" }, NOW);
-    const text = toICS(odd).replace(/\r\n[ \t]/g, "").split("\r\n").filter((l) => /^(SUMMARY|DESCRIPTION):/.test(l)).join("\n");
+    const text = toICS(odd)
+      .replace(/\r\n[ \t]/g, "")
+      .split("\r\n")
+      .filter((l) => /^(SUMMARY|DESCRIPTION):/.test(l))
+      .join("\n");
     expect(text).toContain("A\\;B");
     expect(text.replace(/\\;/g, "")).not.toContain(";"); // every ; in a text value is escaped
   });

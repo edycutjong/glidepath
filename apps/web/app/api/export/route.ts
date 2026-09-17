@@ -14,5 +14,7 @@ export async function GET(req: Request) {
   const plan = await planFor(input);
   const name = `glidepath-${plan.resolved.symbol.replace(/[^A-Za-z0-9]/g, "")}-${plan.today.date}.${format}`;
   const body = format === "csv" ? toCSV(plan) : toICS(plan);
-  return new Response(body, { headers: { "content-type": format === "csv" ? "text/csv; charset=utf-8" : "text/calendar; charset=utf-8", "content-disposition": `attachment; filename="${name}"`, "cache-control": "no-store" } });
+  return new Response(body, {
+    headers: { "content-type": format === "csv" ? "text/csv; charset=utf-8" : "text/calendar; charset=utf-8", "content-disposition": `attachment; filename="${name}"`, "cache-control": "no-store" },
+  });
 }

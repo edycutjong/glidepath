@@ -11,9 +11,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="wrap">
-          <nav className="top"><a href="/" className="brand">glidepath</a><span className="tiny muted">organic-demand-paced selling calendar · powered by Nansen</span></nav>
+          <nav className="top">
+            <a href="/" className="brand">
+              glidepath
+            </a>
+            <span className="tiny muted">organic-demand-paced selling calendar · powered by Nansen</span>
+          </nav>
           {children}
-          <footer className="tiny muted">Glidepath plans; it never trades. Impact costs are estimates (constant-product on Nansen <code>liquidity_usd</code>, or a Nansen <code>trade/quote</code> route on solana/base). Not financial advice. <a href="https://github.com/edycutjong/glidepath">source</a></footer>
+          <footer className="tiny muted">
+            Glidepath plans; it never trades. Impact costs are estimates (constant-product on Nansen <code>liquidity_usd</code>, or a Nansen <code>trade/quote</code> route on solana/base). Not
+            financial advice. <a href="https://github.com/edycutjong/glidepath">source</a>
+          </footer>
         </div>
       </body>
     </html>

@@ -59,7 +59,9 @@ export class NansenError extends Error {
       const j = JSON.parse(bodyText) as { message?: unknown; error?: unknown; detail?: unknown };
       const m = [j.message, j.detail, j.error].find((v) => typeof v === "string" && v.trim());
       if (typeof m === "string") return m.trim().slice(0, 240);
-    } catch { /* not JSON */ }
+    } catch {
+      /* not JSON */
+    }
     return bodyText.slice(0, 200);
   }
 }
@@ -144,9 +146,19 @@ export class NansenClient {
 
   protected record(method: "POST" | "GET", endpoint: string, body: Record<string, unknown>, fieldsUsed: string[], raw: RawResult) {
     this.calls.push({
-      endpoint, method, body, fieldsUsed, cached: false, ok: true,
-      credits: raw.creditsUsed ?? CREDITS[endpoint] ?? 1, creditsRemaining: raw.creditsRemaining,
-      ms: raw.ms, status: raw.status, responseHash: sha256(raw.text), attempts: raw.attempts, totalMs: raw.totalMs,
+      endpoint,
+      method,
+      body,
+      fieldsUsed,
+      cached: false,
+      ok: true,
+      credits: raw.creditsUsed ?? CREDITS[endpoint] ?? 1,
+      creditsRemaining: raw.creditsRemaining,
+      ms: raw.ms,
+      status: raw.status,
+      responseHash: sha256(raw.text),
+      attempts: raw.attempts,
+      totalMs: raw.totalMs,
     });
   }
 
@@ -197,8 +209,13 @@ export class NansenClient {
         }
         if (!res.ok) throw new NansenError(endpoint, res.status, text);
         return {
-          text, ms, status: res.status, attempts: attempt + 1, totalMs: Date.now() - t0,
-          creditsUsed: headerNum(res, "x-nansen-credits-used"), creditsRemaining: headerNum(res, "x-nansen-credits-remaining"),
+          text,
+          ms,
+          status: res.status,
+          attempts: attempt + 1,
+          totalMs: Date.now() - t0,
+          creditsUsed: headerNum(res, "x-nansen-credits-used"),
+          creditsRemaining: headerNum(res, "x-nansen-credits-remaining"),
         };
       } catch (e) {
         lastErr = e;

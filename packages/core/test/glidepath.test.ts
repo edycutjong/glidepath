@@ -27,7 +27,8 @@ describe("glidepath end to end (fake Nansen)", () => {
   it("solana: three trade/quote GETs (probe, one tranche, whole bag) relabel the costs as route quotes", async () => {
     const routes = (e: string, b: Record<string, unknown>) => pepeRoutes(e, e === "search/general" ? b : b);
     const c = fakeCachedClient((e, b) => {
-      if (e === "search/general") return { tokens: [{ name: "Bonk", symbol: "BONK", chain: "solana", address: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263", rank: 1 }], entities: [], total_results: 1 };
+      if (e === "search/general")
+        return { tokens: [{ name: "Bonk", symbol: "BONK", chain: "solana", address: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263", rank: 1 }], entities: [], total_results: 1 };
       return routes(e, b);
     });
     const p = await glidepath(c, { chain: "solana", token: "BONK", amount: 500_000_000 }, { now: NOW });

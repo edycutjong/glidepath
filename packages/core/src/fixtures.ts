@@ -38,8 +38,14 @@ export function readFixture(path: string): Fixture {
 }
 
 export function listFixtures(dir = FIXTURES_DIR): string[] {
-  try { return readdirSync(dir).filter((n) => n.endsWith(".json")).sort().map((n) => join(dir, n)); }
-  catch { return []; }
+  try {
+    return readdirSync(dir)
+      .filter((n) => n.endsWith(".json"))
+      .sort()
+      .map((n) => join(dir, n));
+  } catch {
+    return [];
+  }
 }
 
 /** A cache store pre-loaded with the fixture's responses — plug into `CachedNansenClient` with `offline: true`. */

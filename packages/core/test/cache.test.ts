@@ -47,7 +47,8 @@ describe("cache", () => {
     expect(store.size).toBe(0);
   });
   it("LayeredCache reads through to the second layer and promotes the hit", () => {
-    const mem = new MemoryCache(), disk = new MemoryCache();
+    const mem = new MemoryCache(),
+      disk = new MemoryCache();
     const entry = { storedAt: "2026-01-01T00:00:00Z", ttlMs: 1, endpoint: "e", body: {}, text: "{}" };
     disk.set("k", entry);
     const l = new LayeredCache([mem, disk]);

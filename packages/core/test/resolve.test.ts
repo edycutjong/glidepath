@@ -11,7 +11,9 @@ describe("resolve", () => {
     expect(looksLikeAddress("pepe coin")).toBe(false);
   });
   it("an address passes through with zero calls", async () => {
-    const c = fakeClient(() => { throw new Error("no network expected"); });
+    const c = fakeClient(() => {
+      throw new Error("no network expected");
+    });
     const r = await resolveToken(c, "ethereum", PEPE);
     expect(r).toMatchObject({ ok: true, address: PEPE, viaSearch: false });
     expect(c.calls).toHaveLength(0);
