@@ -87,7 +87,7 @@ flowchart LR
 | Web | Next.js 15 App Router, plain CSS, server-side key; memory + `/tmp` disk cache on Vercel; OG card 1200×630 | `apps/web` |
 | Data | Nansen API — 7 endpoints · 11 calls per plan (table below) | `packages/core/src/nansen.ts` |
 | Proof | 228 vitest tests (60,000 fast-check property cases on the planner, key-boundary tests) · 13 recorded fixtures replayed offline · 42 Playwright checks on the built app · `bench.ts` p50/p95 · `check_submission_readiness.ts` | `packages/core/test`, `apps/web/test`, `e2e/`, `fixtures/`, `scripts/` |
-| CI | GitHub Actions, 6 stages, no key anywhere: quality (prettier, eslint, tsc ×2, vitest + coverage, offline verify, readiness) → security (TruffleHog, npm audit, licenses) → build + bundle budget → Playwright E2E → Lighthouse → deploy gate; CodeQL, gitleaks (full history), Dependabot, semantic releases alongside | `.github/workflows/` |
+| CI | GitHub Actions, 7 stages, no key anywhere: quality (prettier, eslint, tsc ×2, vitest + coverage, offline verify, readiness) → security (TruffleHog, npm audit, licenses) → build + bundle budget → Playwright E2E → Lighthouse → deploy gate → Vercel production deploy (prebuilt, `main` only); CodeQL, gitleaks (full history), Dependabot, semantic releases alongside | `.github/workflows/` |
 
 ## 🏆 Nansen Integration
 
@@ -183,7 +183,7 @@ CLI flags: `--json` (full plan + provenance) · `--explain` (every tranche and e
 
 ## 🧪 Testing & CI
 
-**6-stage pipeline:** Quality → Security → Build → E2E → Performance → Deploy gate — no secret anywhere; the product is only exercised live by a human with a key.
+**7-stage pipeline:** Quality → Security → Build → E2E → Performance → Deploy gate → Production Deploy (prebuilt `vercel deploy` to glidepath.edycu.dev, `main` only, after every gate) — no Nansen key anywhere; the only secret is `VERCEL_TOKEN`. The product is only exercised live by a human with a key.
 
 ```bash
 # ── Code Quality ────────────────────────────
