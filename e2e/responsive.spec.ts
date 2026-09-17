@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 const viewports = [
+  { name: "narrow", width: 320, height: 640 },
   { name: "mobile", width: 375, height: 812 },
   { name: "tablet", width: 768, height: 1024 },
   { name: "desktop", width: 1440, height: 900 },
@@ -15,12 +16,12 @@ for (const vp of viewports) {
         await page.goto(path);
         const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
         expect(overflow, `${path} overflows by ${overflow}px`).toBeLessThanOrEqual(1);
-        const nav = await page.locator("nav.top").boundingBox();
+        const nav = await page.locator("header.site-header").boundingBox();
         expect(nav?.width).toBeLessThanOrEqual(vp.width);
       }
       await page.goto("/");
-      for (const name of ["Plan my glidepath", "PEPE · 12B"]) {
-        const box = await page.getByRole("button", { name }).boundingBox();
+      for (const name of ["Plan", "PEPE · 12B", "Run it live now"]) {
+        const box = await page.getByRole("button", { name, exact: name === "Plan" }).boundingBox();
         expect(box?.height ?? 0, name).toBeGreaterThanOrEqual(36);
         expect(box?.width ?? 0, name).toBeGreaterThanOrEqual(36);
       }

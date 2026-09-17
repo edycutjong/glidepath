@@ -45,25 +45,36 @@ test.describe("/api/plan input validation (before the key check, before any netw
 test.describe("planner UI", () => {
   test("submitting with no key shows the honest server error, not a crash", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("button", { name: "Plan my glidepath" }).click();
-    const banner = page.locator("p.error");
+    await page.getByLabel("token ticker or contract address").fill("PEPE");
+    await page.getByLabel("amount held, in tokens").fill("12000000000");
+    await page.getByRole("button", { name: "Plan", exact: true }).click();
+    const banner = page.locator(".banner[role=alert]");
     await expect(banner).toBeVisible();
     await expect(banner).toContainText("NANSEN_API_KEY is not set on the server");
-    await expect(page.getByRole("button", { name: "Plan my glidepath" })).toBeEnabled();
+    await expect(page.getByRole("button", { name: "Plan", exact: true })).toBeEnabled();
   });
 
   test("an example chip fills the form and updates the URL query on submit", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: "BONK · 20B on solana" }).click();
-    await expect(page.getByPlaceholder("0x… or PEPE")).toHaveValue("BONK");
-    await expect(page.locator("select")).toHaveValue("solana");
-    await expect(page.getByPlaceholder("12000000000")).toHaveValue("20000000000");
-    await expect(page.locator("p.error")).toBeVisible(); // no key on this server — honest, not silent
+    await expect(page.getByLabel("token ticker or contract address")).toHaveValue("BONK");
+    await expect(page.getByLabel("chain")).toHaveValue("solana");
+    await expect(page.getByLabel("amount held, in tokens")).toHaveValue("20000000000");
+    await expect(page.locator(".banner[role=alert]")).toBeVisible(); // no key on this server — honest, not silent
+    await expect(page.locator("footer")).toContainText("it never trades"); // the page never breaks
+  });
+
+  test("the example's Run it live now fills the form with PEPE and runs (honest error without a key)", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Run it live now" }).click();
+    await expect(page.getByLabel("token ticker or contract address")).toHaveValue("PEPE");
+    await expect(page.getByLabel("amount held, in tokens")).toHaveValue("12000000000");
+    await expect(page.locator(".banner[role=alert]")).toBeVisible();
   });
 
   test("the share page reports a malformed query in place instead of crashing", async ({ page }) => {
     const res = await page.goto("/p?chain=ethereum&token=PEPE&amount=0");
     expect(res?.status()).toBe(200);
-    await expect(page.locator("p.error")).toContainText("amount must be a positive number");
+    await expect(page.locator(".banner[role=alert]")).toContainText("amount must be a positive number");
   });
 });

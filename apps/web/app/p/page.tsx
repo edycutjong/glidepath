@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PlanView } from "@/components/PlanView";
+import { Glidepath } from "@/components/Glidepath";
+import { SiteHeader, SiteFooter } from "@/components/Shell";
 import { planFor, parseInput } from "@/lib/server";
 
 export const dynamic = "force-dynamic";
@@ -20,27 +21,28 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   };
 }
 
+/** The share page: the home shell with a server-rendered plan (the same cards, the same drawer, the same exports). */
 export default async function SharePage({ searchParams }: Props) {
   const { chain = "ethereum", token = "", amount = "1" } = await searchParams;
   const input = parseInput(chain, token, amount);
   if ("error" in input)
     return (
-      <main>
-        <p className="error">{input.error}</p>
-      </main>
+      <>
+        <SiteHeader current="home" />
+        <main className="wrap">
+          <div className="banner err" role="alert">
+            This share link is malformed<small>{input.error}</small>
+          </div>
+        </main>
+        <SiteFooter />
+      </>
     );
   const plan = await planFor(input);
-  const exportBase = `/api/export?chain=${plan.input.chain}&token=${encodeURIComponent(plan.resolved.address || plan.input.token)}&amount=${plan.input.amount}`;
   return (
-    <main>
-      <h1>
-        {plan.days ? `${plan.days}-day glidepath` : "Glidepath"} for {plan.input.amount.toLocaleString("en-US")} {plan.resolved.symbol}
-      </h1>
-      <p className="lede">
-        Shareable plan. <a href={`/?token=${encodeURIComponent(plan.resolved.address || plan.input.token)}&chain=${plan.input.chain}&amount=${plan.input.amount}`}>Open in the planner</a> to change the
-        amount.
-      </p>
-      <PlanView p={plan} exportBase={exportBase} />
-    </main>
+    <>
+      <SiteHeader current="home" />
+      <Glidepath initialToken={plan.resolved.symbol || plan.input.token} initialChain={plan.input.chain} initialAmount={String(plan.input.amount)} initialPlan={plan} />
+      <SiteFooter />
+    </>
   );
 }

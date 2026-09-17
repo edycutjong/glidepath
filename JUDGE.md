@@ -14,7 +14,7 @@ Nansen labels decide what counts as organic. It plans; it never trades.
 
 1. Open **https://glidepath-lilac.vercel.app** and click **PEPE · 12B (a $40K donation)** — a two-tranche calendar in ≈3 s cold (12 live Nansen credits; 0 on a cache hit). Read the *Dump today* line: position, estimated impact, and what share of a full day's organic buys you would be.
 2. Click **BONK · 20B on solana** — when exchanges are net-receiving BONK, *today is red*: the first tranche is halved and the reason is printed. Costs come from a real `trade/quote` route, labelled as such.
-3. Open the **provenance drawer** under the plan — every Nansen call, the fields used, credits from the response headers, cached or live, and milliseconds.
+3. Click **Every Nansen call (11)** under the plan — the provenance drawer: every Nansen call, the fields used, credits from the response headers, cached or live, and milliseconds.
 4. Click **ICS** — one calendar event per tranche with the go/no-go rule inside; **CSV** for the spreadsheet.
 5. Open the share page https://glidepath-lilac.vercel.app/p?chain=solana&token=BONK&amount=20000000000 — server-rendered, with an OG image at https://glidepath-lilac.vercel.app/api/og?chain=solana&token=BONK&amount=20000000000.
 
@@ -28,7 +28,7 @@ Nansen labels decide what counts as organic. It plans; it never trades.
 | **Nansen surface** | 7 endpoints · 11 calls per plan · 12 credits on EVM chains, 15 on solana/base, 0 on a cache hit |
 | **Tests** | **221 vitest tests** (unit, end-to-end on a fake Nansen, one replay per fixture, key-boundary) · **13/13 recorded plans reproduce offline** byte-for-byte |
 | **Property-based verification** | **60,000 generated cases** (fast-check, 6 properties × 10,000) on the tranche planner: Σ tranches + remainder = amount held; every tranche ≤ k × organic/day and ≤ 1% of liquidity; a red today halves tranche 1 and only tranche 1; consecutive UTC dates, ≤ 90 of them, expectedDays ≥ days ≥ 1; the decision hash is deterministic and invariant to timing and context fields. It found one real defect (a zero-token tranche emitted 90 empty rows) — fixed and pinned. `packages/core/test/plan.property.test.ts` |
-| **E2E** | 4 Playwright suites (home, planner flow, responsive 375/768/1440, this page) — run in CI with no key; the built app is asserted to never contain an `nsn_` key |
+| **E2E** | 4 Playwright suites (home, planner flow, responsive 320/375/768/1440, this page) — run in CI with no key; the built app is asserted to never contain an `nsn_` key |
 | **Clean clone** | ≈ 15 s from `git clone` to the first live plan (independent reviewer, 2026-09-16 23:51 UTC, warm npm cache) — budget 10 minutes on a cold cache |
 
 ## Reproduce
