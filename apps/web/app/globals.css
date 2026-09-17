@@ -378,6 +378,7 @@ code {
 }
 .card {
   position: relative;
+  min-width: 0; /* a grid item's min-width is auto: the 90-tranche scroll row widened the card to 2560px on a phone */
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;

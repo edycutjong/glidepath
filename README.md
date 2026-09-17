@@ -86,7 +86,7 @@ flowchart LR
 | CLI | `npm run glidepath -- <token> --chain <chain> --amount <n>` with `--json --explain --ics --csv --no-cache --no-quotes` | `packages/cli` |
 | Web | Next.js 15 App Router, plain CSS, server-side key; memory + `/tmp` disk cache on Vercel; OG card 1200×630 | `apps/web` |
 | Data | Nansen API — 7 endpoints · 11 calls per plan (table below) | `packages/core/src/nansen.ts` |
-| Proof | 231 vitest tests (60,000 fast-check property cases on the planner, key-boundary tests) · 13 recorded fixtures replayed offline · 42 Playwright checks on the built app · `bench.ts` p50/p95 · `check_submission_readiness.ts` | `packages/core/test`, `apps/web/test`, `e2e/`, `fixtures/`, `scripts/` |
+| Proof | 231 vitest tests (60,000 fast-check property cases on the planner, key-boundary tests) · 13 recorded fixtures replayed offline · 44 Playwright checks on the built app · `bench.ts` p50/p95 · `check_submission_readiness.ts` | `packages/core/test`, `apps/web/test`, `e2e/`, `fixtures/`, `scripts/` |
 | CI | GitHub Actions, 7 stages, no key anywhere: quality (prettier, eslint, tsc ×2, vitest + coverage, offline verify, readiness) → security (TruffleHog, npm audit, licenses) → build + bundle budget → Playwright E2E → Lighthouse → deploy gate → Vercel production deploy (prebuilt, `main` only); CodeQL, gitleaks (full history), Dependabot, semantic releases alongside | `.github/workflows/` |
 
 ## 🏆 Nansen Integration
@@ -124,7 +124,7 @@ The constant-product estimate treats `liquidity_usd` as one pool with the token 
 | spend guard | public route capped at **6 requests/min per address** (429) and **3,000 live credits/day** (honest 503 past it, before any Nansen call) | `apps/web/lib/guard.ts`, `apps/web/test/guard.test.ts` |
 | property-based verification | **60,000 generated cases** (fast-check, 6 properties × 10,000) on the tranche planner — found and fixed one real defect | `npm test` (`plan.property.test.ts`) |
 | key boundary | the `nsn_` key never reaches a client: engine JSON/ICS/CSV, the route handler, the built pages — all asserted key-free; validation runs before any fetch | `npm test` + `npm run e2e` |
-| E2E | **42 Playwright checks** (21 tests × chromium + Pixel 7) against the production build with no key | `npm run e2e` |
+| E2E | **44 Playwright checks** (22 tests × chromium + Pixel 7) against the production build with no key | `npm run e2e` |
 | fixtures | **13 recorded, 13/13 reproduced offline** — zero network calls, zero credits | `npm run verify` |
 | bench, cold (fresh cache, live Nansen) | **p50 3.5 s / p95 6.0 s** | `npm run bench` (7 tokens × 3 runs) |
 | bench, warm (second call, same cache) | **p50 5 ms / p95 356 ms** | same |
@@ -214,7 +214,7 @@ npm run bench         # live, ~270 credits for 7 tokens × 3 runs
 | Property-based | fast-check — 60,000 generated cases on the tranche planner | ✅ |
 | Key boundary | engine + route handler + built pages asserted `nsn_`-free | ✅ |
 | Offline proof | 13/13 fixtures replay byte-for-byte (`verify`) | ✅ |
-| E2E Testing | Playwright — 4 suites (home, plan flow, responsive, /judge), 42 checks, no key | ✅ |
+| E2E Testing | Playwright — 4 suites (home, plan flow, responsive, /judge), 44 checks, no key | ✅ |
 | Security (SAST) | CodeQL (javascript-typescript) | ✅ |
 | Security (SCA) | Dependabot (4 npm manifests + actions, grouped monthly, no majors) + npm audit + license-checker | ✅ |
 | Secret Scanning | TruffleHog (verified only) + gitleaks (full history) + `npm run check` history grep | ✅ |
