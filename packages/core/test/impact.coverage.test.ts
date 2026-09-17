@@ -37,9 +37,7 @@ describe("fetchRouteQuotes — unsupported chain", () => {
 
 describe("fetchRouteQuotes — probe failures", () => {
   it("probe request failure (plain Error) records 'probe: <message>' and returns with no legs", async () => {
-    const client = fakeClient(
-      scripted([{ throw: new Error("connection reset by peer, and then some extra text past the one-sixty cutoff that should never appear because it is not sliced here") }]),
-    );
+    const client = fakeClient(scripted([{ throw: new Error("connection reset by peer, and then some extra text past the one-sixty cutoff that should never appear because it is not sliced here") }]));
     const result = await fetchRouteQuotes(client, "solana", TOKEN, [{ label: "tranche 1", tokens: 1000 }]);
     expect(result).not.toBeNull();
     expect(result!.errors[0]).toMatch(/^probe: connection reset by peer/);
@@ -164,9 +162,7 @@ describe("fetchRouteQuotes — legs, happy path and edge values", () => {
   });
 
   it("base chain is also supported end to end", async () => {
-    const client = fakeClient(
-      scripted([{ data: { quotes: [{ toTokenDecimals: "18", toTokenPrice: "1.5" }] } }, { data: { quotes: [{ outUsdValue: "9", inUsdValue: "10" }] } }]),
-    );
+    const client = fakeClient(scripted([{ data: { quotes: [{ toTokenDecimals: "18", toTokenPrice: "1.5" }] } }, { data: { quotes: [{ outUsdValue: "9", inUsdValue: "10" }] } }]));
     const result = await fetchRouteQuotes(client, "base", TOKEN, [{ label: "all", tokens: 5 }]);
     expect(result!.decimals).toBe(18);
     expect(result!.spotPriceUsd).toBe(1.5);

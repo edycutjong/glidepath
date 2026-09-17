@@ -28,8 +28,7 @@ describe("NansenClient — remaining coverage gaps", () => {
   });
 
   it("falls back to the static credit table when a credits header is present but not a finite number", async () => {
-    const fetchImpl: typeof fetch = async () =>
-      new Response("{}", { status: 200, headers: { "x-nansen-credits-used": "not-a-number", "x-nansen-credits-remaining": "also-bad" } });
+    const fetchImpl: typeof fetch = async () => new Response("{}", { status: 200, headers: { "x-nansen-credits-used": "not-a-number", "x-nansen-credits-remaining": "also-bad" } });
     const c = new NansenClient(KEY, { fetchImpl });
     await c.post("tgm/indicators", {});
     expect(c.calls[0].credits).toBe(5); // static table, since the header didn't parse to a finite number

@@ -8,11 +8,7 @@ import type { Plan } from "../src/plan";
  * sub-1000 token tranche, and a null `glidepath.model` — to reach every ternary/`??` arm in
  * export.ts without changing behaviour.
  */
-function minimalPlan(overrides: {
-  tranches: Plan["tranches"];
-  organicDailyUsd?: number | null;
-  model?: "constant-product" | "route-quote" | null;
-}): Plan {
+function minimalPlan(overrides: { tranches: Plan["tranches"]; organicDailyUsd?: number | null; model?: "constant-product" | "route-quote" | null }): Plan {
   return {
     resolved: { address: "0x" + "a".repeat(40), symbol: "TEST", name: "Test Token", viaSearch: false, logo: null },
     computedAt: "2026-09-16T00:00:00.000Z",

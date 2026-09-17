@@ -17,8 +17,7 @@ vi.mock("@/lib/server", async (importOriginal) => {
 
 const KEY = "nsn_route_coverage_test_key_00000000000000";
 const VALID_BODY = { chain: "ethereum", token: "PEPE", amount: "1" };
-const post = (body: unknown) =>
-  POST(new Request("http://localhost/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }));
+const post = (body: unknown) => POST(new Request("http://localhost/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }));
 
 describe("POST /api/plan — request body fields default via ?? when absent (not just empty)", () => {
   it("a body with no amount key at all (undefined, not '') still 400s as a non-positive amount", async () => {
