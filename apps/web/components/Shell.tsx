@@ -5,13 +5,14 @@ export const VERSION = `v${pkg.version}`;
 export const REPO = "https://github.com/edycutjong/glidepath";
 export const SITE = "https://glidepath-lilac.vercel.app";
 
-/** The family mark: one green bar over two grey ones — here, today's tranche above the days that follow. */
+/** The mark — the favicon's glyph at 24px: today's red bar, then the tranches gliding down. */
 export function Mark({ size = 24 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect x="2" y="3" width="20" height="5" rx="1.5" fill="var(--real)" />
-      <rect x="2" y="10" width="20" height="4" rx="1.5" fill="var(--border-2)" />
-      <rect x="2" y="16" width="20" height="4" rx="1.5" fill="var(--border-2)" />
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" aria-hidden>
+      <rect x="4" y="12" width="11" height="46" rx="2.5" fill="#dc2626" />
+      <rect x="19" y="22" width="11" height="36" rx="2.5" fill="var(--real, #16a34a)" />
+      <rect x="34" y="32" width="11" height="26" rx="2.5" fill="var(--real, #16a34a)" />
+      <rect x="49" y="42" width="11" height="16" rx="2.5" fill="var(--real, #16a34a)" />
     </svg>
   );
 }

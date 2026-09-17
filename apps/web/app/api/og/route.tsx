@@ -68,12 +68,55 @@ export async function GET(req: Request) {
               ))}
             </div>
           )}
-          <div style={{ display: "flex", fontSize: 20, color: "#8b9bab", marginTop: 12 }}>
-            organic buys {usd(p.organic.organicDailyUsd)}/day · pace {(p.risk.k * 100).toFixed(1)}% · {p.calls} Nansen calls · plan {p.hash.slice(0, 12)}
+          <div style={{ display: "flex", alignItems: "center", fontSize: 20, color: "#8b9bab", marginTop: 12 }}>
+            <span>
+              organic buys {usd(p.organic.organicDailyUsd)}/day · pace {(p.risk.k * 100).toFixed(1)}% · {p.calls} Nansen calls · plan {p.hash.slice(0, 12)}
+            </span>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginLeft: "auto" }}>
+              <div style={{ fontSize: 22, color: "#8B9BAB" }}>glidepath.edycu.dev</div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "12px 22px",
+                  borderRadius: 999,
+                  background: "#22c55e",
+                  color: "#04150a",
+                  fontSize: 24,
+                  fontWeight: 700,
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.45)",
+                }}
+              >
+                Plan my glidepath →
+              </div>
+            </div>
           </div>
         </div>
       ) : (
-        <div style={{ display: "flex", fontSize: 34, marginTop: 40 }}>{p?.statusReason ?? "Paste a token, a chain and the amount you hold."}</div>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 40, flex: 1 }}>
+          <div style={{ display: "flex", fontSize: 34 }}>{p?.statusReason ?? "Paste a token, a chain and the amount you hold."}</div>
+          <div style={{ display: "flex", alignItems: "center", marginTop: "auto", fontSize: 20, color: "#8b9bab" }}>
+            <span>a dated selling calendar paced to organic demand · Nansen labels decide what counts</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginLeft: "auto" }}>
+              <div style={{ fontSize: 22, color: "#8B9BAB" }}>glidepath.edycu.dev</div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "12px 22px",
+                  borderRadius: 999,
+                  background: "#22c55e",
+                  color: "#04150a",
+                  fontSize: 24,
+                  fontWeight: 700,
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.45)",
+                }}
+              >
+                Plan my glidepath →
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>,
     // crawlers fetch a shared link 3–5× from different cold instances; let Vercel's edge serve repeats for the cache window

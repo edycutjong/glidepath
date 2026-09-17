@@ -33,7 +33,7 @@ test.describe("home page without a key", () => {
 
   test("title and description are set and the footer says it never trades", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Glidepath — a dated selling calendar/);
+    await expect(page).toHaveTitle(/Glidepath — sell at the pace/);
     const description = await page.locator('meta[name="description"]').getAttribute("content");
     expect(description).toMatch(/dated selling calendar/);
     await expect(page.locator("footer")).toContainText("it never trades");

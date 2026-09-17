@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "https://glidepath.edycu.dev"),
-  title: "Glidepath — a dated selling calendar paced to organic demand, Nansen labels decide what counts",
+  title: "Glidepath — sell at the pace the market can absorb",
   description: "Paste a token, chain and amount held. A dated selling calendar sized to the organic demand Nansen sees, never the biggest seller on a day the pros exit.",
   openGraph: {
     type: "website",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description: "Paste token, chain, amount held. A dated selling calendar paced to organic demand.",
     images: [
       {
-        url: "/api/og?chain=ethereum&token=0x6982508145454ce325ddbe47a25d4ec3d2311933&amount=12000000000",
+        url: "/api/og?chain=ethereum&token=0x6982508145454ce325ddbe47a25d4ec3d2311933&amount=12000000000&v=2",
         width: 1200,
         height: 630,
         alt: "Glidepath share card: dump today vs a paced selling calendar for 12B PEPE on ethereum, tranche bars sized to organic demand",
