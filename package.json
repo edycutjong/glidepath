@@ -1,6 +1,6 @@
 {
   "name": "glidepath",
-  "version": "1.3.0",
+  "version": "1.5.4",
   "private": true,
   "description": "Paste a token, a chain and the amount you hold. Glidepath turns it into a dated selling calendar sized to organic demand — Nansen labels decide what counts as organic.",
   "license": "MIT",

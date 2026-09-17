@@ -1,6 +1,6 @@
 {
   "name": "glidepath-web",
-  "version": "1.3.0",
+  "version": "1.5.4",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@glidepath/core": "1.3.0",
+    "@glidepath/core": "1.5.4",
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

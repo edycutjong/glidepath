@@ -1,6 +1,6 @@
 {
   "name": "@glidepath/core",
-  "version": "1.3.0",
+  "version": "1.5.4",
   "description": "Organic-demand-paced liquidation calendar engine on the Nansen API.",
   "license": "MIT",
   "type": "module",

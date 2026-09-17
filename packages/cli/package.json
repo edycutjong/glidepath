@@ -1,12 +1,12 @@
 {
   "name": "glidepath-cli",
-  "version": "1.3.0",
+  "version": "1.5.4",
   "license": "MIT",
   "type": "module",
   "bin": {
     "glidepath": "./src/cli.ts"
   },
   "dependencies": {
-    "@glidepath/core": "1.3.0"
+    "@glidepath/core": "1.5.4"
   }
 }
