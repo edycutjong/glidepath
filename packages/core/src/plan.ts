@@ -136,6 +136,9 @@ export function sizeTranches(
   todayRed: { red: boolean; reason: string | null },
 ): Pick<Plan, "tranches" | "days" | "truncated" | "remainderTokens" | "remainderPct"> {
   const tranches: Tranche[] = [];
+  // a tranche of zero tokens (liquidity cap underflowing at a dust price) would otherwise emit MAX_DAYS empty rows:
+  // nothing can be sold at this pace, so the calendar is empty and the whole bag is the unsold remainder
+  if (!(trancheTokens > 0)) return { tranches, days: 0, truncated: true, remainderTokens: amount, remainderPct: 1 };
   let left = amount;
   for (let day = 0; left > 1e-12 && day < MAX_DAYS; day++) {
     const isRed = day === 0 && todayRed.red;

@@ -73,6 +73,18 @@ describe("tranche sizing", () => {
     expect(r.remainderTokens).toBe(910);
     expect(r.remainderPct).toBeCloseTo(0.91);
   });
+  it("regression (fast-check, 2026-09-17): a zero-token tranche — liquidity cap underflowing at a dust price — no longer emits 90 empty rows; the calendar is empty and 100% is the unsold remainder", () => {
+    const r = sizeTranches(1000, 0, 1e-12, NOW, green);
+    expect(r.tranches).toEqual([]);
+    expect(r.days).toBe(0);
+    expect(r.truncated).toBe(true);
+    expect(r.remainderTokens).toBe(1000);
+    expect(r.remainderPct).toBe(1);
+    const p = computePlan(pepeFacts({ liquidityUsd: 5e-324, marketCapUsd: 0.001, circulatingSupply: 1e9, fdvUsd: null, totalSupply: null }), { ...INPUT, amount: 1e-6 }, RESOLVED, NOW);
+    expect(p.status).toBe("thin");
+    expect(p.tranches).toEqual([]);
+    expect(p.statusReason).toMatch(/100% of the position is still unsold/);
+  });
   it("a bag smaller than one tranche is one tranche", () => {
     const r = sizeTranches(5, 100, 1, NOW, green);
     expect(r.days).toBe(1);

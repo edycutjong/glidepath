@@ -51,7 +51,12 @@ export class NansenError extends Error {
     public status: number,
     public bodyText: string,
   ) {
-    super(`Nansen ${endpoint} → HTTP ${status}: ${NansenError.reason(bodyText)}`);
+    super(`Nansen ${endpoint} → HTTP ${status}: ${NansenError.redact(NansenError.reason(bodyText))}`);
+    this.bodyText = NansenError.redact(bodyText);
+  }
+  /** An upstream body that echoes the key back must not reach `plan.errors` — that JSON is returned to the browser. */
+  static redact(text: string): string {
+    return text.replace(/nsn_[A-Za-z0-9_-]{8,}/g, "nsn_[redacted]");
   }
   /** Nansen error bodies are JSON `{error, message}`; show the message, not the envelope, so a 422 reads as a sentence on screen. */
   static reason(bodyText: string): string {

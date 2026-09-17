@@ -5,9 +5,12 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-/** POST {chain, token, amount} → PlanResult. The Nansen key is read server-side only. */
+/**
+ * POST {chain, token, amount} → PlanResult. The Nansen key is read server-side only.
+ * Input validation runs before the key check and before any network call: a malformed query is a 400 whether or
+ * not the server holds a key (boundary test: apps/web/test/api-boundary.test.ts).
+ */
 export async function POST(req: Request) {
-  if (!process.env.NANSEN_API_KEY) return NextResponse.json({ error: "NANSEN_API_KEY is not set on the server" }, { status: 500 });
   let body: Record<string, unknown> = {};
   try {
     body = await req.json();
@@ -16,6 +19,7 @@ export async function POST(req: Request) {
   }
   const input = parseInput(String(body.chain ?? ""), String(body.token ?? ""), String(body.amount ?? ""));
   if ("error" in input) return NextResponse.json({ error: input.error }, { status: 400 });
+  if (!process.env.NANSEN_API_KEY) return NextResponse.json({ error: "NANSEN_API_KEY is not set on the server" }, { status: 500 });
   try {
     const plan = await planFor(input);
     return NextResponse.json(plan, { headers: { "cache-control": "no-store" } });
