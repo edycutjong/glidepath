@@ -39,7 +39,7 @@ for (const p of [".env", ".cache/", "node_modules/", ".next/", ".vercel"])
   );
 const tracked = sh("git ls-files").split("\n");
 add("no kitchen files tracked (specs/, PROGRESS, project.json, CLAUDE.md, AGENTS.md, .claude/)", !tracked.some((f) => /^(specs\/|PROGRESS|project\.json|CLAUDE\.md|AGENTS\.md|\.claude\/)/.test(f)));
-add("no .env or .cache tracked", !tracked.some((f) => /(^|\/)\.env|(^|\/)\.cache\//.test(f)));
+add("no .env or .cache tracked (.env.example is the template, allowed)", !tracked.some((f) => /(^|\/)\.env(?!\.example$)|(^|\/)\.cache\//.test(f)));
 const grep = sh("git grep -n -I -E 'nsn_[A-Za-z0-9]{20,}' -- . ':!fixtures' || true");
 add("no nsn_ key in tracked files", !/nsn_[A-Za-z0-9]{20,}/.test(grep), grep.trim().slice(0, 200));
 const hist = sh("git log -p --all | grep -c -E 'nsn_[A-Za-z0-9]{20,}' || true").trim();
