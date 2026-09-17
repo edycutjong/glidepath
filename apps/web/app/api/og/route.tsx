@@ -69,8 +69,8 @@ export async function GET(req: Request) {
             </div>
           )}
           <div style={{ display: "flex", alignItems: "center", fontSize: 20, color: "#8b9bab", marginTop: 12 }}>
-            <span>
-              organic buys {usd(p.organic.organicDailyUsd)}/day · pace {(p.risk.k * 100).toFixed(1)}% · {p.calls} Nansen calls · plan {p.hash.slice(0, 12)}
+            <span style={{ whiteSpace: "nowrap" }}>
+              organic buys {usd(p.organic.organicDailyUsd)}/day · pace {(p.risk.k * 100).toFixed(1)}% · {p.calls} calls · plan {p.hash.slice(0, 8)}
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginLeft: "auto" }}>
               <div style={{ fontSize: 22, color: "#8B9BAB" }}>glidepath.edycu.dev</div>
