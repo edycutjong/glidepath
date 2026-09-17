@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { planFor, parseInput } from "@/lib/server";
+import { clientIp, ipAllowed, budgetExhausted, recordSpend } from "@/lib/guard";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,7 +12,18 @@ const usd = (v: number | null | undefined) => (v == null ? "—" : `$${Math.roun
 export async function GET(req: Request) {
   const u = new URL(req.url);
   const input = parseInput(u.searchParams.get("chain"), u.searchParams.get("token"), u.searchParams.get("amount"));
-  const p = "error" in input ? null : await planFor(input).catch(() => null);
+  // same spend guard as /api/plan — but an image never 4xxs (a scraper would drop the card): past the per-IP rate or
+  // the daily ceiling the card renders its data-free layout
+  const live = ipAllowed(clientIp(req.headers)).ok && !budgetExhausted();
+  const p =
+    "error" in input || !live
+      ? null
+      : await planFor(input)
+          .then((plan) => {
+            recordSpend(plan.credits);
+            return plan;
+          })
+          .catch(() => null);
   const ok = p && (p.status === "ok" || p.status === "thin");
   const max = p ? Math.max(1, ...p.tranches.map((t) => t.usd)) : 1;
   return new ImageResponse(
@@ -23,12 +35,14 @@ export async function GET(req: Request) {
       {p && p.status !== "not-found" ? (
         <div style={{ display: "flex", flexDirection: "column", marginTop: 30, gap: 14 }}>
           <div style={{ display: "flex", fontSize: 34 }}>
-            <span style={{ color: "#ef4444", fontWeight: 700 }}>Dump today:</span>&nbsp;{usd(p.dumpToday.usd)} · est. impact {usd(p.dumpToday.costUsd)}
+            <span style={{ color: "#ef4444", fontWeight: 700, marginRight: 10 }}>Dump today:</span>
+            {usd(p.dumpToday.usd)} · est. impact {usd(p.dumpToday.costUsd)}
             {p.dumpToday.shareOfOrganicDay != null ? ` · ${Math.round(p.dumpToday.shareOfOrganicDay * 100)}% of a day's organic buys` : ""}
           </div>
           {ok ? (
             <div style={{ display: "flex", fontSize: 34 }}>
-              <span style={{ color: "#22c55e", fontWeight: 700 }}>Glidepath:</span>&nbsp;{p.days} tranches · est. cost {usd(p.glidepath.costUsd)}
+              <span style={{ color: "#22c55e", fontWeight: 700, marginRight: 10 }}>Glidepath:</span>
+              {p.days} tranches · est. cost {usd(p.glidepath.costUsd)}
               {p.redDays ? ` · ${p.redDays} red days in the last ${p.completeDays}` : ""}
             </div>
           ) : (
@@ -58,6 +72,7 @@ export async function GET(req: Request) {
         <div style={{ display: "flex", fontSize: 34, marginTop: 40 }}>{p?.statusReason ?? "Paste a token, a chain and the amount you hold."}</div>
       )}
     </div>,
-    { width: 1200, height: 630 },
+    // crawlers fetch a shared link 3–5× from different cold instances; let Vercel's edge serve repeats for the cache window
+    { width: 1200, height: 630, headers: { "cache-control": "public, s-maxage=1800, stale-while-revalidate=3600" } },
   );
 }

@@ -95,3 +95,40 @@ describe("POST /api/plan under the guard", () => {
     expect(planForMock).not.toHaveBeenCalled();
   });
 });
+
+describe("GET /api/og under the guard — an image never 4xxs", () => {
+  let realKey: string | undefined;
+  beforeEach(() => {
+    resetGuard();
+    realKey = process.env.NANSEN_API_KEY;
+    process.env.NANSEN_API_KEY = KEY;
+    planForMock.mockReset();
+    planForMock.mockResolvedValue({ status: "not-found", credits: 3, tranches: [], resolved: { symbol: "X" }, input: { chain: "ethereum", amount: 1 }, statusReason: "x" });
+  });
+  afterEach(() => {
+    if (realKey == null) delete process.env.NANSEN_API_KEY;
+    else process.env.NANSEN_API_KEY = realKey;
+  });
+  const og = async (ip: string) => (await import("../app/api/og/route")).GET(new Request(`http://localhost/api/og?chain=ethereum&token=PEPE&amount=1`, { headers: { "x-forwarded-for": ip } }));
+
+  it("a live card records its credits against the day", async () => {
+    const res = await og("203.0.113.7");
+    expect(res.status).toBe(200);
+    expect(planForMock).toHaveBeenCalledTimes(1);
+    expect(creditsLeft()).toBe(DAILY_CREDITS - 3);
+  });
+
+  it("past the daily ceiling the card renders data-free: 200 image, planFor never runs", async () => {
+    recordSpend(DAILY_CREDITS);
+    const res = await og("203.0.113.7");
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-type")).toContain("image/png");
+    expect(planForMock).not.toHaveBeenCalled();
+  });
+
+  it("past the per-IP rate the card renders data-free too", async () => {
+    for (let i = 0; i < IP_PER_MIN; i++) ipAllowed("203.0.113.7");
+    expect((await og("203.0.113.7")).status).toBe(200);
+    expect(planForMock).not.toHaveBeenCalled();
+  });
+});

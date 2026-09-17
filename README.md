@@ -16,7 +16,7 @@
   ![Next.js](https://img.shields.io/badge/Next.js_15-black?style=flat&logo=next.js)
   ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
   ![Nansen](https://img.shields.io/badge/Nansen%20API-7%20endpoints%20%C2%B7%2011%20calls-111827?style=flat)
-  ![tests](https://img.shields.io/badge/tests-228%20passing-16a34a?style=flat)
+  ![tests](https://img.shields.io/badge/tests-231%20passing-16a34a?style=flat)
   ![property cases](https://img.shields.io/badge/property%20cases-60%2C000-16a34a?style=flat)
   ![fixtures](https://img.shields.io/badge/fixtures-13%2F13%20replay%20offline-16a34a?style=flat)
   [![license](https://img.shields.io/badge/license-MIT-blue?style=flat)](LICENSE)
@@ -86,7 +86,7 @@ flowchart LR
 | CLI | `npm run glidepath -- <token> --chain <chain> --amount <n>` with `--json --explain --ics --csv --no-cache --no-quotes` | `packages/cli` |
 | Web | Next.js 15 App Router, plain CSS, server-side key; memory + `/tmp` disk cache on Vercel; OG card 1200×630 | `apps/web` |
 | Data | Nansen API — 7 endpoints · 11 calls per plan (table below) | `packages/core/src/nansen.ts` |
-| Proof | 228 vitest tests (60,000 fast-check property cases on the planner, key-boundary tests) · 13 recorded fixtures replayed offline · 42 Playwright checks on the built app · `bench.ts` p50/p95 · `check_submission_readiness.ts` | `packages/core/test`, `apps/web/test`, `e2e/`, `fixtures/`, `scripts/` |
+| Proof | 231 vitest tests (60,000 fast-check property cases on the planner, key-boundary tests) · 13 recorded fixtures replayed offline · 42 Playwright checks on the built app · `bench.ts` p50/p95 · `check_submission_readiness.ts` | `packages/core/test`, `apps/web/test`, `e2e/`, `fixtures/`, `scripts/` |
 | CI | GitHub Actions, 7 stages, no key anywhere: quality (prettier, eslint, tsc ×2, vitest + coverage, offline verify, readiness) → security (TruffleHog, npm audit, licenses) → build + bundle budget → Playwright E2E → Lighthouse → deploy gate → Vercel production deploy (prebuilt, `main` only); CodeQL, gitleaks (full history), Dependabot, semantic releases alongside | `.github/workflows/` |
 
 ## 🏆 Nansen Integration
@@ -120,7 +120,7 @@ The constant-product estimate treats `liquidity_usd` as one pool with the token 
 
 | metric | value | how to reproduce |
 |---|---|---|
-| tests | **228 vitest tests**, green — 12 of them regression tests named for the defect each pins | `npm test` |
+| tests | **231 vitest tests**, green — 12 of them regression tests named for the defect each pins | `npm test` |
 | spend guard | public route capped at **6 requests/min per address** (429) and **3,000 live credits/day** (honest 503 past it, before any Nansen call) | `apps/web/lib/guard.ts`, `apps/web/test/guard.test.ts` |
 | property-based verification | **60,000 generated cases** (fast-check, 6 properties × 10,000) on the tranche planner — found and fixed one real defect | `npm test` (`plan.property.test.ts`) |
 | key boundary | the `nsn_` key never reaches a client: engine JSON/ICS/CSV, the route handler, the built pages — all asserted key-free; validation runs before any fetch | `npm test` + `npm run e2e` |
@@ -134,7 +134,7 @@ The constant-product estimate treats `liquidity_usd` as one pool with the token 
 | failed calls | 7 of 195 (6 deterministic: `tgm/flows` refuses stablecoins) | same |
 | readiness | `npm run check` — files, secrets, kitchen leaks, fixtures, verify, tests, README claims | `npm run check` |
 
-- **228 vitest tests** (`npm test`): tranche-sizing table, red-day rule, risk dial vs indicator scores, impact model, decision-hash stability, pagination cap (the 20,000-buyer case), cache and offline mode, client retries/timeouts/header credits, ICS/CSV, resolver, end-to-end on a fake Nansen, one replay test per fixture — and three high-signal categories:
+- **231 vitest tests** (`npm test`): tranche-sizing table, red-day rule, risk dial vs indicator scores, impact model, decision-hash stability, pagination cap (the 20,000-buyer case), cache and offline mode, client retries/timeouts/header credits, ICS/CSV, resolver, end-to-end on a fake Nansen, one replay test per fixture — and three high-signal categories:
   - **12 regression tests, each named for the defect it pins** (`qa round …`, `regression (…)`): the one-tranche "expect ~2 days" copy, the ICS `\;` no-op, the error body cut mid-word, the FLOKI empty symbol, `liquidity_usd = 0`, the 7-day regime that was fetched but never shown, the echoed-key redaction, the zero-token tranche.
   - **One property-based verification, 60,000 generated cases** (`packages/core/test/plan.property.test.ts`, fast-check, 6 properties × 10,000 runs): Σ tranches + remainder = amount held; every tranche ≤ k × organic/day and ≤ 1 % of liquidity; a red today halves tranche 1 and only tranche 1; consecutive UTC dates, ≤ 90 of them, expectedDays ≥ days ≥ 1; the decision hash is deterministic and invariant to timing and context fields. Run 1 found a real defect — a liquidity cap underflowing at a dust price produced 90 tranches of zero tokens — now a guarded, fully-unsold `thin` plan with its own regression test.
   - **Key-boundary tests** (`packages/core/test/boundary.test.ts`, `apps/web/test/api-boundary.test.ts`, `e2e/`): the server key travels in one request header and nowhere else — plan JSON, provenance, ICS/CSV, the route handler's 400/500 bodies and the built pages are asserted free of `nsn_`; an upstream body that echoes the key is redacted; `/api/plan` validates input before the key check and before any `fetch`.
@@ -190,7 +190,7 @@ CLI flags: `--json` (full plan + provenance) · `--explain` (every tranche and e
 npm run lint          # ESLint (flat config, TS + React hooks)
 npm run format:check  # Prettier
 npm run typecheck     # engine + CLI + scripts   ·   npm run typecheck:web
-npm test              # 228 vitest tests incl. 60,000 property cases
+npm test              # 231 vitest tests incl. 60,000 property cases
 npm run test:coverage # + v8 coverage (≈ 93 % lines on the engine and API)
 npm run verify        # 13/13 recorded plans replay offline — no key, no network, 0 credits
 npm run check         # submission-readiness audit (files, secrets, kitchen leaks, fixtures, verify, tests, README claims)
@@ -210,7 +210,7 @@ npm run bench         # live, ~270 credits for 7 tokens × 3 runs
 | Layer | Tool | Status |
 |---|---|---|
 | Code Quality | ESLint 9 (typescript-eslint, react-hooks) + Prettier + tsc (engine, web) | ✅ |
-| Unit Testing | vitest, 228 tests, v8 coverage ≈ 93 % lines | ✅ |
+| Unit Testing | vitest, 231 tests, v8 coverage ≈ 93 % lines | ✅ |
 | Property-based | fast-check — 60,000 generated cases on the tranche planner | ✅ |
 | Key boundary | engine + route handler + built pages asserted `nsn_`-free | ✅ |
 | Offline proof | 13/13 fixtures replay byte-for-byte (`verify`) | ✅ |

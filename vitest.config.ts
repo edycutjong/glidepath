@@ -1,6 +1,8 @@
 import { defineConfig } from "vitest/config";
 const root = new URL("./", import.meta.url).pathname;
 export default defineConfig({
+  // guard.test.ts renders the /api/og route (TSX) — use the automatic JSX runtime, as next build does
+  esbuild: { jsx: "automatic" },
   test: {
     // fast-check property suites run 10,000+ cases; 5 s is too tight on a loaded runner
     testTimeout: 60_000,
