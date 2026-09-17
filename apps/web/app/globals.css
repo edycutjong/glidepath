@@ -129,7 +129,8 @@ form.inputs select {
 .examples button {
   font: inherit;
   font-size: 12px;
-  padding: 4px 10px;
+  min-height: 36px; /* touch target — the chips are the demo's first click on a phone */
+  padding: 6px 12px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: #fff;
@@ -401,5 +402,79 @@ footer {
   }
   .dump-main strong {
     font-size: 20px;
+  }
+}
+
+/* /judge — a static page for exactly one reader */
+.judge section {
+  margin: 22px 0;
+}
+.judge h2 {
+  font-size: 18px;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+.judge ol,
+.judge ul {
+  margin: 6px 0 0;
+  padding-left: 22px;
+}
+.judge li {
+  margin: 4px 0;
+}
+.judge .claim {
+  font-size: 19px;
+  line-height: 1.4;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin: 0;
+}
+.judge table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.judge th,
+.judge td {
+  text-align: left;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.judge th {
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.judge pre {
+  background: var(--accent);
+  color: #f9fafb;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  overflow-x: auto;
+  margin: 8px 0;
+}
+.judge .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.judge a,
+.judge code {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 720px) {
+  .judge th {
+    white-space: normal;
+  }
+  .judge table {
+    display: block;
+    overflow-x: auto;
   }
 }
