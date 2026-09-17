@@ -10,3 +10,15 @@ coverage/
 .DS_Store
 out/
 .vercel
+
+# keep the template, ignore every real env file
+!.env.example
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Lighthouse
+.lighthouseci/
