@@ -1,0 +1,16 @@
+node_modules
+.next
+dist
+out
+coverage
+.cache
+.vercel
+playwright-report
+test-results
+.lighthouseci
+package-lock.json
+fixtures/*.json
+docs/screenshots
+*.md
+*.ics
+*.csv
