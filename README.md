@@ -218,7 +218,7 @@ npm run bench         # live, ~270 credits for 7 tokens × 3 runs
 | Security (SCA) | Dependabot (4 npm manifests + actions, grouped monthly, no majors) + npm audit + license-checker | ✅ |
 | Secret Scanning | TruffleHog (verified only) + gitleaks (full history) + `npm run check` history grep | ✅ |
 | Performance | Lighthouse CI (advisory), bundle budget 1.5/2 MB | ✅ |
-| Releases | Semantic versions from conventional commits (`release.yml`), v1.0.0 tagged | ✅ |
+| Releases | Semantic versions from conventional commits (`release.yml`), v1.0.0 → v1.1.0 tagged by the workflow | ✅ |
 | Community | CoC · Contributing · Security policy · issue + PR templates | ✅ |
 
 ## 📁 Project Structure

@@ -156,8 +156,8 @@ npm run check         # submission-readiness audit`}</pre>
           <a className="btn ghost" href={`${REPO}/blob/main/docs/SCORING.md`}>
             SCORING.md — formulas with the PEPE numbers
           </a>
-          <a className="btn ghost" href={`${REPO}/releases/tag/v1.0.0`}>
-            Release v1.0.0
+          <a className="btn ghost" href={`${REPO}/releases/tag/v1.1.0`}>
+            Release v1.1.0
           </a>
           <a className="btn ghost" href="https://x.com/edycutjong">
             @edycutjong — the demo clip is posted here at submission

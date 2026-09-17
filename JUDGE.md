@@ -61,7 +61,7 @@ npm run check         # submission-readiness audit
 - Live app: https://glidepath-lilac.vercel.app
 - Repository: https://github.com/edycutjong/glidepath
 - [DEMO.md](DEMO.md) — reproduce every number · [docs/SCORING.md](docs/SCORING.md) — formulas with the PEPE numbers · [ARCHITECTURE.md](ARCHITECTURE.md)
-- Release: https://github.com/edycutjong/glidepath/releases/tag/v1.0.0
+- Release: https://github.com/edycutjong/glidepath/releases/tag/v1.1.0
 - Demo clip: posted from [@edycutjong](https://x.com/edycutjong) on X at submission
 
 Built for the Nansen Meridian Buildathon (14–27 Sep 2026). Not financial advice.
