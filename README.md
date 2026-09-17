@@ -71,6 +71,11 @@ It plans. It never trades.
 
 One plan is `resolve → facts → computePlan → applyQuotes`; the plan is a pure function of `(facts, input, now)`, so a recorded fixture replays to the same calendar dates, the same red history and the same decision hash. Full module map and data flow: [ARCHITECTURE.md](ARCHITECTURE.md).
 
+<p align="center"><img src="docs/assets/architecture.png" alt="Glidepath architecture — token · chain · amount → resolve → facts → plan.ts computePlan → impact/export → Plan; cache in front of seven Nansen endpoints" width="100%"></p>
+
+<details>
+<summary><b>Mermaid source</b> — expand to see the diagram as text (renders on GitHub)</summary>
+
 ```mermaid
 flowchart LR
   IN["token · chain · amount"] --> R["resolve.ts<br/>address passes through · ticker → search/general (0 credits)"]
@@ -84,6 +89,8 @@ flowchart LR
   P --> CLI["packages/cli<br/>npm run glidepath -- &lt;token&gt; --chain --amount"]
   P --> WEB["apps/web (Next.js 15)<br/>/api/plan · /api/export · /api/og · /p share page"]
 ```
+
+</details>
 
 | layer | what | where |
 |---|---|---|
@@ -175,7 +182,7 @@ The constant-product estimate treats `liquidity_usd` as one pool with the token 
 Quickstart — runs in under 10 minutes:
 
 ```bash
-git clone https://github.com/edycutjong/glidepath && cd glidepath   # 0:10
+git clone https://github.com/edycutjong/glidepath && cd glidepath    # 0:10
 npm install                                                          # 0:40  (Node ≥ 20)
 export NANSEN_API_KEY=nsn_...                                        # from https://app.nansen.ai/api
 npm run glidepath -- PEPE --chain ethereum --amount 12000000000      # 0:05  → the plan, 12 credits
