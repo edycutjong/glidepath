@@ -33,7 +33,7 @@ export async function GET(req: Request) {
         <div style={{ fontSize: 22, color: "#8b9bab" }}>{p ? `${p.resolved.symbol} · ${p.input.chain} · ${p.input.amount.toLocaleString("en-US")} tokens` : "Nansen-paced selling calendar"}</div>
       </div>
       {p && p.status !== "not-found" ? (
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 30, gap: 14 }}>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 24, gap: 12 }}>
           <div style={{ display: "flex", fontSize: 34, gap: 12 }}>
             <span style={{ color: "#ef4444", fontWeight: 700 }}>Dump today:</span>
             <span>
@@ -53,14 +53,14 @@ export async function GET(req: Request) {
             <div style={{ display: "flex", fontSize: 30, color: "#f59e0b" }}>{p.statusReason}</div>
           )}
           {ok && (
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 240, marginTop: 24 }}>
+            <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 190, marginTop: 18 }}>
               {p.tranches.slice(0, 40).map((t) => (
                 <div
                   key={t.day}
                   style={{
                     display: "flex",
                     width: Math.min(180, Math.max(12, Math.floor(1080 / Math.min(40, p.tranches.length)) - 6)),
-                    height: Math.max(8, (t.usd / max) * 240),
+                    height: Math.max(8, (t.usd / max) * 190),
                     background: t.red ? "#ef4444" : "#22c55e",
                     borderRadius: 4,
                   }}
