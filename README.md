@@ -8,7 +8,7 @@
 
 ![PEPE plan](docs/screenshots/01-pepe-plan.png)
 
-**[Live preview](https://glidepath-q8yfrlql8-edy-cus-projects.vercel.app)** · [DEMO.md](DEMO.md) · [SCORING.md](docs/SCORING.md) · [DX-REPORT.md](docs/DX-REPORT.md) · [ARCHITECTURE.md](ARCHITECTURE.md)
+**[Live preview](https://glidepath-lilac.vercel.app)** · [DEMO.md](DEMO.md) · [SCORING.md](docs/SCORING.md) · [DX-REPORT.md](docs/DX-REPORT.md) · [ARCHITECTURE.md](ARCHITECTURE.md)
 
 </div>
 
