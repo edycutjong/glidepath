@@ -1,7 +1,8 @@
 <div align="center">
+  <img src="docs/assets/icon-animated.svg" width="96" alt="">
   <h1>Glidepath 🛬</h1>
   <p><em>You have to sell a token you never meant to own. Glidepath turns it into a dated selling calendar sized to the market's organic demand — so you are never the biggest seller on a day the pros are exiting.</em></p>
-  <img src="docs/screenshots/01-pepe-plan.png" alt="Glidepath — PEPE plan" width="100%">
+  <img src="docs/assets/readme-hero-animated.svg" alt="Glidepath — turns a bag you must sell into a dated selling calendar sized to organic demand; a red day halves that day's tranche" width="100%">
 
   <p>It plans. It never trades. 12 credits per plan on EVM chains, 15 on solana/base, 0 on a cache hit — and the 13 recorded plans replay offline byte-for-byte with zero network calls and zero credits (<code>npm run verify</code>).</p>
 
@@ -33,14 +34,18 @@
 
 ## 📸 See it in Action
 
-A **red today** — BONK, exchange net deposits flagged by `tgm/flow-intelligence`, first tranche halved, real `trade/quote` route costs:
+The PEPE plan, live on 2026-09-17 — 12 credits, 9 calls, 2.2 s, two dated tranches, a green today:
 
-![BONK red day](docs/screenshots/02-bonk-red-day.png)
+![Glidepath — 12B PEPE on ethereum: two dated tranches sized to organic buys, 3 red of the last 13 days, a green Sep 17](docs/screenshots/01-pepe-plan.png)
 
-| | |
+BONK on solana inside a **red regime** — today is green, but `tgm/flow-intelligence` 7d shows exchange net deposits of +$2.34M over the week and `tgm/flows` marks 3 of the last 13 days red; the costs are real `trade/quote` routes:
+
+![Glidepath — 20B BONK on solana: green today inside a red 7-day exchange-deposit regime, 4 tranches, route-quote costs](docs/screenshots/02-bonk-red-regime.png)
+
+| provenance drawer — every call live, with credits and ms | mobile — the TURBO thin plan, 90 tranches, 30 % still unsold |
 |---|---|
-| ![provenance](docs/screenshots/03-provenance-drawer.png) | ![mobile](docs/screenshots/04-mobile-thin.png) |
-| ![share card](docs/screenshots/05-share-card.png) | |
+| ![Glidepath — provenance drawer: every Nansen call behind the plan with fields used, credits and ms](docs/screenshots/03-provenance-drawer.png) | ![Glidepath on a phone — 50M TURBO, a thin plan of 90 tranches with 30 % still unsold after 90 days](docs/screenshots/04-mobile-thin.png) |
+| ![Glidepath share card — BONK on solana: dump today vs 4 tranches, the OG image of the share page](docs/screenshots/05-share-card.png) | |
 
 ## 💡 The Problem & Solution
 
