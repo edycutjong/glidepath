@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/assets/icon-animated.svg" width="96" alt="">
+  <img src="docs/assets/icon-animated.svg" width="144" alt="Glidepath mark — one red dump bar splits into green tranches that glide down, paced to organic demand">
   <h1>Glidepath 🛬</h1>
   <p><em>You have to sell a token you never meant to own. Glidepath turns it into a dated selling calendar sized to the market's organic demand — so you are never the biggest seller on a day the pros are exiting.</em></p>
   <img src="docs/assets/readme-hero-animated.svg" alt="Glidepath — turns a bag you must sell into a dated selling calendar sized to organic demand; a red day halves that day's tranche" width="100%">
