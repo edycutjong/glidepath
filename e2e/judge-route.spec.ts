@@ -25,7 +25,7 @@ test.describe("/judge", () => {
     await expect(page.locator("pre").nth(1)).toContainText("npm run verify");
     await expect(page.getByText("60,000 generated cases")).toBeVisible();
     await expect(page.locator("main.judge ul > li")).toHaveCount(3);
-    await expect(page.getByRole("link", { name: "Live app" })).toHaveAttribute("href", "https://glidepath-lilac.vercel.app");
+    await expect(page.getByRole("link", { name: "Live app" })).toHaveAttribute("href", "https://glidepath.edycu.dev");
     await expect(page.getByRole("link", { name: "Repository" })).toHaveAttribute("href", "https://github.com/edycutjong/glidepath");
     await expect(page.getByRole("navigation", { name: "site" }).getByRole("link", { name: "For the judge" })).toHaveAttribute("aria-current", "page");
     await expect(page.locator("footer.site-footer")).toBeVisible();

@@ -3,7 +3,7 @@ import pkg from "../package.json";
 
 export const VERSION = `v${pkg.version}`;
 export const REPO = "https://github.com/edycutjong/glidepath";
-export const SITE = "https://glidepath-lilac.vercel.app";
+export const SITE = "https://glidepath.edycu.dev";
 
 /** The mark — the favicon's glyph at 24px: today's red bar, then the tranches gliding down. */
 export function Mark({ size = 24 }: { size?: number }) {

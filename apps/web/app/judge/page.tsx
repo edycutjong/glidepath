@@ -8,7 +8,7 @@ import { SiteHeader, SiteFooter } from "@/components/Shell";
  */
 export const dynamic = "force-static";
 
-const LIVE = "https://glidepath-lilac.vercel.app";
+const LIVE = "https://glidepath.edycu.dev";
 const REPO = "https://github.com/edycutjong/glidepath";
 
 const CLAIM =

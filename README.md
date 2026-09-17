@@ -7,8 +7,8 @@
 
   <br/>
 
-  [![Live Demo](https://img.shields.io/badge/🚀_Live-Demo-06b6d4?style=for-the-badge)](https://glidepath-lilac.vercel.app)
-  [![For the Judge](https://img.shields.io/badge/⚖️_For_the-Judge-f59e0b?style=for-the-badge)](https://glidepath-lilac.vercel.app/judge)
+  [![Live Demo](https://img.shields.io/badge/🚀_Live-Demo-06b6d4?style=for-the-badge)](https://glidepath.edycu.dev)
+  [![For the Judge](https://img.shields.io/badge/⚖️_For_the-Judge-f59e0b?style=for-the-badge)](https://glidepath.edycu.dev/judge)
   [![Built for Nansen Meridian](https://img.shields.io/badge/Built_for-Nansen_Meridian-8b5cf6?style=for-the-badge)](https://nansen.ai/campaigns/meridian-buildathon)
 
   <br/>
@@ -233,7 +233,7 @@ e2e/            Playwright suites (no key)                                      
 
 ## 📽️ Demo Materials
 
-- **Live:** https://glidepath-lilac.vercel.app — no wallet, no account; five example chips (PEPE · BONK · BRETT · TURBO · SHIB2), ICS/CSV export, share card with OG image.
+- **Live:** https://glidepath.edycu.dev — no wallet, no account; five example chips (PEPE · BONK · BRETT · TURBO · SHIB2), ICS/CSV export, share card with OG image.
 - **Reproduce every number:** [DEMO.md](DEMO.md) — the recorded PEPE plan, offline replay, tests, bench table, re-recording the fixtures, the day-one spike, and the credits spent.
 - **Formulas with the real PEPE numbers:** [docs/SCORING.md](docs/SCORING.md) · **API findings from the spike:** [docs/DX-REPORT.md](docs/DX-REPORT.md).
 
