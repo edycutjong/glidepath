@@ -36,7 +36,7 @@
 
 The PEPE plan, live on 2026-09-17 — 12 credits, 9 calls, 2.2 s, two dated tranches, a green today:
 
-![Glidepath — 12B PEPE on ethereum: two dated tranches sized to organic buys, 3 red of the last 13 days, a green Sep 17](docs/screenshots/01-pepe-plan.png)
+<img src="docs/demo.gif" alt="Glidepath — 14 s demo: token, chain, amount held; Nansen labels split organic buys from Smart Money, funds, whales and exchanges; dump-today vs paced tranches, red days halved" width="100%">
 
 BONK on solana inside a **red regime** — today is green, but `tgm/flow-intelligence` 7d shows exchange net deposits of +$2.34M over the week and `tgm/flows` marks 3 of the last 13 days red; the costs are real `trade/quote` routes:
 
