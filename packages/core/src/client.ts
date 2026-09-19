@@ -26,12 +26,22 @@ export type Call = {
 
 export type CallOptions = { timeoutMs?: number; retries?: number };
 
+/**
+ * Live call events for the web app's Nansen call rail: `start` fires before the first network attempt (the rail shows a
+ * pending row), `end` fires once the Call is recorded — the SAME object that lands in `calls` and in the provenance
+ * drawer, so the rail and the drawer can never disagree. Cache hits fire `end` only (nothing was pending).
+ */
+export type CallEvent = { type: "start"; id: number; method: "POST" | "GET"; endpoint: string; body: Record<string, unknown> } | { type: "end"; id: number; call: Call };
+export type CallObserver = (event: CallEvent) => void;
+
 export type ClientOptions = {
   baseUrl?: string;
   /** requests per second, client-side burst cap (Nansen Free: 15/s, 300/min) */
   rps?: number;
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
+  /** receives every call as it starts and as it lands (see CallEvent) */
+  onCall?: CallObserver;
 };
 
 /** Static fallback cost per endpoint (docs.nansen.ai credits table, 2026-09-16). Live calls use the response header instead. */
@@ -113,6 +123,9 @@ export class NansenClient {
   private fetchImpl: typeof fetch;
   /** Every call made through this client, in order. */
   readonly calls: Call[] = [];
+  /** live observer (the call rail); set in the constructor or with `observe()` */
+  onCall?: CallObserver;
+  private seq = 0;
 
   constructor(
     private apiKey: string,
@@ -125,6 +138,33 @@ export class NansenClient {
     this.limiter = new RateLimiter(opts.rps ?? 8);
     this.timeoutMs = opts.timeoutMs ?? 8000; // Nansen occasionally hangs on very large tokens; 8 s + one retry caps a call at ~17 s
     this.fetchImpl = opts.fetchImpl ?? fetch;
+    this.onCall = opts.onCall;
+  }
+
+  /** Attach (or detach, with undefined) the live observer. */
+  observe(fn: CallObserver | undefined): void {
+    this.onCall = fn;
+  }
+
+  /** Announce a call that is about to hit the network; returns its id for `push`. */
+  protected begin(method: "POST" | "GET", endpoint: string, body: Record<string, unknown>): number {
+    const id = ++this.seq;
+    this.emit({ type: "start", id, method, endpoint, body });
+    return id;
+  }
+
+  /** The one place a Call enters `calls` — and the observer sees the identical object. */
+  protected push(call: Call, id = ++this.seq): void {
+    this.calls.push(call);
+    this.emit({ type: "end", id, call });
+  }
+
+  private emit(event: CallEvent): void {
+    try {
+      this.onCall?.(event);
+    } catch {
+      /* an observer must never break a plan */
+    }
   }
 
   /** POST `endpoint` with a JSON body; one retry on 429/5xx/timeout unless `retries: 0`; records the call. */
@@ -139,40 +179,44 @@ export class NansenClient {
 
   protected async request<T>(method: "POST" | "GET", endpoint: string, body: Record<string, unknown>, fieldsUsed: string[], opts: CallOptions): Promise<T> {
     const t0 = Date.now();
+    const id = this.begin(method, endpoint, body);
     try {
       const raw = await this.raw(method, endpoint, body, opts);
-      this.record(method, endpoint, body, fieldsUsed, raw);
+      this.record(method, endpoint, body, fieldsUsed, raw, id);
       return JSON.parse(raw.text) as T;
     } catch (e) {
-      this.recordFailure(method, endpoint, body, fieldsUsed, e, Date.now() - t0);
+      this.recordFailure(method, endpoint, body, fieldsUsed, e, Date.now() - t0, id);
       throw e;
     }
   }
 
-  protected record(method: "POST" | "GET", endpoint: string, body: Record<string, unknown>, fieldsUsed: string[], raw: RawResult) {
-    this.calls.push({
-      endpoint,
-      method,
-      body,
-      fieldsUsed,
-      cached: false,
-      ok: true,
-      credits: raw.creditsUsed ?? CREDITS[endpoint] ?? 1,
-      creditsRemaining: raw.creditsRemaining,
-      ms: raw.ms,
-      status: raw.status,
-      responseHash: sha256(raw.text),
-      attempts: raw.attempts,
-      totalMs: raw.totalMs,
-    });
+  protected record(method: "POST" | "GET", endpoint: string, body: Record<string, unknown>, fieldsUsed: string[], raw: RawResult, id?: number) {
+    this.push(
+      {
+        endpoint,
+        method,
+        body,
+        fieldsUsed,
+        cached: false,
+        ok: true,
+        credits: raw.creditsUsed ?? CREDITS[endpoint] ?? 1,
+        creditsRemaining: raw.creditsRemaining,
+        ms: raw.ms,
+        status: raw.status,
+        responseHash: sha256(raw.text),
+        attempts: raw.attempts,
+        totalMs: raw.totalMs,
+      },
+      id,
+    );
   }
 
   /** A call that failed every attempt still appears in provenance — a hidden timeout is a recording risk, not a detail. */
-  protected recordFailure(method: "POST" | "GET", endpoint: string, body: Record<string, unknown>, fieldsUsed: string[], e: unknown, totalMs: number) {
+  protected recordFailure(method: "POST" | "GET", endpoint: string, body: Record<string, unknown>, fieldsUsed: string[], e: unknown, totalMs: number, id?: number) {
     const status = e instanceof NansenError ? e.status : 0;
     const error = e instanceof Error ? (e.name === "AbortError" ? "timeout" : e.message.slice(0, 160)) : String(e);
     const attempts = (e as { attempts?: number })?.attempts ?? 1;
-    this.calls.push({ endpoint, method, body, credits: 0, ms: 0, cached: false, status, fieldsUsed, responseHash: "", attempts, totalMs, ok: false, error });
+    this.push({ endpoint, method, body, credits: 0, ms: 0, cached: false, status, fieldsUsed, responseHash: "", attempts, totalMs, ok: false, error }, id);
   }
 
   /** The network call itself, returning the raw body so callers (and the cache) hash exactly what Nansen sent. */

@@ -123,20 +123,21 @@ export class CachedNansenClient extends NansenClient {
     const hit = this.ttlMs > 0 || this.offline ? this.store.get(key) : undefined;
     const fresh = hit && Date.now() - Date.parse(hit.storedAt) < this.ttlMs;
     if (hit && (fresh || this.offline)) {
-      this.calls.push({ endpoint, method, body, credits: 0, ms: 0, cached: true, status: 200, fieldsUsed, responseHash: sha256(hit.text), attempts: 0, totalMs: 0, ok: true });
+      this.push({ endpoint, method, body, credits: 0, ms: 0, cached: true, status: 200, fieldsUsed, responseHash: sha256(hit.text), attempts: 0, totalMs: 0, ok: true });
       if (!this.oldestHit || hit.storedAt < this.oldestHit) this.oldestHit = hit.storedAt;
       return JSON.parse(hit.text) as T;
     }
     if (this.offline) throw new Error(`NANSEN_OFFLINE=1 and no cached response for ${method} ${endpoint} ${JSON.stringify(body)}`);
     const t0 = Date.now();
+    const id = this.begin(method, endpoint, body);
     let raw: RawResult;
     try {
       raw = await this.raw(method, endpoint, body, opts);
     } catch (e) {
-      this.recordFailure(method, endpoint, body, fieldsUsed, e, Date.now() - t0);
+      this.recordFailure(method, endpoint, body, fieldsUsed, e, Date.now() - t0, id);
       throw e;
     }
-    this.record(method, endpoint, body, fieldsUsed, raw);
+    this.record(method, endpoint, body, fieldsUsed, raw, id);
     this.store.set(key, { storedAt: new Date().toISOString(), ttlMs: this.ttlMs, endpoint, body, text: raw.text, creditsUsed: raw.creditsUsed ?? CREDITS[endpoint] ?? 1 });
     return JSON.parse(raw.text) as T;
   }

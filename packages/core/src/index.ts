@@ -1,5 +1,5 @@
 export { NansenClient, NansenError, clientFromEnv, sha256, CREDITS } from "./client";
-export type { Call, ClientOptions, CallOptions, RawResult } from "./client";
+export type { Call, CallEvent, CallObserver, ClientOptions, CallOptions, RawResult } from "./client";
 export { CachedNansenClient, cachedClientFromEnv, DiskCache, MemoryCache, LayeredCache, cacheKey, canonicalize, DEFAULT_TTL_MS } from "./cache";
 export type { CacheStore, CacheEntry, CachedClientOptions } from "./cache";
 export * from "./nansen";
