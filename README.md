@@ -34,9 +34,9 @@
 
 ## 📸 See it in Action
 
-The PEPE plan, live on 2026-09-17 — 12 credits, 9 calls, 2.2 s, two dated tranches, a green today:
+The PEPE plan, live on 2026-09-19 — 12 credits, 9 calls, 2.0 s; a **red today** (exchange net deposits +$736K) halves the first tranche — and every Nansen call streams into the rail on the right as it lands:
 
-<img src="docs/demo.gif" alt="Glidepath — 14 s demo: token, chain, amount held; Nansen labels split organic buys from Smart Money, funds, whales and exchanges; dump-today vs paced tranches, red days halved" width="100%">
+<img src="docs/demo.gif" alt="Glidepath — 13 s demo: token, chain, amount held; the Nansen call rail fills on the right, each call pending then green with credits and ms; a red today halves the first tranche; dump-today vs paced tranches" width="100%">
 
 BONK on solana inside a **red regime** — today is green, but `tgm/flow-intelligence` 7d shows exchange net deposits of +$2.34M over the week and `tgm/flows` marks 3 of the last 13 days red; the costs are real `trade/quote` routes:
 
