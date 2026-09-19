@@ -6,7 +6,7 @@
                        └──────────────────────────────────────────────────────────────┬──────────────────────────────────────────────────┘
                                                                                       │ raw text, sha256'd, credits from response headers
   packages/core/src                                                                   ▼
-  ├─ client.ts       NansenClient: token bucket (8 rps) · timeout · 1 retry on 429/5xx/timeout (honours Retry-After) · Call log
+  ├─ client.ts       NansenClient: token bucket (8 rps) · timeout · 1 retry on 429/5xx/timeout (honours Retry-After) · Call log · onCall observer (CallEvent start/end)
   ├─ cache.ts        CachedNansenClient: read-through cache keyed by (method, endpoint, canonical body); hit = 0 credits; NANSEN_OFFLINE=1 never touches the network
   ├─ nansen.ts       typed request bodies (verified against openapi.json) · EXCLUDED_LABELS · whoBoughtPaged (per_page 1000, cap) · flows · indicators · quote
   ├─ resolve.ts      address passes through; ticker → search/general (0 credits), exact symbol/name on the chain, lowest rank
@@ -20,11 +20,12 @@
   packages/cli/src/cli.ts        npm run glidepath -- <token> --chain <chain> --amount <n> [--json --explain --csv f --ics f --no-cache --no-quotes]
 
   apps/web (Next.js 15, App Router, plain CSS)
-  ├─ app/page.tsx                three inputs → POST /api/plan → <PlanView>
-  ├─ app/api/plan/route.ts       server-side key; CachedNansenClient with memory + disk (/tmp on Vercel) cache, 1 h TTL
+  ├─ app/page.tsx                three inputs → POST /api/plan?stream=1 → <Glidepath> (cards, drawer) + <Rail> (the live call log on the right)
+  ├─ app/api/plan/route.ts       server-side key; CachedNansenClient with memory + disk (/tmp on Vercel) cache, 1 h TTL; ?stream=1 = NDJSON start · call · plan lines
   ├─ app/api/export/route.ts     ?format=ics|csv, served from the same cache so the file matches the screen
   ├─ app/p/page.tsx              share page (?chain&token&amount) with OG/Twitter meta → /api/og (1200×630 card)
-  └─ components/PlanView.tsx     dump line · facts · 14-day red/green strip + live today · tranche bars · cost line · exports · provenance drawer · "computed Ns ago"
+  ├─ components/Glidepath.tsx    dump line · facts · 14-day red/green strip + live today · tranche bars · cost line · exports · provenance drawer · "computed Ns ago"
+  └─ components/Rail.tsx         the Nansen call rail: one row per CallEvent (pending → live/cached/error), credits · ms · sha256; replayed example on load; session totals
 
   scripts/  spike.ts (day-one pagination + filter spike) · seed.ts · verify.ts · bench.ts · check_submission_readiness.ts
 ```
@@ -35,6 +36,7 @@
 3. **Plan** — pure function of `(facts, input, now)`. Every branch that lacks data adds a warning naming the endpoint; the status is one of `ok · thin · no-organic-demand · no-price · not-found`.
 4. **Quotes** — solana/base only, after the tranche size is known: three `GET trade/quote` calls; any failure keeps the constant-product number and says so.
 5. **Hash** — sha256 over the decision only; the CLI, the web app and `verify.ts` show the first 12 hex chars.
+6. **Stream** — the web route attaches an `onCall` observer to the client; each `start` event (a call leaving) and `end` event (the recorded `Call`) is written as one NDJSON line while the plan is still computing, so the page's call rail shows the truth as it arrives. The drawer prints `plan.provenance` afterwards — the same objects — so the two can never disagree.
 
 ## Caching and the recording
 Cache key = sha256(method + endpoint + canonical JSON body). The who-bought-sold and flows windows are floored to the hour, so a token re-planned within the hour is a full cache hit (0 credits, ≈ 2–5 ms). A hit is still a `Call` in provenance (`cached: true`, 0 credits) and the oldest hit's timestamp drives the "computed Ns ago" badge. Failures are never cached. The web deployment uses a per-instance memory cache plus `/tmp` disk, so a warm Vercel function stays warm.

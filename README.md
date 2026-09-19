@@ -71,7 +71,7 @@ It plans. It never trades.
 
 One plan is `resolve → facts → computePlan → applyQuotes`; the plan is a pure function of `(facts, input, now)`, so a recorded fixture replays to the same calendar dates, the same red history and the same decision hash. Full module map and data flow: [ARCHITECTURE.md](ARCHITECTURE.md).
 
-<p align="center"><img src="docs/assets/architecture.png" alt="Glidepath architecture — token · chain · amount → resolve → facts → plan.ts computePlan → impact/export → Plan; cache in front of seven Nansen endpoints" width="100%"></p>
+<p align="center"><img src="docs/assets/architecture.png" alt="Glidepath architecture — views (web page with the live call rail, /api/plan?stream=1 behind a spend guard, share page, CLI) → resolve → facts → plan.ts computePlan → impact/export → Plan; a read-through cache in front of seven Nansen endpoints with their credits; recorded fixtures replay offline" width="100%"></p>
 
 <details>
 <summary><b>Mermaid source</b> — expand to see the diagram as text (renders on GitHub)</summary>
@@ -87,7 +87,8 @@ flowchart LR
   Q <--> N
   P --> X["export.ts<br/>ICS (one VEVENT per tranche, go/no-go rule inside) · CSV"]
   P --> CLI["packages/cli<br/>npm run glidepath -- &lt;token&gt; --chain --amount"]
-  P --> WEB["apps/web (Next.js 15)<br/>/api/plan · /api/export · /api/og · /p share page"]
+  P --> WEB["apps/web (Next.js 15)<br/>/api/plan?stream=1 → the call rail · /api/export · /api/og · /p share page"]
+  N -. "CallEvent start · end (the same Call objects)" .-> WEB
 ```
 
 </details>
