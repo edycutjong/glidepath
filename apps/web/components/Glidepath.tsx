@@ -232,7 +232,7 @@ export function Glidepath({
         </div>
 
         <div className={`progress ${phase === "idle" ? "hidden" : ""}`}>
-          <i style={{ width: phase === "planning" ? "40%" : phase === "done" ? "100%" : "0%" }} />
+          <i style={{ width: phase === "planning" ? `${Math.min(88, 12 + (batch?.kind === "running" ? batch.calls : 0) * 8)}%` : phase === "done" ? "100%" : "0%" }} />
         </div>
         <p className={`status ${phase === "idle" ? "hidden" : ""}`} aria-live="polite">
           {status}

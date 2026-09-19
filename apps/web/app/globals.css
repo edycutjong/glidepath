@@ -96,9 +96,11 @@ code {
   align-items: center;
   gap: 10px;
   color: var(--text);
+  transition: opacity 120ms;
 }
 .brand:hover {
   text-decoration: none;
+  opacity: 0.82; /* interaction-qa: the brand is a link, so it answers a hover (family shell otherwise unchanged) */
 }
 .brand-name {
   font-weight: 800;
@@ -245,6 +247,10 @@ code {
 .search input::placeholder {
   color: var(--muted);
 }
+.search input:hover:not(:focus),
+.search select:hover:not(:focus) {
+  border-color: rgba(139, 155, 171, 0.55); /* --muted at 55 % */
+}
 .search input:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22);
@@ -288,13 +294,17 @@ code {
   transition:
     border-color 120ms,
     color 120ms,
-    background 120ms;
+    background 120ms,
+    transform 120ms;
 }
 .chip:hover,
 .chip:focus-visible {
   border-color: var(--accent);
   color: var(--text);
   outline: none;
+}
+.chip:active {
+  transform: scale(0.97);
 }
 .chip.on {
   background: var(--accent);
@@ -1265,6 +1275,9 @@ code {
 }
 .rail-row:last-child {
   border-bottom: 0;
+}
+.rail-row:hover {
+  background: rgba(255, 255, 255, 0.025);
 }
 .rail-l1,
 .rail-l2 {
