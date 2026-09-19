@@ -17,7 +17,6 @@ const CLAIM =
 export const metadata: Metadata = {
   title: "Glidepath — for the judge",
   description: "One claim, a 30-second click path, the real-run receipts, the reproduce command and the honest limits.",
-  robots: { index: false },
 };
 
 export default function JudgePage() {
