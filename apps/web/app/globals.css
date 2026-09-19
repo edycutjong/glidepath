@@ -306,6 +306,12 @@ code {
 .chip:active {
   transform: scale(0.97);
 }
+.chip:disabled,
+.btn:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+}
 .chip.on {
   background: var(--accent);
   color: var(--accent-ink);

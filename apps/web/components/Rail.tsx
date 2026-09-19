@@ -87,24 +87,25 @@ function reducedMotion(): boolean {
 /** Count-up 240 ms on change (§13 A3); reduced motion = jump. */
 function useCountUp(target: number, ms = 240): number {
   const [shown, setShown] = useState(target);
-  const fromRef = useRef(target);
+  const shownRef = useRef(target);
   useEffect(() => {
-    if (reducedMotion() || fromRef.current === target) {
-      fromRef.current = target;
+    const from = shownRef.current;
+    if (reducedMotion() || from === target) {
+      shownRef.current = target;
       setShown(target);
       return;
     }
-    const from = fromRef.current;
     const t0 = performance.now();
     let raf = 0;
     const tick = (t: number) => {
       const k = Math.min(1, (t - t0) / ms);
       const e = 1 - Math.pow(1 - k, 3);
-      setShown(Math.round(from + (target - from) * e));
+      shownRef.current = Math.round(from + (target - from) * e);
+      setShown(shownRef.current);
       if (k < 1) raf = requestAnimationFrame(tick);
-      else fromRef.current = target;
     };
     raf = requestAnimationFrame(tick);
+    // a target that moves before 240 ms elapse (parallel calls land together) continues from the digit on screen, never from the old origin
     return () => cancelAnimationFrame(raf);
   }, [target, ms]);
   return shown;

@@ -98,10 +98,12 @@ export function Glidepath({
         : null,
   );
   const batchNo = useRef(0);
+  const inFlight = useRef(false);
 
   const run = useCallback(async (t: string, c: string, a: string) => {
     const term = t.trim();
-    if (!term || !a.trim()) return;
+    if (!term || !a.trim() || inFlight.current) return; // one run at a time: the rail's batch belongs to the run in flight
+    inFlight.current = true;
     setPhase("planning");
     setError(null);
     setPlan(null);
@@ -160,6 +162,8 @@ export function Glidepath({
       setBatch((x) => (x && x.kind === "running" ? { ...x, kind: "done", ms: Date.now() - startedAt } : x));
       setError((e as Error).message);
       setPhase("error");
+    } finally {
+      inFlight.current = false;
     }
   }, []);
 
@@ -224,7 +228,7 @@ export function Glidepath({
           </form>
           <div className="chips" role="group" aria-label="examples">
             {EXAMPLES.map((x) => (
-              <button key={x.label} type="button" className="chip" onClick={() => runExample(x)}>
+              <button key={x.label} type="button" className="chip" onClick={() => runExample(x)} disabled={phase === "planning"}>
                 {x.label}
               </button>
             ))}
