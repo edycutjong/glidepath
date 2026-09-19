@@ -39,10 +39,10 @@ export default async function SharePage({ searchParams }: Props) {
     );
   const plan = await planFor(input);
   return (
-    <>
+    <div className="with-rail">
       <SiteHeader current="home" />
       <Glidepath initialToken={plan.resolved.symbol || plan.input.token} initialChain={plan.input.chain} initialAmount={String(plan.input.amount)} initialPlan={plan} />
       <SiteFooter />
-    </>
+    </div>
   );
 }

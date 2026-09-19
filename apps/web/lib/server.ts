@@ -1,4 +1,4 @@
-import { CachedNansenClient, DiskCache, LayeredCache, MemoryCache, glidepath, type PlanInput, type PlanResult } from "@glidepath/core";
+import { CachedNansenClient, DiskCache, LayeredCache, MemoryCache, glidepath, type CallObserver, type PlanInput, type PlanResult } from "@glidepath/core";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -7,13 +7,14 @@ import { join } from "node:path";
  * warm function stays warm). The key never leaves the server. TTL 1 h — the badge shows the age of the oldest response.
  */
 const memory = new MemoryCache();
-function makeClient(): CachedNansenClient {
+function makeClient(onCall?: CallObserver): CachedNansenClient {
   const dir = process.env.VERCEL ? join(tmpdir(), "glidepath-cache") : join(process.cwd(), ".cache");
-  return new CachedNansenClient(process.env.NANSEN_API_KEY ?? "", { store: new LayeredCache([memory, new DiskCache(dir)]), timeoutMs: 12000 });
+  return new CachedNansenClient(process.env.NANSEN_API_KEY ?? "", { store: new LayeredCache([memory, new DiskCache(dir)]), timeoutMs: 12000, onCall });
 }
 
-export async function planFor(input: PlanInput): Promise<PlanResult> {
-  const client = makeClient();
+/** One plan. `onCall` (optional) sees every Nansen call start and land — the stream behind the page's call rail. */
+export async function planFor(input: PlanInput, onCall?: CallObserver): Promise<PlanResult> {
+  const client = makeClient(onCall);
   return glidepath(client, input);
 }
 

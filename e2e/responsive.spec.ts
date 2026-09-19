@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { test, expect } from "@playwright/test";
+import { fulfillStream } from "./_ndjson";
 
 const viewports = [
   { name: "narrow", width: 320, height: 640 },
@@ -39,7 +40,7 @@ test.describe("mobile 375px · 90-tranche plan", () => {
   test.use({ viewport: { width: 375, height: 812 } });
   test("the tranche row scrolls inside the card; the page never overflows horizontally", async ({ page }) => {
     const fixture = JSON.parse(readFileSync(new URL("../fixtures/0XA35923162C--ETHEREUM.json", import.meta.url), "utf8"));
-    await page.route("**/api/plan", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(fixture.plan) }));
+    await page.route("**/api/plan?stream=1", fulfillStream(fixture.plan));
     await page.goto("/");
     await page.getByRole("button", { name: "TURBO · 50M" }).click();
     await expect(page.locator(".tranche")).toHaveCount(60); // the UI draws the first 60 bars, then "+30 more"
