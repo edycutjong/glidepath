@@ -17,7 +17,7 @@
   ![Next.js](https://img.shields.io/badge/Next.js_15-black?style=flat&logo=next.js)
   ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
   ![Nansen](https://img.shields.io/badge/Nansen%20API-7%20endpoints%20%C2%B7%2011%20calls-7c3aed?style=flat&labelColor=0a0e13)
-  ![tests](https://img.shields.io/badge/tests-231%20passing-16a34a?style=flat)
+  ![tests](https://img.shields.io/badge/tests-247%20passing-16a34a?style=flat)
   ![property cases](https://img.shields.io/badge/property%20cases-60%2C000-16a34a?style=flat)
   ![fixtures](https://img.shields.io/badge/fixtures-13%2F13%20replay%20offline-16a34a?style=flat)
   [![license](https://img.shields.io/badge/license-MIT-blue?style=flat)](LICENSE)
