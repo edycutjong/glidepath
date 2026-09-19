@@ -63,7 +63,7 @@ Paste **token · chain · amount held**. Glidepath:
 4. Flags **red days**: today from `tgm/flow-intelligence` (Smart Money net-selling, or net deposits to exchanges), the 13 complete days before it from `tgm/flows` daily cohort history (a 14-day strip with today). A red today halves the first tranche; the observed red-day rate stretches the expected finish.
 5. Shows **dump today vs glidepath cost** — constant-product from `liquidity_usd`, or a real routed `trade/quote` on solana/base, labelled as such.
 6. Exports the plan as **ICS** (one calendar event per tranche, with the go/no-go rule inside) and **CSV**, plus a share card with an OG image.
-7. Opens a **provenance drawer**: every Nansen call, the fields used, credits (from Nansen's response headers), cached or live, ms — and a "computed Ns ago" badge.
+7. Streams every Nansen call into the **call rail** on the right as it happens (endpoint · params · credits · ms · hash), then opens a **provenance drawer**: every call, the fields used, credits (from Nansen's response headers), cached or live, ms — and a "computed Ns ago" badge.
 
 It plans. It never trades.
 
@@ -98,7 +98,7 @@ flowchart LR
 | CLI | `npm run glidepath -- <token> --chain <chain> --amount <n>` with `--json --explain --ics --csv --no-cache --no-quotes` | `packages/cli` |
 | Web | Next.js 15 App Router, plain CSS, server-side key; memory + `/tmp` disk cache on Vercel; OG card 1200×630 | `apps/web` |
 | Data | Nansen API — 7 endpoints · 11 calls per plan (table below) | `packages/core/src/nansen.ts` |
-| Proof | 231 vitest tests (60,000 fast-check property cases on the planner, key-boundary tests) · 13 recorded fixtures replayed offline · 44 Playwright checks on the built app · `bench.ts` p50/p95 · `check_submission_readiness.ts` | `packages/core/test`, `apps/web/test`, `e2e/`, `fixtures/`, `scripts/` |
+| Proof | 245 vitest tests (60,000 fast-check property cases on the planner, key-boundary tests) · 13 recorded fixtures replayed offline · 56 Playwright checks on the built app · `bench.ts` p50/p95 · `check_submission_readiness.ts` | `packages/core/test`, `apps/web/test`, `e2e/`, `fixtures/`, `scripts/` |
 | CI | GitHub Actions, 7 stages, no key anywhere: quality (prettier, eslint, tsc ×2, vitest + coverage, offline verify, readiness) → security (TruffleHog, npm audit, licenses) → build + bundle budget → Playwright E2E → Lighthouse → deploy gate → Vercel production deploy (prebuilt, `main` only); CodeQL, gitleaks (full history), Dependabot, semantic releases alongside | `.github/workflows/` |
 
 ## 🏆 Nansen Integration
@@ -120,6 +120,8 @@ The data drives the logic — every on-screen number traces to a named Nansen fi
 
 12 credits per plan on EVM chains, 15 on solana/base, 0 on a cache hit. Formulas with the real PEPE numbers: [docs/SCORING.md](docs/SCORING.md).
 
+**You watch it happen.** The right-hand **Nansen call rail** streams every call as the plan is computed — `/api/plan?stream=1` emits an NDJSON line when a call leaves (a pending row) and one when it lands (the recorded `Call`: endpoint, params, credits from the response header, ms, sha256 of the body) — the same objects the provenance drawer prints afterwards, so the rail's counters and the drawer's totals always agree. On load the rail shows the recorded example's calls labelled `replayed · 0 cr`; the CLI prints the same rows with `--explain`.
+
 ### Why only Nansen
 
 "Organic demand" is a **who**, not a **how much**. An RPC node or an explorer gives you volume; it cannot tell you which buyers are funds, Smart Money, exchanges or sniper-bot users. On Nansen that split exists as a server-side label filter on `tgm/who-bought-sold` — and the spike showed the filter acts on labels the row's `address_label` does not even display, so there is no client-side substitute. The red-day rule needs **cohort** net flows (`tgm/flows`, `tgm/flow-intelligence`); the risk dial needs **peer-percentile** scores (`tgm/indicators`); the route quote needs an aggregator that returns decimals with the price (`trade/quote`). Remove Nansen and Glidepath degrades to a TWAP calculator on raw volume — exactly the number a forced seller must not trust.
@@ -132,11 +134,11 @@ The constant-product estimate treats `liquidity_usd` as one pool with the token 
 
 | metric | value | how to reproduce |
 |---|---|---|
-| tests | **231 vitest tests**, green — 12 of them regression tests named for the defect each pins | `npm test` |
+| tests | **245 vitest tests**, green — 12 of them regression tests named for the defect each pins | `npm test` |
 | spend guard | public route capped at **6 requests/min per address** (429) and **3,000 live credits/day** (honest 503 past it, before any Nansen call) | `apps/web/lib/guard.ts`, `apps/web/test/guard.test.ts` |
 | property-based verification | **60,000 generated cases** (fast-check, 6 properties × 10,000) on the tranche planner — found and fixed one real defect | `npm test` (`plan.property.test.ts`) |
 | key boundary | the `nsn_` key never reaches a client: engine JSON/ICS/CSV, the route handler, the built pages — all asserted key-free; validation runs before any fetch | `npm test` + `npm run e2e` |
-| E2E | **44 Playwright checks** (22 tests × chromium + Pixel 7) against the production build with no key | `npm run e2e` |
+| E2E | **56 Playwright checks** (28 tests × chromium + Pixel 7) against the production build with no key | `npm run e2e` |
 | fixtures | **13 recorded, 13/13 reproduced offline** — zero network calls, zero credits | `npm run verify` |
 | bench, cold (fresh cache, live Nansen) | **p50 3.5 s / p95 6.0 s** | `npm run bench` (7 tokens × 3 runs) |
 | bench, warm (second call, same cache) | **p50 5 ms / p95 356 ms** | same |
@@ -146,7 +148,7 @@ The constant-product estimate treats `liquidity_usd` as one pool with the token 
 | failed calls | 7 of 195 (6 deterministic: `tgm/flows` refuses stablecoins) | same |
 | readiness | `npm run check` — files, secrets, kitchen leaks, fixtures, verify, tests, README claims | `npm run check` |
 
-- **231 vitest tests** (`npm test`): tranche-sizing table, red-day rule, risk dial vs indicator scores, impact model, decision-hash stability, pagination cap (the 20,000-buyer case), cache and offline mode, client retries/timeouts/header credits, ICS/CSV, resolver, end-to-end on a fake Nansen, one replay test per fixture — and three high-signal categories:
+- **245 vitest tests** (`npm test`): tranche-sizing table, red-day rule, risk dial vs indicator scores, impact model, decision-hash stability, pagination cap (the 20,000-buyer case), cache and offline mode, client retries/timeouts/header credits, ICS/CSV, resolver, end-to-end on a fake Nansen, one replay test per fixture — and three high-signal categories:
   - **12 regression tests, each named for the defect it pins** (`qa round …`, `regression (…)`): the one-tranche "expect ~2 days" copy, the ICS `\;` no-op, the error body cut mid-word, the FLOKI empty symbol, `liquidity_usd = 0`, the 7-day regime that was fetched but never shown, the echoed-key redaction, the zero-token tranche.
   - **One property-based verification, 60,000 generated cases** (`packages/core/test/plan.property.test.ts`, fast-check, 6 properties × 10,000 runs): Σ tranches + remainder = amount held; every tranche ≤ k × organic/day and ≤ 1 % of liquidity; a red today halves tranche 1 and only tranche 1; consecutive UTC dates, ≤ 90 of them, expectedDays ≥ days ≥ 1; the decision hash is deterministic and invariant to timing and context fields. Run 1 found a real defect — a liquidity cap underflowing at a dust price produced 90 tranches of zero tokens — now a guarded, fully-unsold `thin` plan with its own regression test.
   - **Key-boundary tests** (`packages/core/test/boundary.test.ts`, `apps/web/test/api-boundary.test.ts`, `e2e/`): the server key travels in one request header and nowhere else — plan JSON, provenance, ICS/CSV, the route handler's 400/500 bodies and the built pages are asserted free of `nsn_`; an upstream body that echoes the key is redacted; `/api/plan` validates input before the key check and before any `fetch`.
@@ -202,7 +204,7 @@ CLI flags: `--json` (full plan + provenance) · `--explain` (every tranche and e
 npm run lint          # ESLint (flat config, TS + React hooks)
 npm run format:check  # Prettier
 npm run typecheck     # engine + CLI + scripts   ·   npm run typecheck:web
-npm test              # 231 vitest tests incl. 60,000 property cases
+npm test              # 245 vitest tests incl. 60,000 property cases
 npm run test:coverage # + v8 coverage (≈ 93 % lines on the engine and API)
 npm run verify        # 13/13 recorded plans replay offline — no key, no network, 0 credits
 npm run check         # submission-readiness audit (files, secrets, kitchen leaks, fixtures, verify, tests, README claims)
@@ -222,11 +224,11 @@ npm run bench         # live, ~270 credits for 7 tokens × 3 runs
 | Layer | Tool | Status |
 |---|---|---|
 | Code Quality | ESLint 9 (typescript-eslint, react-hooks) + Prettier + tsc (engine, web) | ✅ |
-| Unit Testing | vitest, 231 tests, v8 coverage ≈ 93 % lines | ✅ |
+| Unit Testing | vitest, 245 tests, v8 coverage ≈ 93 % lines | ✅ |
 | Property-based | fast-check — 60,000 generated cases on the tranche planner | ✅ |
 | Key boundary | engine + route handler + built pages asserted `nsn_`-free | ✅ |
 | Offline proof | 13/13 fixtures replay byte-for-byte (`verify`) | ✅ |
-| E2E Testing | Playwright — 4 suites (home, plan flow, responsive, /judge), 44 checks, no key | ✅ |
+| E2E Testing | Playwright — 5 suites (home, plan flow, responsive, /judge, call rail), 56 checks, no key | ✅ |
 | Security (SAST) | CodeQL (javascript-typescript) | ✅ |
 | Security (SCA) | Dependabot (4 npm manifests + actions, grouped monthly, no majors) + npm audit + license-checker | ✅ |
 | Secret Scanning | TruffleHog (verified only) + gitleaks (full history) + `npm run check` history grep | ✅ |
