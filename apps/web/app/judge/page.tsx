@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteHeader, SiteFooter } from "@/components/Shell";
+import { SiteHeader, SiteFooter, VERSION } from "@/components/Shell";
 
 /**
  * /judge — no auth, no cookies, no key, no network: a static page for exactly one reader.
@@ -41,7 +41,8 @@ export default function JudgePage() {
           <h2>The 30-second path</h2>
           <ol>
             <li>
-              Open <a href={LIVE}>{LIVE}</a> and click <strong>PEPE · 12B (a $40K donation)</strong> — a two-tranche calendar in ≈3 s cold (12 live Nansen credits; 0 on a cache hit). Read the{" "}
+              Open <a href={LIVE}>{LIVE}</a> and click <strong>PEPE · 12B (a $40K donation)</strong> — a two-tranche calendar in ≈3 s cold (12 live Nansen credits; 0 on a cache hit). Watch the{" "}
+              <strong>Nansen call rail</strong> on the right while it runs: every call appears pending and turns green as Nansen answers — endpoint, params, credits, ms. Then read the{" "}
               <em>Dump today</em> line: position, estimated impact, and what share of a full day&apos;s organic buys you would be.
             </li>
             <li>
@@ -49,8 +50,8 @@ export default function JudgePage() {
               <code>trade/quote</code> route, labelled as such.
             </li>
             <li>
-              Click <strong>Every Nansen call (11)</strong> under the plan — the provenance drawer: every Nansen call, the fields used, credits from the response headers, cached or live, and
-              milliseconds.
+              Click <strong>Every Nansen call (12)</strong> under the plan — the provenance drawer: the receipt behind the rail. Same calls, plus the fields used; its totals equal the rail&apos;s
+              counters exactly.
             </li>
             <li>
               Click <strong>ICS</strong> — one calendar event per tranche with the go/no-go rule inside; <strong>CSV</strong> for the spreadsheet.
@@ -164,8 +165,8 @@ npm run check         # submission-readiness audit`}</pre>
             <a className="btn" href={`${REPO}/blob/main/docs/SCORING.md`}>
               SCORING.md — formulas with the PEPE numbers
             </a>
-            <a className="btn" href={`${REPO}/releases/tag/v1.1.0`}>
-              Release v1.1.0
+            <a className="btn" href={`${REPO}/releases/latest`}>
+              Release {VERSION}
             </a>
             <a className="btn" href="https://x.com/edycutjong">
               @edycutjong — the demo clip is posted here at submission

@@ -12,9 +12,9 @@ Nansen labels decide what counts as organic. It plans; it never trades.
 
 ## The 30-second path
 
-1. Open **https://glidepath.edycu.dev** and click **PEPE · 12B (a $40K donation)** — a two-tranche calendar in ≈3 s cold (12 live Nansen credits; 0 on a cache hit). Read the *Dump today* line: position, estimated impact, and what share of a full day's organic buys you would be.
+1. Open **https://glidepath.edycu.dev** and click **PEPE · 12B (a $40K donation)** — a two-tranche calendar in ≈3 s cold (12 live Nansen credits; 0 on a cache hit). Watch the **Nansen call rail** on the right while it runs: every call appears pending and turns green as Nansen answers — endpoint, params, credits, ms. Then read the *Dump today* line: position, estimated impact, and what share of a full day's organic buys you would be.
 2. Click **BONK · 20B on solana** — when exchanges are net-receiving BONK, *today is red*: the first tranche is halved and the reason is printed. Costs come from a real `trade/quote` route, labelled as such.
-3. Click **Every Nansen call (11)** under the plan — the provenance drawer: every Nansen call, the fields used, credits from the response headers, cached or live, and milliseconds.
+3. Click **Every Nansen call (12)** under the plan — the provenance drawer: the receipt behind the rail. Same calls, plus the fields used; its totals equal the rail's counters exactly.
 4. Click **ICS** — one calendar event per tranche with the go/no-go rule inside; **CSV** for the spreadsheet.
 5. Open the share page https://glidepath.edycu.dev/p?chain=solana&token=BONK&amount=20000000000 — server-rendered, with an OG image at https://glidepath.edycu.dev/api/og?chain=solana&token=BONK&amount=20000000000.
 
@@ -61,7 +61,7 @@ npm run check         # submission-readiness audit
 - Live app: https://glidepath.edycu.dev
 - Repository: https://github.com/edycutjong/glidepath
 - [DEMO.md](DEMO.md) — reproduce every number · [docs/SCORING.md](docs/SCORING.md) — formulas with the PEPE numbers · [ARCHITECTURE.md](ARCHITECTURE.md)
-- Release: https://github.com/edycutjong/glidepath/releases/tag/v1.1.0
+- Release: https://github.com/edycutjong/glidepath/releases/latest
 - Demo clip: posted from [@edycutjong](https://x.com/edycutjong) on X at submission
 
 Built for the Nansen Meridian Buildathon (14–27 Sep 2026). Not financial advice.
