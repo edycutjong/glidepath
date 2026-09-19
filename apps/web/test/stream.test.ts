@@ -78,6 +78,27 @@ describe("POST /api/plan?stream=1", () => {
     expect(out).toEqual([{ t: "error", error: "Nansen unreachable" }]);
   });
 
+  it("a client that disconnects mid-stream does not break the plan: later lines are dropped, the spend is still counted", async () => {
+    let release!: () => void;
+    const gate = new Promise<void>((r) => (release = r));
+    let onCallRef: ((e: unknown) => void) | null = null;
+    planForMock.mockImplementationOnce(async (_input: unknown, onCall: (e: unknown) => void) => {
+      onCallRef = onCall;
+      onCall({ type: "start", id: 1, method: "POST", endpoint: CALL.endpoint, body: CALL.body });
+      await gate;
+      onCall({ type: "end", id: 1, call: CALL });
+      return { status: "ok", credits: 7, calls: 1, provenance: [CALL] };
+    });
+    const res = await post({ chain: "ethereum", token: "PEPE", amount: "1" });
+    const reader = res.body!.getReader();
+    const first = new TextDecoder().decode((await reader.read()).value);
+    expect(JSON.parse(first.trim()).t).toBe("start");
+    await reader.cancel(); // the browser tab closed
+    release();
+    await vi.waitFor(() => expect(creditsLeft()).toBe(DAILY_CREDITS - 7));
+    expect(onCallRef).not.toBeNull();
+  });
+
   it("validation and the key check still run before the stream: a bad amount is a plain 400", async () => {
     const res = await post({ chain: "ethereum", token: "PEPE", amount: "-1" });
     expect(res.status).toBe(400);

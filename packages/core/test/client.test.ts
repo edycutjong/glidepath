@@ -21,6 +21,15 @@ describe("NansenClient", () => {
     expect(c.creditsSpent).toBe(5);
     expect(c.creditsRemaining).toBe(61000);
   });
+  it("creditsRemaining is the LAST balance any call reported — a later call without the header does not erase it", async () => {
+    let n = 0;
+    const fetchImpl: typeof fetch = async () => new Response("{}", { status: 200, headers: n++ === 0 ? { "x-nansen-credits-remaining": "500" } : {} });
+    const c = new NansenClient(KEY, { fetchImpl });
+    await c.post("search/general", {});
+    await c.post("search/general", { q: 2 });
+    expect(c.calls[1].creditsRemaining).toBeUndefined();
+    expect(c.creditsRemaining).toBe(500);
+  });
   it("falls back to the static credit table when the header is absent", async () => {
     const fetchImpl: typeof fetch = async () => new Response("{}", { status: 200 });
     const c = new NansenClient(KEY, { fetchImpl });
