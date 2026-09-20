@@ -206,7 +206,7 @@ npm run lint          # ESLint (flat config, TS + React hooks)
 npm run format:check  # Prettier
 npm run typecheck     # engine + CLI + scripts   ·   npm run typecheck:web
 npm test              # 247 vitest tests incl. 60,000 property cases
-npm run test:coverage # + v8 coverage (≈ 93 % lines on the engine and API)
+npm run test:coverage # + v8 coverage (100% statements/branches/functions/lines, engine + API)
 npm run verify        # 13/13 recorded plans replay offline — no key, no network, 0 credits
 npm run check         # submission-readiness audit (files, secrets, kitchen leaks, fixtures, verify, tests, README claims)
 npm run ci            # audit + format + lint + typecheck ×2 + coverage + verify + check
@@ -225,7 +225,7 @@ npm run bench         # live, ~270 credits for 7 tokens × 3 runs
 | Layer | Tool | Status |
 |---|---|---|
 | Code Quality | ESLint 9 (typescript-eslint, react-hooks) + Prettier + tsc (engine, web) | ✅ |
-| Unit Testing | vitest, 247 tests, v8 coverage ≈ 93 % lines | ✅ |
+| Unit Testing | vitest, 247 tests, v8 coverage 100% statements/branches/functions/lines | ✅ |
 | Property-based | fast-check — 60,000 generated cases on the tranche planner | ✅ |
 | Key boundary | engine + route handler + built pages asserted `nsn_`-free | ✅ |
 | Offline proof | 13/13 fixtures replay byte-for-byte (`verify`) | ✅ |
