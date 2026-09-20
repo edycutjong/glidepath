@@ -48,7 +48,7 @@ Each fixture stores every raw Nansen response (keyed by request, byte-for-byte),
 
 ## 3. Tests, typecheck, readiness
 ```bash
-npm test          # 112 vitest tests (tranche sizing table, red-day rule, risk dial, impact model, hash stability, pagination cap, cache, client, exports, resolver, end-to-end on a fake Nansen, every fixture, key boundary) — incl. 60,000 fast-check property cases on the planner
+npm test          # 247 vitest tests (tranche sizing table, red-day rule, risk dial, impact model, hash stability, pagination cap, cache, client, exports, resolver, end-to-end on a fake Nansen, every fixture, key boundary) — incl. 60,000 fast-check property cases on the planner; 100% statements/branches/functions/lines on packages/core/src, apps/web/lib, apps/web/app/api/plan
 npm run e2e       # Playwright, 4 suites × chromium + Pixel 7, against the built app started with NANSEN_API_KEY="" (0 credits)
 npm run typecheck
 npm run check     # submission readiness: files, secrets, kitchen leaks, fixtures, verify, tests, README claims
