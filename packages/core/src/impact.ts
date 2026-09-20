@@ -59,10 +59,9 @@ export function toBaseUnits(tokens: number, decimals: number): string {
   const [int, frac = ""] = s.split(".");
   const fracPadded = (frac + "0".repeat(decimals)).slice(0, decimals);
   const digits = (int + fracPadded).replace(/^0+(?=\d)/, "");
-  // `|| "0"` fallback: digits is provably never empty — toFixed() always yields ≥1 integer digit and the
-  // leading-zero-strip regex's lookahead always leaves a trailing digit behind. Unreachable from any input.
-  /* v8 ignore next */
-  return BigInt(digits || "0").toString();
+  // digits is provably never empty here: toFixed() always yields ≥1 integer digit, and the leading-zero-strip
+  // regex's lookahead always leaves a trailing digit behind — so no `|| "0"` fallback is needed.
+  return BigInt(digits).toString();
 }
 
 export function quoteSupported(chain: string): boolean {

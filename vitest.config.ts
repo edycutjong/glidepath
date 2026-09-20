@@ -14,6 +14,7 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "lcov"],
       include: ["packages/core/src/**", "apps/web/lib/**", "apps/web/app/api/plan/**"],
+      thresholds: { statements: 100, branches: 100, functions: 100, lines: 100 },
     },
   },
   resolve: {

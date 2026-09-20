@@ -238,8 +238,9 @@ export function computePlan(facts: Facts, input: PlanInput, resolved: Plan["reso
   // risk dial
   const risk = riskDial(facts.indicatorScores ?? {}, top1Share);
   for (const t of RISK_INDICATORS) if (risk.scores[t] == null) warnings.push(`indicator ${t} missing — treated as medium`);
-  /* v8 ignore next -- risk.concentrated is `top1Share != null && top1Share > CONCENTRATION_TOP1` on this same top1Share (riskDial's first arg), so whenever this branch runs top1Share is provably non-null; the `?? 0` fallback is defensive/unreachable. */
-  if (risk.concentrated) warnings.push(`one organic buyer is ${Math.round((top1Share ?? 0) * 100)}% of page-1 organic volume — single-buyer dependence, k reduced by 2 pts`);
+  // risk.concentrated is `top1Share != null && top1Share > CONCENTRATION_TOP1` on this same top1Share (riskDial's
+  // first arg), so whenever this branch runs top1Share is provably non-null — no `?? 0` fallback is needed.
+  if (risk.concentrated) warnings.push(`one organic buyer is ${Math.round(top1Share! * 100)}% of page-1 organic volume — single-buyer dependence, k reduced by 2 pts`);
 
   // red-day rule
   const th = theta(organicDailyUsd);
