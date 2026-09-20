@@ -1,6 +1,18 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { cacheKey, canonicalize, MemoryCache, LayeredCache, CachedNansenClient } from "../src/cache";
 import { fakeCachedClient, fakeFetch, KEY } from "./helpers";
+
+// A footgun fix: a real shell with NANSEN_OFFLINE=1 exported must not change what this suite asserts — every
+// test below builds its own CachedNansenClient with an explicit `offline` option, but cachedClientFromEnv reads
+// the ambient env directly, so it is neutralized around just that test too.
+const REAL_NANSEN_OFFLINE = process.env.NANSEN_OFFLINE;
+beforeEach(() => {
+  delete process.env.NANSEN_OFFLINE;
+});
+afterEach(() => {
+  if (REAL_NANSEN_OFFLINE === undefined) delete process.env.NANSEN_OFFLINE;
+  else process.env.NANSEN_OFFLINE = REAL_NANSEN_OFFLINE;
+});
 
 describe("cache", () => {
   it("cacheKey is order-independent at every depth and distinguishes GET from POST", () => {

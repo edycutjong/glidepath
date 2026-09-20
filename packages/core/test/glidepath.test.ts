@@ -1,6 +1,17 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { glidepath } from "../src/glidepath";
 import { fakeCachedClient, fakeClient, pepeRoutes, PEPE, NOW } from "./helpers";
+
+// A footgun fix: a real shell with NANSEN_OFFLINE=1 exported must not change what this suite asserts — every
+// fakeCachedClient below is meant to hit its fake network, so the ambient env is neutralized for each test.
+const REAL_NANSEN_OFFLINE = process.env.NANSEN_OFFLINE;
+beforeEach(() => {
+  delete process.env.NANSEN_OFFLINE;
+});
+afterEach(() => {
+  if (REAL_NANSEN_OFFLINE === undefined) delete process.env.NANSEN_OFFLINE;
+  else process.env.NANSEN_OFFLINE = REAL_NANSEN_OFFLINE;
+});
 
 describe("glidepath end to end (fake Nansen)", () => {
   it("PEPE on ethereum: 9 calls, 12 credits, plan ok, provenance lists every endpoint with fields", async () => {

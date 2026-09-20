@@ -1,9 +1,22 @@
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect, afterEach, beforeEach } from "vitest";
 import { mkdtempSync, writeFileSync, existsSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { DiskCache, MemoryCache, LayeredCache, cacheKey, cachedClientFromEnv, CachedNansenClient } from "../src/cache";
 import { fakeFetch, KEY } from "./helpers";
+
+// A footgun fix: a real shell with NANSEN_OFFLINE=1 exported must not change what this suite asserts — every
+// CachedNansenClient built below is meant to hit its fake network, so the ambient env is neutralized for the
+// duration of each test and restored after (cachedClientFromEnv reads it directly, and would otherwise flip
+// every client in this file into offline mode).
+const REAL_NANSEN_OFFLINE = process.env.NANSEN_OFFLINE;
+beforeEach(() => {
+  delete process.env.NANSEN_OFFLINE;
+});
+afterEach(() => {
+  if (REAL_NANSEN_OFFLINE === undefined) delete process.env.NANSEN_OFFLINE;
+  else process.env.NANSEN_OFFLINE = REAL_NANSEN_OFFLINE;
+});
 
 const ENTRY = { storedAt: "2026-01-01T00:00:00Z", ttlMs: 1, endpoint: "tgm/flows", body: { a: 1 }, text: '{"ok":true}' };
 

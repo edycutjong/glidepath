@@ -20,6 +20,7 @@ describe("makeClient wiring (VERCEL cache dir + NANSEN_API_KEY fallback)", () =>
   let realFetch: typeof fetch;
   let realKey: string | undefined;
   let realVercel: string | undefined;
+  let realOffline: string | undefined;
   let scratchDir: string;
   let realCwd: () => string;
 
@@ -27,6 +28,10 @@ describe("makeClient wiring (VERCEL cache dir + NANSEN_API_KEY fallback)", () =>
     realFetch = globalThis.fetch;
     realKey = process.env.NANSEN_API_KEY;
     realVercel = process.env.VERCEL;
+    realOffline = process.env.NANSEN_OFFLINE;
+    // A real shell with NANSEN_OFFLINE=1 exported must not change what this suite asserts: makeClient wires a
+    // CachedNansenClient through cachedClientFromEnv, which reads the ambient env directly.
+    delete process.env.NANSEN_OFFLINE;
     // Every call fails; fetchFacts settles each into Facts.errors rather than throwing, so planFor still resolves.
     globalThis.fetch = vi.fn(async () => new Response("boom", { status: 500 })) as unknown as typeof fetch;
     scratchDir = mkdtempSync(join(tmpdir(), "glidepath-server-coverage-"));
@@ -38,6 +43,8 @@ describe("makeClient wiring (VERCEL cache dir + NANSEN_API_KEY fallback)", () =>
     else process.env.NANSEN_API_KEY = realKey;
     if (realVercel == null) delete process.env.VERCEL;
     else process.env.VERCEL = realVercel;
+    if (realOffline === undefined) delete process.env.NANSEN_OFFLINE;
+    else process.env.NANSEN_OFFLINE = realOffline;
     process.cwd = realCwd;
     rmSync(scratchDir, { recursive: true, force: true });
   });

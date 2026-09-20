@@ -3,11 +3,23 @@
  * app returns, the provenance drawer, the ICS and CSV exports and every error message are key-free — checked by
  * running the real engine against a fake Nansen that receives the key in the header and echoes it back in a body.
  */
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { glidepath } from "../src/glidepath";
 import { toICS, toCSV } from "../src/export";
 import { NansenClient } from "../src/client";
 import { fakeCachedClient, fakeFetch, pepeRoutes, KEY, PEPE, NOW } from "./helpers";
+
+// A footgun fix: a real shell with NANSEN_OFFLINE=1 exported must not change what this suite asserts — the first
+// test below drives a real CachedNansenClient (via fakeCachedClient) against a fake network, so the ambient env
+// is neutralized for the duration of each test and restored after.
+const REAL_NANSEN_OFFLINE = process.env.NANSEN_OFFLINE;
+beforeEach(() => {
+  delete process.env.NANSEN_OFFLINE;
+});
+afterEach(() => {
+  if (REAL_NANSEN_OFFLINE === undefined) delete process.env.NANSEN_OFFLINE;
+  else process.env.NANSEN_OFFLINE = REAL_NANSEN_OFFLINE;
+});
 
 describe("the Nansen key never leaves the request header", () => {
   it("a full plan serialised to JSON, its provenance, and the ICS/CSV exports contain no nsn_ key", async () => {

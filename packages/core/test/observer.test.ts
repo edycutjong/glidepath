@@ -1,6 +1,17 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import type { CallEvent } from "../src/client";
 import { fakeClient, fakeCachedClient } from "./helpers";
+
+// A footgun fix: a real shell with NANSEN_OFFLINE=1 exported must not change what this suite asserts — the
+// fakeCachedClient case below is meant to hit its fake network, so the ambient env is neutralized for each test.
+const REAL_NANSEN_OFFLINE = process.env.NANSEN_OFFLINE;
+beforeEach(() => {
+  delete process.env.NANSEN_OFFLINE;
+});
+afterEach(() => {
+  if (REAL_NANSEN_OFFLINE === undefined) delete process.env.NANSEN_OFFLINE;
+  else process.env.NANSEN_OFFLINE = REAL_NANSEN_OFFLINE;
+});
 
 /** The web app's call rail is fed by these events; every `end` must carry the very object the drawer prints. */
 describe("call observer (the Nansen call rail)", () => {
