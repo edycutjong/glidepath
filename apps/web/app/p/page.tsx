@@ -8,14 +8,26 @@ export const maxDuration = 60;
 
 type Props = { searchParams: Promise<{ chain?: string; token?: string; amount?: string }> };
 
+const compactAmount = (amount: string): string => {
+  const n = Number(amount);
+  if (!Number.isFinite(n)) return amount;
+  return new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(n);
+};
+
+// og:description / twitter:description need to land in 80–125 chars regardless of token shape (a raw 42-char
+// address plus a long amount can otherwise push a naive template well past 125) — compact the amount and
+// abbreviate a long token identifier so the description stays in range for both a ticker and a bare address.
+const shortToken = (token: string): string => (token.length > 12 ? `${token.slice(0, 6)}…${token.slice(-4)}` : token);
+
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { chain = "ethereum", token = "", amount = "1" } = await searchParams;
   const t = token;
   const og = `/api/og?chain=${chain}&token=${encodeURIComponent(t)}&amount=${encodeURIComponent(amount)}`;
   const title = `Glidepath — ${t} on ${chain}`;
+  const description = `A dated selling calendar for ${compactAmount(amount)} ${shortToken(t)} on ${chain}, sized to the organic demand Nansen sees.`;
   return {
     title,
-    description: `A dated selling calendar for ${amount} ${t} on ${chain}, paced to organic demand (Nansen).`,
+    description,
     openGraph: { title, images: [og] },
     twitter: { card: "summary_large_image", title, images: [og] },
   };
