@@ -260,6 +260,18 @@ describe("applyQuotes", () => {
     expect(p.warnings.join()).toMatch(/route quote: probe: HTTP 400/);
     expect(p.hash).toBe(base.hash);
   });
+  it("regression (audit 2026-09-23): only one leg quoted → costs keep their own labels and no cross-model savings figure", () => {
+    const leg = { outUsd: 1, inUsd: 2, costUsd: 5000, priceImpactPct: 1, aggregator: "okx" };
+    const bagOnly = applyQuotes(base, { decimals: 18, spotPriceUsd: 3.3e-6, errors: ["one-tranche: timeout"], legs: [{ label: "whole-bag", tokens: INPUT.amount, ...leg }] });
+    expect(bagOnly.dumpToday.model).toBe("route-quote");
+    expect(bagOnly.glidepath.model).toBe("constant-product");
+    expect(bagOnly.savingsUsd).toBeNull();
+    expect(bagOnly.warnings.join()).toMatch(/different models, so no savings figure/);
+    const oneOnly = applyQuotes(base, { decimals: 18, spotPriceUsd: 3.3e-6, errors: ["whole-bag: no route"], legs: [{ label: "one-tranche", tokens: base.tranches[0].tokens, ...leg }] });
+    expect(oneOnly.dumpToday.model).toBe("constant-product");
+    expect(oneOnly.glidepath.model).toBe("route-quote");
+    expect(oneOnly.savingsUsd).toBeNull();
+  });
   it("null quotes (chain unsupported) is a no-op", () => {
     expect(applyQuotes(base, null)).toBe(base);
   });

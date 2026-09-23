@@ -352,7 +352,11 @@ export function applyQuotes(plan: Plan, quotes: RouteQuotes | null): Plan {
     }
     p.glidepath = { costUsd: p.tranches.reduce((n, t) => n + t.costUsd, 0), model: "route-quote", firstTrancheCostUsd: p.tranches[0].costUsd, priceImpactPct: pctOf(one.priceImpactPct) };
   }
-  p.savingsUsd = p.dumpToday.costUsd != null && p.glidepath.costUsd != null ? p.dumpToday.costUsd - p.glidepath.costUsd : null;
+  // one leg quoted, the other on the model: a route quote carries aggregator fees the model does not, so the two
+  // costs are not comparable — show both, labelled, but never subtract them into a "savings" figure
+  const mixed = p.dumpToday.model != null && p.glidepath.model != null && p.dumpToday.model !== p.glidepath.model;
+  if (mixed) p.warnings.push(`dump-today cost is a ${p.dumpToday.model}, the glidepath cost a ${p.glidepath.model} — different models, so no savings figure`);
+  p.savingsUsd = !mixed && p.dumpToday.costUsd != null && p.glidepath.costUsd != null ? p.dumpToday.costUsd - p.glidepath.costUsd : null;
   p.hash = planHash(p);
   return p;
 }
