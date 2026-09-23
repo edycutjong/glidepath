@@ -18,8 +18,12 @@ export async function planFor(input: PlanInput, onCall?: CallObserver): Promise<
   return glidepath(client, input);
 }
 
+/** the longest real address (starknet/sui, 66) with room to spare; anything longer is not a token and never reaches Nansen */
+export const MAX_TOKEN_CHARS = 128;
+
 export function parseInput(chain: string | null, token: string | null, amount: string | null): PlanInput | { error: string } {
   if (!token?.trim()) return { error: "token is required (address or ticker)" };
+  if (token.trim().length > MAX_TOKEN_CHARS) return { error: `token is too long — an address or a ticker, at most ${MAX_TOKEN_CHARS} characters` };
   if (!chain?.trim()) return { error: "chain is required" };
   const n = Number(String(amount ?? "").replace(/[,_\s]/g, ""));
   if (!(n > 0) || !Number.isFinite(n)) return { error: "amount must be a positive number of tokens" };

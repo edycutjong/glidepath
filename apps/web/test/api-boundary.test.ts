@@ -63,5 +63,8 @@ describe("input validation happens before the key check and before any network c
   it("parseInput accepts comma / underscore / space thousands separators and lower-cases the chain", () => {
     expect(parseInput(" Ethereum ", " PEPE ", "12,000,000,000")).toEqual({ chain: "ethereum", token: "PEPE", amount: 12_000_000_000 });
     expect(parseInput("solana", "BONK", "20_000 000")).toEqual({ chain: "solana", token: "BONK", amount: 20_000_000 });
+    // audit 2026-09-23: an unbounded token string reached search/general and the fixture/file names
+    expect(parseInput("solana", "x".repeat(128), "1")).toEqual({ chain: "solana", token: "x".repeat(128), amount: 1 });
+    expect(parseInput("solana", "x".repeat(129), "1")).toEqual({ error: "token is too long — an address or a ticker, at most 128 characters" });
   });
 });
