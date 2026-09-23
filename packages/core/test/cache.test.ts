@@ -84,4 +84,16 @@ describe("cache", () => {
     expect(n).toBe(2);
     expect(store.size).toBe(1);
   });
+  it("regression (audit 2026-09-23): a bounded MemoryCache drops the oldest-written entry, and a re-write refreshes it", () => {
+    const e = (text: string) => ({ storedAt: "2026-09-23T00:00:00.000Z", ttlMs: 1, endpoint: "x", body: {}, text });
+    const m = new MemoryCache(2);
+    m.set("a", e("1"));
+    m.set("b", e("2"));
+    m.set("a", e("1'"));
+    m.set("c", e("3"));
+    expect(m.size).toBe(2);
+    expect(m.get("b")).toBeUndefined();
+    expect(m.get("a")?.text).toBe("1'");
+    expect(m.get("c")?.text).toBe("3");
+  });
 });

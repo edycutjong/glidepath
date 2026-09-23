@@ -41,11 +41,15 @@ export class DiskCache implements CacheStore {
 
 export class MemoryCache implements CacheStore {
   private m = new Map<string, CacheEntry>();
+  /** `maxEntries` bounds a long-lived server instance: past it the oldest-written entry goes (it is on disk too) */
+  constructor(private maxEntries = Infinity) {}
   get(key: string) {
     return this.m.get(key);
   }
   set(key: string, entry: CacheEntry) {
+    this.m.delete(key);
     this.m.set(key, entry);
+    if (this.m.size > this.maxEntries) this.m.delete(this.m.keys().next().value!);
   }
   entries(): Record<string, CacheEntry> {
     return Object.fromEntries(this.m);
