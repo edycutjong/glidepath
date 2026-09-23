@@ -1,6 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { NansenClient, sha256, CREDITS, type ClientOptions, type CallOptions, type RawResult } from "./client";
+import { NansenClient, sha256, CREDITS, parseBody, type ClientOptions, type CallOptions, type RawResult } from "./client";
 
 export type CacheEntry = { storedAt: string; ttlMs: number; endpoint: string; body: Record<string, unknown>; text: string; creditsUsed?: number };
 
@@ -130,16 +130,17 @@ export class CachedNansenClient extends NansenClient {
     if (this.offline) throw new Error(`NANSEN_OFFLINE=1 and no cached response for ${method} ${endpoint} ${JSON.stringify(body)}`);
     const t0 = Date.now();
     const id = this.begin(method, endpoint, body);
-    let raw: RawResult;
+    let raw: RawResult, data: T;
     try {
       raw = await this.raw(method, endpoint, body, opts);
+      data = parseBody<T>(endpoint, raw); // before the store: a non-JSON 200 is a failure and is never cached
     } catch (e) {
       this.recordFailure(method, endpoint, body, fieldsUsed, e, Date.now() - t0, id);
       throw e;
     }
     this.record(method, endpoint, body, fieldsUsed, raw, id);
     this.store.set(key, { storedAt: new Date().toISOString(), ttlMs: this.ttlMs, endpoint, body, text: raw.text, creditsUsed: raw.creditsUsed ?? CREDITS[endpoint] ?? 1 });
-    return JSON.parse(raw.text) as T;
+    return data;
   }
 }
 

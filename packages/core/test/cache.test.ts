@@ -68,4 +68,20 @@ describe("cache", () => {
     expect(mem.get("k")).toEqual(entry);
     expect(l.get("missing")).toBeUndefined();
   });
+  it("regression (audit 2026-09-23): a non-JSON 200 is never cached — the next request goes back to the network", async () => {
+    let n = 0;
+    const store = new MemoryCache();
+    const c = new CachedNansenClient(KEY, {
+      store,
+      rps: 1000,
+      offline: false,
+      fetchImpl: async () => (n++ === 0 ? new Response("<html>gateway</html>", { status: 200 }) : new Response('{"data":[1]}', { status: 200 })),
+    });
+    await expect(c.post("tgm/flows", { a: 1 })).rejects.toThrow(/not JSON/);
+    expect(store.size).toBe(0);
+    expect(c.calls[0]).toMatchObject({ ok: false, cached: false, credits: 0 });
+    await expect(c.post("tgm/flows", { a: 1 })).resolves.toEqual({ data: [1] });
+    expect(n).toBe(2);
+    expect(store.size).toBe(1);
+  });
 });

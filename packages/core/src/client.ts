@@ -81,6 +81,21 @@ export class NansenError extends Error {
   }
 }
 
+/**
+ * Parse a 2xx body. A 200 that is not JSON (a gateway/HTML page) is a failed call, not a success: it must be recorded as
+ * one and must never reach the cache, where it would replay the same failure for an hour at 0 credits.
+ */
+export function parseBody<T>(endpoint: string, raw: RawResult): T {
+  try {
+    return JSON.parse(raw.text) as T;
+  } catch {
+    throw withAttempts(new NansenError(endpoint, raw.status, "response body was not JSON"), raw.attempts);
+  }
+}
+
+/** Worth one more attempt: our timeout fired, or the socket failed before any HTTP status (undici throws TypeError). */
+const transient = (e: unknown) => e instanceof Error && (e.name === "AbortError" || e instanceof TypeError);
+
 function withAttempts(e: unknown, attempts: number): unknown {
   if (e && typeof e === "object") (e as { attempts?: number }).attempts = attempts;
   return e;
@@ -167,7 +182,7 @@ export class NansenClient {
     }
   }
 
-  /** POST `endpoint` with a JSON body; one retry on 429/5xx/timeout unless `retries: 0`; records the call. */
+  /** POST `endpoint` with a JSON body; one retry on 429/5xx/timeout/network error unless `retries: 0`; records the call. */
   async post<T = unknown>(endpoint: string, body: Record<string, unknown>, fieldsUsed: string[] = [], opts: CallOptions = {}): Promise<T> {
     return this.request<T>("POST", endpoint, body, fieldsUsed, opts);
   }
@@ -182,8 +197,9 @@ export class NansenClient {
     const id = this.begin(method, endpoint, body);
     try {
       const raw = await this.raw(method, endpoint, body, opts);
+      const data = parseBody<T>(endpoint, raw);
       this.record(method, endpoint, body, fieldsUsed, raw, id);
-      return JSON.parse(raw.text) as T;
+      return data;
     } catch (e) {
       this.recordFailure(method, endpoint, body, fieldsUsed, e, Date.now() - t0, id);
       throw e;
@@ -268,7 +284,7 @@ export class NansenClient {
         };
       } catch (e) {
         lastErr = e;
-        if (attempt === maxAttempts - 1 || !(e instanceof Error && e.name === "AbortError")) throw withAttempts(e, attemptsMade);
+        if (attempt === maxAttempts - 1 || !transient(e)) throw withAttempts(e, attemptsMade);
       } finally {
         clearTimeout(timer);
       }

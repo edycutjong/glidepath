@@ -95,4 +95,21 @@ describe("NansenClient", () => {
     await expect(c.post("tgm/flows", {}, [], { retries: 0 })).rejects.toThrow();
     expect(c.calls[0]).toMatchObject({ ok: false, error: "timeout", attempts: 1, credits: 0 });
   });
+  it("regression (audit 2026-09-23): a 200 that is not JSON is ONE failed call, not a success followed by a failure", async () => {
+    const c = fakeClient(() => new Response("<html>gateway</html>", { status: 200, headers: { "content-type": "text/html" } }));
+    await expect(c.post("tgm/flows", {})).rejects.toThrow(/HTTP 200: response body was not JSON/);
+    expect(c.calls).toHaveLength(1);
+    expect(c.calls[0]).toMatchObject({ ok: false, status: 200, credits: 0, attempts: 1 });
+  });
+  it("regression (audit 2026-09-23): a socket error before any HTTP status is retried once, like a timeout", async () => {
+    let n = 0;
+    const fetchImpl: typeof fetch = async () => {
+      if (n++ === 0) throw new TypeError("fetch failed");
+      return new Response('{"data":[]}', { status: 200 });
+    };
+    const c = new NansenClient(KEY, { fetchImpl });
+    await expect(c.post("tgm/flows", {})).resolves.toEqual({ data: [] });
+    expect(n).toBe(2);
+    expect(c.calls[0]).toMatchObject({ ok: true, attempts: 2 });
+  });
 });
