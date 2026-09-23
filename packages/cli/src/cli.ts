@@ -22,11 +22,18 @@ const amount = Number(String(opt("--amount") ?? positional[1] ?? "").replace(/[,
 if (!token || !(amount > 0) || flag("--help")) {
   console.log(`usage: glidepath <token-address-or-ticker> --chain <chain> --amount <tokens> [--json] [--explain] [--csv out.csv] [--ics out.ics] [--no-cache] [--no-quotes]
   Paste a token, a chain and the amount you hold → a dated selling calendar paced to organic demand (Nansen labels decide what is organic).
-  Needs NANSEN_API_KEY:  set -a; source ~/.config/nansen/meridian.env; set +a`);
+  Needs NANSEN_API_KEY:  export NANSEN_API_KEY=nsn_…  (a key from https://app.nansen.ai/api)`);
   process.exit(token && amount > 0 ? 0 : 1);
 }
 
-const client = cachedClientFromEnv({ ttlMs: flag("--no-cache") ? 0 : undefined });
+let client: ReturnType<typeof cachedClientFromEnv>;
+try {
+  client = cachedClientFromEnv({ ttlMs: flag("--no-cache") ? 0 : undefined });
+} catch (e) {
+  // the first thing a stranger hits if the env file was not sourced — one line, not a stack trace
+  console.error(`${(e as Error).message}\n  export NANSEN_API_KEY=nsn_…   (a key from https://app.nansen.ai/api)\n  no key? \`npm run verify\` replays the 13 recorded plans offline`);
+  process.exit(1);
+}
 const p: PlanResult = await glidepath(client, { chain, token, amount }, { quotes: !flag("--no-quotes") });
 
 if (flag("--json")) {
