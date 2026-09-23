@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { Call, PlanResult } from "@glidepath/core";
 import { planFor, parseInput } from "@/lib/server";
-import { clientIp, ipAllowed, budgetExhausted, recordSpend, RATE_MESSAGE, BUDGET_MESSAGE } from "@/lib/guard";
+import { admit, recordSpend } from "@/lib/guard";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -58,9 +58,8 @@ export async function POST(req: Request) {
   const input = parseInput(String(body.chain ?? ""), String(body.token ?? ""), String(body.amount ?? ""));
   if ("error" in input) return NextResponse.json({ error: input.error }, { status: 400 });
   if (!process.env.NANSEN_API_KEY) return NextResponse.json({ error: "NANSEN_API_KEY is not set on the server" }, { status: 500 });
-  const gate = ipAllowed(clientIp(req.headers));
-  if (!gate.ok) return NextResponse.json({ error: RATE_MESSAGE(gate.retryAfter) }, { status: 429, headers: { "retry-after": String(gate.retryAfter), "cache-control": "no-store" } });
-  if (budgetExhausted()) return NextResponse.json({ error: BUDGET_MESSAGE }, { status: 503, headers: { "retry-after": "3600", "cache-control": "no-store" } });
+  const gate = admit(req.headers);
+  if (!gate.ok) return NextResponse.json({ error: gate.error }, { status: gate.status, headers: { "retry-after": String(gate.retryAfter), "cache-control": "no-store" } });
   if (new URL(req.url).searchParams.get("stream") === "1") return streamPlan(input);
   try {
     const plan = await planFor(input);

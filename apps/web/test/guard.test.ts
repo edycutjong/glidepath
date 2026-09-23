@@ -126,9 +126,75 @@ describe("GET /api/og under the guard — an image never 4xxs", () => {
     expect(planForMock).not.toHaveBeenCalled();
   });
 
-  it("past the per-IP rate the card renders data-free too", async () => {
-    for (let i = 0; i < IP_PER_MIN; i++) ipAllowed("203.0.113.7");
+  it("past its own per-IP rate the card renders data-free too (the planner's window does not blank a card)", async () => {
+    for (let i = 0; i < IP_PER_MIN; i++) ipAllowed("og:203.0.113.7");
     expect((await og("203.0.113.7")).status).toBe(200);
+    expect(planForMock).not.toHaveBeenCalled();
+  });
+});
+
+describe("GET /api/export under the guard (audit 2026-09-23: it spent credits with no gate)", () => {
+  let realKey: string | undefined;
+  beforeEach(() => {
+    resetGuard();
+    realKey = process.env.NANSEN_API_KEY;
+    process.env.NANSEN_API_KEY = KEY;
+    planForMock.mockReset();
+    planForMock.mockResolvedValue({
+      credits: 12,
+      tranches: [],
+      days: 0,
+      resolved: { symbol: "PEPE" },
+      today: { date: "2026-09-23", theta: { smUsd: 0, exUsd: 0 } },
+      risk: { k: 0 },
+      organic: {},
+      glidepath: {},
+      computedAt: "2026-09-23T00:00:00.000Z",
+      hash: "0".repeat(64),
+    });
+  });
+  afterEach(() => {
+    if (realKey == null) delete process.env.NANSEN_API_KEY;
+    else process.env.NANSEN_API_KEY = realKey;
+  });
+  const exp = async (ip = "203.0.113.7") =>
+    (await import("../app/api/export/route")).GET(new Request("http://localhost/api/export?chain=ethereum&token=PEPE&amount=1&format=csv", { headers: { "x-forwarded-for": ip } }));
+
+  it("a file download records its credits against the day", async () => {
+    const res = await exp();
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-type")).toContain("text/csv");
+    expect(creditsLeft()).toBe(DAILY_CREDITS - 12);
+  });
+
+  it("has its own per-IP window: a planner at its limit can still download the calendar", async () => {
+    for (let i = 0; i < IP_PER_MIN; i++) ipAllowed("203.0.113.7");
+    expect((await exp()).status).toBe(200);
+    for (let i = 0; i < IP_PER_MIN - 1; i++) await exp();
+    const res = await exp();
+    expect(res.status).toBe(429);
+    expect(Number(res.headers.get("retry-after"))).toBeGreaterThan(0);
+  });
+
+  it("past the daily ceiling: 503 with the reason, planFor never runs", async () => {
+    recordSpend(DAILY_CREDITS);
+    const res = await exp();
+    expect(res.status).toBe(503);
+    expect(await res.text()).toBe(BUDGET_MESSAGE);
+    expect(planForMock).not.toHaveBeenCalled();
+  });
+
+  it("an engine failure is a plain 502 with the reason, not an unhandled throw", async () => {
+    planForMock.mockRejectedValueOnce(new Error("NANSEN_API_KEY missing or malformed (expected nsn_…)"));
+    const res = await exp();
+    expect(res.status).toBe(502);
+    expect(await res.text()).toMatch(/malformed/);
+  });
+
+  it("no key on the server: 500 with the reason before any gate or planFor", async () => {
+    delete process.env.NANSEN_API_KEY;
+    const res = await exp();
+    expect(res.status).toBe(500);
     expect(planForMock).not.toHaveBeenCalled();
   });
 });

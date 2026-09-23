@@ -64,3 +64,18 @@ export function resetGuard(): void {
 
 export const RATE_MESSAGE = (s: number) => `Too many requests from this address — try again in ${s} s`;
 export const BUDGET_MESSAGE = "Today's live Nansen budget for this demo is used up — come back after 00:00 UTC, or run it locally with your own key (README, under 10 minutes).";
+
+export type Admission = { ok: true } | { ok: false; status: 429 | 503; error: string; retryAfter: number };
+
+/**
+ * The one gate in front of every route that can spend credits (/api/plan, /api/export, /p, /api/og). `scope` gives a
+ * surface its own per-IP window, so the calendar download and the share page never eat the planner's 6/min on camera;
+ * the daily ceiling is shared by all of them.
+ */
+export function admit(headers: Headers, scope = "plan", now = Date.now()): Admission {
+  const ip = clientIp(headers);
+  const gate = ipAllowed(scope === "plan" ? ip : `${scope}:${ip}`, now);
+  if (!gate.ok) return { ok: false, status: 429, error: RATE_MESSAGE(gate.retryAfter), retryAfter: gate.retryAfter };
+  if (budgetExhausted(now)) return { ok: false, status: 503, error: BUDGET_MESSAGE, retryAfter: 3600 };
+  return { ok: true };
+}

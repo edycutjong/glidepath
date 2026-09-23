@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import type { PlanResult } from "@glidepath/core";
 import { Glidepath } from "@/components/Glidepath";
 import { SiteHeader, SiteFooter } from "@/components/Shell";
 import { planFor, parseInput } from "@/lib/server";
+import { admit, recordSpend } from "@/lib/guard";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -22,7 +25,7 @@ const shortToken = (token: string): string => (token.length > 12 ? `${token.slic
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { chain = "ethereum", token = "", amount = "1" } = await searchParams;
   const t = token;
-  const og = `/api/og?chain=${chain}&token=${encodeURIComponent(t)}&amount=${encodeURIComponent(amount)}`;
+  const og = `/api/og?chain=${encodeURIComponent(chain)}&token=${encodeURIComponent(t)}&amount=${encodeURIComponent(amount)}`;
   const title = `Glidepath — ${t} on ${chain}`;
   const description = `A dated selling calendar for ${compactAmount(amount)} ${shortToken(t)} on ${chain}, sized to the organic demand Nansen sees.`;
   return {
@@ -37,24 +40,39 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 export default async function SharePage({ searchParams }: Props) {
   const { chain = "ethereum", token = "", amount = "1" } = await searchParams;
   const input = parseInput(chain, token, amount);
-  if ("error" in input)
-    return (
-      <>
-        <SiteHeader current="home" />
-        <main className="wrap">
-          <div className="banner err" role="alert">
-            This share link is malformed<small>{input.error}</small>
-          </div>
-        </main>
-        <SiteFooter />
-      </>
-    );
-  const plan = await planFor(input);
+  if ("error" in input) return <ShareError title="This share link is malformed" detail={input.error} />;
+  // a share link spends live credits on a cache miss: same spend guard as /api/plan, and never a 500 page on a link
+  if (!process.env.NANSEN_API_KEY)
+    return <ShareError title="This server has no Nansen key" detail="NANSEN_API_KEY is not set on the server — run it locally with your own key (README, under 10 minutes)." />;
+  const gate = admit(await headers(), "share");
+  if (!gate.ok) return <ShareError title="The plan could not be computed" detail={gate.error} />;
+  let plan: PlanResult;
+  try {
+    plan = await planFor(input);
+  } catch (e) {
+    return <ShareError title="The plan could not be computed" detail={(e as Error).message.slice(0, 300)} />;
+  }
+  recordSpend(plan.credits);
   return (
     <div className="with-rail">
       <SiteHeader current="home" />
       <Glidepath initialToken={plan.resolved.symbol || plan.input.token} initialChain={plan.input.chain} initialAmount={String(plan.input.amount)} initialPlan={plan} />
       <SiteFooter />
     </div>
+  );
+}
+
+function ShareError({ title, detail }: { title: string; detail: string }) {
+  return (
+    <>
+      <SiteHeader current="home" />
+      <main className="wrap">
+        <div className="banner err" role="alert">
+          {title}
+          <small>{detail}</small>
+        </div>
+      </main>
+      <SiteFooter />
+    </>
   );
 }

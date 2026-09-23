@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { planFor, parseInput } from "@/lib/server";
-import { clientIp, ipAllowed, budgetExhausted, recordSpend } from "@/lib/guard";
+import { admit, recordSpend } from "@/lib/guard";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   const input = parseInput(u.searchParams.get("chain"), u.searchParams.get("token"), u.searchParams.get("amount"));
   // same spend guard as /api/plan — but an image never 4xxs (a scraper would drop the card): past the per-IP rate or
   // the daily ceiling the card renders its data-free layout
-  const live = ipAllowed(clientIp(req.headers)).ok && !budgetExhausted();
+  const live = admit(req.headers, "og").ok;
   const p =
     "error" in input || !live
       ? null

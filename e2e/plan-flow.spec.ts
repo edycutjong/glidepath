@@ -77,4 +77,16 @@ test.describe("planner UI", () => {
     expect(res?.status()).toBe(200);
     await expect(page.locator(".banner[role=alert]")).toContainText("amount must be a positive number");
   });
+
+  test("regression (audit 2026-09-23): a well-formed share link on a keyless server is a banner, not a 500 page", async ({ page }) => {
+    const res = await page.goto("/p?chain=ethereum&token=PEPE&amount=12000000000");
+    expect(res?.status()).toBe(200);
+    await expect(page.locator(".banner[role=alert]")).toContainText("no Nansen key");
+  });
+
+  test("regression (audit 2026-09-23): /api/export on a keyless server answers a plain 500 with the reason", async ({ request }) => {
+    const res = await request.get("/api/export?chain=ethereum&token=PEPE&amount=1&format=ics");
+    expect(res.status()).toBe(500);
+    expect(await res.text()).toMatch(/NANSEN_API_KEY is not set/);
+  });
 });
