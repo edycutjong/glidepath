@@ -25,6 +25,8 @@ export type Facts = {
   proBuy7dUsd: number | null;
   proBuyers: number | null;
   proPages: number | null;
+  /** the pro list hit the page cap with more pages left (pro volume is then a floor, organic an upper bound) */
+  proTruncated: boolean | null;
   proLabels: string[];
   /** who-bought-sold 7d, exclude pro labels, page 1 (top-1000 organic buyers by USD) */
   organicPage1Usd: number | null;
@@ -51,7 +53,6 @@ export type Facts = {
 };
 
 export const RISK_INDICATORS = ["liquidity-risk", "concentration-risk", "btc-reflexivity"] as const;
-export const LABELS = EXCLUDED_LABELS;
 
 const num = (v: unknown): number | null => (typeof v === "number" && Number.isFinite(v) ? v : null);
 const topN = <T extends { bought_volume_usd?: number | null }>(rows: T[], n: number) => [...rows].sort((a, b) => (num(b.bought_volume_usd) ?? 0) - (num(a.bought_volume_usd) ?? 0)).slice(0, n);
@@ -139,6 +140,7 @@ export async function fetchFacts(client: NansenClient, chain: string, address: s
     proBuy7dUsd: proRows ? usdOf(proRows) : null,
     proBuyers: proRows ? proRows.length : null,
     proPages: pros?.pages ?? null,
+    proTruncated: pros?.truncated ?? null,
     proLabels: proRows ? [...new Set(proRows.map((r) => r.address_label).filter((l): l is string => !!l))].slice(0, 8) : [],
     organicPage1Usd: orgRows ? usdOf(orgRows) : null,
     organicPage1Rows: orgRows ? orgRows.length : null,

@@ -53,6 +53,7 @@ export function pepeFacts(over: Partial<Facts> = {}): Facts {
     proBuy7dUsd: 24_893,
     proBuyers: 1,
     proPages: 1,
+    proTruncated: false,
     proLabels: ["nftsindubai.eth"],
     organicPage1Usd: 1_657_674,
     organicPage1Rows: 407,

@@ -42,8 +42,12 @@ describe("computePlan — warnings on the fringes", () => {
     expect(p.warnings.join()).toMatch(/amount exceeds the token's total supply \(420,690,000,000,000\) — check the units/);
   });
   it("pro-buyer list truncated at 3 pages warns that organic volume is an upper bound", () => {
-    const p = computePlan(pepeFacts({ proPages: 3 }), INPUT, RESOLVED, NOW);
+    const p = computePlan(pepeFacts({ proPages: 3, proTruncated: true }), INPUT, RESOLVED, NOW);
     expect(p.warnings.join()).toMatch(/pro-buyer list truncated at 3 pages/);
+  });
+  it("regression (audit 2026-09-23): a pro list that ends exactly on page 3 is complete — no truncation warning", () => {
+    const p = computePlan(pepeFacts({ proPages: 3, proTruncated: false }), INPUT, RESOLVED, NOW);
+    expect(p.warnings.join()).not.toMatch(/truncated/);
   });
   it("organicTop10Usd missing keeps top10Share null without throwing", () => {
     const p = computePlan(pepeFacts({ organicTop10Usd: null }), INPUT, RESOLVED, NOW);

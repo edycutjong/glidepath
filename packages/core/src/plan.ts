@@ -227,7 +227,8 @@ export function computePlan(facts: Facts, input: PlanInput, resolved: Plan["reso
       organicShare = totalBuy7dUsd > 0 ? organicBuy7dUsd / totalBuy7dUsd : null;
     }
   }
-  if (facts.proPages != null && facts.proPages >= 3) warnings.push("pro-buyer list truncated at 3 pages — organic volume is an upper bound");
+  // from the pager's own flag: a list that ends exactly on page 3 is complete, not truncated
+  if (facts.proTruncated) warnings.push(`pro-buyer list truncated at ${facts.proPages} pages — organic volume is an upper bound`);
   const organicDailyUsd = organicBuy7dUsd == null ? null : organicBuy7dUsd / 7;
   const organicBuyers = facts.uniqueBuyers7d == null ? null : Math.max(0, facts.uniqueBuyers7d - (facts.proBuyers ?? 0));
   const pageUsd = facts.organicPage1Usd;
