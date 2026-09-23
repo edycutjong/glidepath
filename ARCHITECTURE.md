@@ -6,8 +6,8 @@
                        └──────────────────────────────────────────────────────────────┬──────────────────────────────────────────────────┘
                                                                                       │ raw text, sha256'd, credits from response headers
   packages/core/src                                                                   ▼
-  ├─ client.ts       NansenClient: token bucket (8 rps) · timeout · 1 retry on 429/5xx/timeout (honours Retry-After) · Call log · onCall observer (CallEvent start/end)
-  ├─ cache.ts        CachedNansenClient: read-through cache keyed by (method, endpoint, canonical body); hit = 0 credits; NANSEN_OFFLINE=1 never touches the network
+  ├─ client.ts       NansenClient: token bucket (8 rps) · timeout · 1 retry on 429/5xx/timeout/socket error (honours Retry-After) · a non-JSON 200 is a failed call · Call log · onCall observer (CallEvent start/end)
+  ├─ cache.ts        CachedNansenClient: read-through cache keyed by (method, endpoint, canonical body); hit = 0 credits; only parsed JSON is stored; NANSEN_OFFLINE=1 never touches the network
   ├─ nansen.ts       typed request bodies (verified against openapi.json) · EXCLUDED_LABELS · whoBoughtPaged (per_page 1000, cap) · flows · indicators · quote
   ├─ resolve.ts      address passes through; ticker → search/general (0 credits), exact symbol/name on the chain, lowest rank
   ├─ facts.ts        one Promise.all over 8 calls; every failure lands in errors[term], fields stay null
@@ -21,9 +21,10 @@
 
   apps/web (Next.js 15, App Router, plain CSS)
   ├─ app/page.tsx                three inputs → POST /api/plan?stream=1 → <Glidepath> (cards, drawer) + <Rail> (the live call log on the right)
-  ├─ app/api/plan/route.ts       server-side key; CachedNansenClient with memory + disk (/tmp on Vercel) cache, 1 h TTL; ?stream=1 = NDJSON start · call · plan lines
-  ├─ app/api/export/route.ts     ?format=ics|csv, served from the same cache so the file matches the screen
-  ├─ app/p/page.tsx              share page (?chain&token&amount) with OG/Twitter meta → /api/og (1200×630 card)
+  ├─ app/api/plan/route.ts       server-side key; CachedNansenClient with memory (≤ 1,000 responses) + disk (/tmp on Vercel) cache, 1 h TTL; ?stream=1 = NDJSON start · call · plan lines
+  ├─ lib/guard.ts                admit(): the spend guard in front of every route that can spend credits (plan, export, /p, og) — per-IP window per route (429), shared daily credit ceiling (503)
+  ├─ app/api/export/route.ts     ?format=ics|csv, served from the same cache so the file matches the screen; guarded, plain-text 4xx/5xx on failure
+  ├─ app/p/page.tsx              share page (?chain&token&amount) with OG/Twitter meta → /api/og (1200×630 card); guarded, a failure is a banner, never a 500
   ├─ components/Glidepath.tsx    dump line · facts · 14-day red/green strip + live today · tranche bars · cost line · exports · provenance drawer · "computed Ns ago"
   └─ components/Rail.tsx         the Nansen call rail: one row per CallEvent (pending → live/cached/error), credits · ms · sha256; replayed example on load; session totals
 

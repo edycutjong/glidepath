@@ -78,7 +78,7 @@ export function HowItDecides() {
           <b>13/13</b> plans replay offline
         </li>
         <li>
-          <b>247</b> tests · <b>60,000</b> property cases
+          <b>258</b> tests · <b>60,000</b> property cases
         </li>
       </ul>
     </section>
